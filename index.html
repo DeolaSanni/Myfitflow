@@ -218,8 +218,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 
 <div class="ad-banner" id="adBanner">
   <span style="font-size:20px;">📢</span>
-  <div style="flex:1;"><p style="font-size:10px;color:rgba(255,255,255,0.45);margin-bottom:1px;">Advertisement</p><p style="font-size:12px;color:#ffffff;font-weight:500;">Stay healthy with our premium partners</p></div>
-  <span class="ad-rm" onclick="adFreeOffer()" id="adRmBtn">Remove ads $10</span>
+  <div style="flex:1;"><p style="font-size:10px;color:rgba(255,255,255,0.45);margin-bottom:1px;letter-spacing:1px;text-transform:uppercase;">MyFitFlow Promotions</p><p style="font-size:12px;color:#ffffff;font-weight:500;" id="promoMsg">Stay healthy with our premium partners</p></div>
+  
 </div>
 
 <div class="sec">
@@ -398,8 +398,8 @@ function moti(){
 }
 
 function updatePriceLabels(){
-  const adBtn=document.getElementById('adRmBtn');
-  if(adBtn)adBtn.textContent='Remove ads $'+prices.ad_free;
+  // Prices loaded - used when AdMob ads appear
+  console.log('Prices loaded:', prices);
 }
 
 function adFreeOffer(){
