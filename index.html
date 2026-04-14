@@ -219,7 +219,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 <div class="ad-banner" id="adBanner">
   <span style="font-size:20px;">📢</span>
   <div style="flex:1;"><p style="font-size:10px;color:rgba(255,255,255,0.45);margin-bottom:1px;">Advertisement</p><p style="font-size:12px;color:#ffffff;font-weight:500;">Stay healthy with our premium partners</p></div>
-  <span class="ad-rm" onclick="adFreeOffer()">Remove ads $10</span>
+  <span class="ad-rm" onclick="adFreeOffer()" id="adRmBtn">Remove ads $10</span>
 </div>
 
 <div class="sec">
@@ -292,9 +292,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 const{createClient}=supabase;
 const sb=createClient('https://tdphxzkjvslqukmfihsu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRkcGh4emtqdnNscXVrbWZpaHN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwMDE2MzUsImV4cCI6MjA5MTU3NzYzNX0.yn0xdSYsNEOUH7-Qv4DzDNIut1Q9dNaFDAJja0HVKA0');
 let user=null,profile=null,level=null,authMode='signup';
+let prices={level_upgrade:10,ad_free:10,advanced_unlock:10};
 const quotes=[{e:"💪",q:"Your body can do it. It's your mind you need to convince!"},{e:"😂",q:"A moment on the lips, forever on the hips!"},{e:"🌟",q:"You didn't come this far to only come this far."},{e:"🔥",q:"Sweat now, shine later."},{e:"😂",q:"The only bad workout is the one that didn't happen."},{e:"🐕",q:"Be the person your dog thinks you are... and take that walk!"},{e:"💃",q:"Life is short. Dance it out!"},{e:"😂",q:"I thought they said rum... not run. Here we are anyway!"},{e:"🌱",q:"Small steps every day lead to big changes."},{e:"😂",q:"Exercise? I thought you said extra fries!"},{e:"⚡",q:"Energy flows where intention goes. Let's flow!"},{e:"🏆",q:"The pain you feel today is the strength you feel tomorrow."}];
 
 window.addEventListener('load',async()=>{
+  // Load prices from Supabase
+  const{data:priceData}=await sb.from('app_prices').select('*').eq('active',true);
+  if(priceData){priceData.forEach(p=>{prices[p.id]=p.amount;});
+  updatePriceLabels();}
+
   const{data:{session}}=await sb.auth.getSession();
   if(session){user=session.user;const{data}=await sb.from('profiles').select('*').eq('id',user.id).single();if(data){profile=data;updateApp();show('appScreen');}else show('levelScreen');}
 });
@@ -389,6 +395,11 @@ function moti(){
   ov.classList.remove('show');void ov.offsetWidth;
   ov.classList.add('show');
   setTimeout(()=>ov.classList.remove('show'),3200);
+}
+
+function updatePriceLabels(){
+  const adBtn=document.getElementById('adRmBtn');
+  if(adBtn)adBtn.textContent='Remove ads $'+prices.ad_free;
 }
 
 function adFreeOffer(){
