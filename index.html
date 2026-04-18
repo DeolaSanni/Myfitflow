@@ -7,309 +7,7 @@
 <meta name="theme-color" content="#1E3A8A">
 <title>MyFitFlow</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-// ── STORE ──
-
-function showStore(){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('storeScreen').classList.add('active');
-  window.scrollTo(0,0);
-  loadProducts();
-  loadSettings();
-}
-
-
-
-
-
-let allProducts=[];
-let currentProduct=null;
-let currentCat='all';
-
-const catColors={
-  consultation:{bg:'#ede9fe',color:'#5b21b6',label:'Consultation'},
-  medical:{bg:'#dbeafe',color:'#1e40af',label:'Medical'},
-  ebooks:{bg:'#dcfce7',color:'#166534',label:'E-Book'},
-  fitgear:{bg:'#fff7ed',color:'#9a3412',label:'FitGear'},
-  medications:{bg:'#fce7f3',color:'#9d174d',label:'Medications'},
-};
-
-const thumbColors={
-  consultation:'#7C3AED',
-  medical:'#1E3A8A',
-  ebooks:'#16a34a',
-  fitgear:'#F97316',
-  medications:'#ec4899',
-};
-
-
-
-async function loadProducts(){
-  const{data,error}=await sb.from('store_products').select('*').eq('available',true).order('coming_soon',{ascending:true});
-  if(error){document.getElementById('productsList').innerHTML='<div class="loading">Could not load products. Please try again.</div>';return;}
-  allProducts=data||[];
-  renderProducts(allProducts);
-}
-
-async function loadSettings(){
-  const{data}=await sb.from('app_settings').select('*');
-  if(data){
-    const promo=data.find(s=>s.id==='promo_message');
-    const link=data.find(s=>s.id==='promo_link');
-    if(promo&&promo.value){document.getElementById('promoMsg').textContent=promo.value;}
-    if(link&&link.value){
-      const banner=document.getElementById('promoBanner');
-      banner.style.cursor='pointer';
-      banner.onclick=()=>window.open(link.value,'_blank');
-    }
-  }
-}
-
-function formatPrice(price,currency,coming_soon){
-  if(coming_soon)return'Coming Soon';
-  if(currency==='NGN')return'₦'+Number(price).toLocaleString();
-  return'$'+Number(price).toLocaleString();
-}
-
-function renderProducts(products){
-  const list=document.getElementById('productsList');
-  if(!products.length){list.innerHTML='<div class="loading">No products found.</div>';return;}
-  list.innerHTML=products.map(p=>{
-    const cc=catColors[p.category]||{bg:'#f1f5f9',color:'#64748B',label:p.category};
-    const tc=thumbColors[p.category]||'#1E3A8A';
-    const priceStr=formatPrice(p.price,p.currency,p.coming_soon);
-    const btn=p.coming_soon
-      ?`<button class="btn-coming">Coming Soon</button>`
-      :p.category==='consultation'
-        ?`<button class="btn-consult" onclick="event.stopPropagation();openProduct(${JSON.stringify(p).replace(/"/g,'&quot;')})">Book Now →</button>`
-        :`<button class="btn-buy" onclick="event.stopPropagation();openProduct(${JSON.stringify(p).replace(/"/g,'&quot;')})">Buy Now →</button>`;
-    return`
-    <div class="product-card" onclick="openProduct(${JSON.stringify(p).replace(/"/g,'&quot;')})">
-      <div class="product-thumb" style="background:${tc};">
-        ${p.image_emoji}
-        ${p.coming_soon?'<div class="coming-badge">Coming Soon</div>':'<div class="new-badge">Available</div>'}
-        <div class="cat-tag" style="background:${cc.bg};color:${cc.color};">${cc.label}</div>
-      </div>
-      <div class="product-info">
-        <div class="product-name">${p.name}</div>
-        <div class="product-desc">${p.description||''}</div>
-        <div class="product-footer">
-          <div class="product-price ${p.coming_soon?'coming':''}">${priceStr}</div>
-          ${btn}
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function filterCat(cat,el){
-  currentCat=cat;
-  document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active'));
-  el.classList.add('active');
-  const search=document.getElementById('searchInput').value.toLowerCase();
-  let filtered=cat==='all'?allProducts:allProducts.filter(p=>p.category===cat);
-  if(search)filtered=filtered.filter(p=>p.name.toLowerCase().includes(search)||p.description.toLowerCase().includes(search));
-  renderProducts(filtered);
-}
-
-function filterProducts(){
-  const search=document.getElementById('searchInput').value.toLowerCase();
-  let filtered=currentCat==='all'?allProducts:allProducts.filter(p=>p.category===currentCat);
-  if(search)filtered=filtered.filter(p=>p.name.toLowerCase().includes(search)||(p.description||'').toLowerCase().includes(search));
-  renderProducts(filtered);
-}
-
-function openProduct(p){
-  if(typeof p==='string')p=JSON.parse(p);
-  currentProduct=p;
-  document.getElementById('ovEmoji').textContent=p.image_emoji||'📦';
-  document.getElementById('ovName').textContent=p.name;
-  document.getElementById('ovPrice').textContent=formatPrice(p.price,p.currency,p.coming_soon);
-  document.getElementById('ovDesc').textContent=p.description||'';
-  const btn=document.getElementById('ovBuyBtn');
-  if(p.coming_soon){
-    btn.textContent='Notify Me When Available';
-    btn.style.background='#64748B';
-  }else if(p.category==='consultation'){
-    btn.textContent='Book Consultation Now →';
-    btn.style.background='#7C3AED';
-  }else{
-    btn.textContent='Buy Now — '+formatPrice(p.price,p.currency,false)+' →';
-    btn.style.background='#1E3A8A';
-  }
-  document.getElementById('productOverlay').classList.add('show');
-}
-
-function closeOverlay(){
-  document.getElementById('productOverlay').classList.remove('show');
-  currentProduct=null;
-}
-
-function buyNow(){
-  if(!currentProduct)return;
-  if(currentProduct.coming_soon){
-    alert('We will notify you when '+currentProduct.name+' becomes available! 🔔');
-    closeOverlay();
-    return;
-  }
-  if(currentProduct.payment_link){
-    window.open(currentProduct.payment_link,'_blank');
-  }else{
-    alert('Payment link coming soon for this product!');
-  }
-  closeOverlay();
-}
-
-
-// ── STORE FUNCTIONS ──
-let allProducts=[];
-let currentProduct=null;
-let currentCat='all';
-
-const catColors={
-  consultation:{bg:'#ede9fe',color:'#5b21b6',label:'Consultation'},
-  medical:{bg:'#dbeafe',color:'#1e40af',label:'Medical'},
-  ebooks:{bg:'#dcfce7',color:'#166534',label:'E-Book'},
-  fitgear:{bg:'#fff7ed',color:'#9a3412',label:'FitGear'},
-  medications:{bg:'#fce7f3',color:'#9d174d',label:'Medications'},
-};
-
-const thumbColors={
-  consultation:'#7C3AED',
-  medical:'#1E3A8A',
-  ebooks:'#16a34a',
-  fitgear:'#F97316',
-  medications:'#ec4899',
-};
-
-function showStore(){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  var st=document.getElementById('storeScreen');
-  if(st){
-    st.classList.add('active');
-    window.scrollTo(0,0);
-    loadProducts();
-    loadStoreSettings();
-  } else {
-    alert('Store is loading, please try again!');
-  }
-}
-
-async function loadProducts(){
-  const{data,error}=await sb.from('store_products').select('*').eq('available',true).order('coming_soon',{ascending:true});
-  if(error){document.getElementById('productsList').innerHTML='<div style="text-align:center;padding:40px;color:#64748B;">Could not load products. Please try again.</div>';return;}
-  allProducts=data||[];
-  renderProducts(allProducts);
-}
-
-async function loadStoreSettings(){
-  const{data}=await sb.from('app_settings').select('*');
-  if(data){
-    const promo=data.find(s=>s.id==='promo_message');
-    const link=data.find(s=>s.id==='promo_link');
-    if(promo&&promo.value){const el=document.getElementById('storePromoMsg');if(el)el.textContent=promo.value;}
-    if(link&&link.value){const banner=document.getElementById('storePromoBanner');if(banner){banner.style.cursor='pointer';banner.onclick=()=>window.open(link.value,'_blank');}}
-  }
-}
-
-function formatPrice(price,currency,coming_soon){
-  if(coming_soon)return'Coming Soon';
-  if(currency==='NGN')return'\u20a6'+Number(price).toLocaleString();
-  return'$'+Number(price).toLocaleString();
-}
-
-function renderProducts(products){
-  const list=document.getElementById('productsList');
-  if(!products||!products.length){list.innerHTML='<div style="text-align:center;padding:40px;color:#64748B;">No products found.</div>';return;}
-  list.innerHTML=products.map(p=>{
-    const cc=catColors[p.category]||{bg:'#f1f5f9',color:'#64748B',label:p.category};
-    const tc=thumbColors[p.category]||'#1E3A8A';
-    const priceStr=formatPrice(p.price,p.currency,p.coming_soon);
-    const pStr=JSON.stringify(p).replace(/"/g,"'");
-    const btn=p.coming_soon
-      ?`<button style="padding:10px 20px;background:#f1f5f9;border:none;border-radius:12px;color:#94a3b8;font-size:13px;font-weight:600;">Coming Soon</button>`
-      :p.category==='consultation'
-        ?`<button style="padding:10px 20px;background:#7C3AED;border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;" onclick="event.stopPropagation();openProd(this)">Book Now</button>`
-        :`<button style="padding:10px 20px;background:#1E3A8A;border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;" onclick="event.stopPropagation();openProd(this)">Buy Now</button>`;
-    return`<div style="background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 16px rgba(15,23,42,0.08);cursor:pointer;margin-bottom:2px;" onclick="openProdById('${p.id}')">
-      <div style="height:130px;display:flex;align-items:center;justify-content:center;font-size:52px;position:relative;background:${tc};">
-        ${p.image_emoji}
-        ${p.coming_soon?'<div style="position:absolute;top:10px;right:10px;background:#64748B;color:#fff;font-size:9px;font-weight:700;padding:3px 10px;border-radius:20px;">COMING SOON</div>':'<div style="position:absolute;top:10px;right:10px;background:#22C55E;color:#fff;font-size:9px;font-weight:700;padding:3px 10px;border-radius:20px;">AVAILABLE</div>'}
-        <div style="position:absolute;top:10px;left:10px;background:${cc.bg};color:${cc.color};font-size:9px;font-weight:700;padding:3px 10px;border-radius:20px;">${cc.label.toUpperCase()}</div>
-      </div>
-      <div style="padding:14px 16px;">
-        <p style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;margin-bottom:4px;">${p.name}</p>
-        <p style="font-size:12px;color:#64748B;line-height:1.5;margin-bottom:12px;">${p.description||''}</p>
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <p style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:${p.coming_soon?'#94a3b8':'#1E3A8A'};">${priceStr}</p>
-          ${btn}
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function filterCat(cat,el){
-  currentCat=cat;
-  document.querySelectorAll('[onclick^="filterCat"]').forEach(p=>{
-    p.style.background='#ffffff';p.style.color='#64748B';p.style.border='2px solid #E2E8F0';
-  });
-  el.style.background='#1E3A8A';el.style.color='#ffffff';el.style.border='2px solid #1E3A8A';
-  applyFilters();
-}
-
-function filterProducts(){applyFilters();}
-
-function applyFilters(){
-  const search=(document.getElementById('searchInput')||{}).value||'';
-  let filtered=currentCat==='all'?allProducts:allProducts.filter(p=>p.category===currentCat);
-  if(search)filtered=filtered.filter(p=>p.name.toLowerCase().includes(search.toLowerCase())||(p.description||'').toLowerCase().includes(search.toLowerCase()));
-  renderProducts(filtered);
-}
-
-function openProdById(id){
-  const p=allProducts.find(x=>x.id===id);
-  if(p)openProd2(p);
-}
-
-function openProd(btn){
-  const card=btn.closest('[onclick^="openProdById"]');
-  if(card){const id=card.getAttribute('onclick').match(/'([^']+)'/)[1];openProdById(id);}
-}
-
-function openProd2(p){
-  currentProduct=p;
-  document.getElementById('ovEmoji').textContent=p.image_emoji||'\ud83d\udce6';
-  document.getElementById('ovName').textContent=p.name;
-  document.getElementById('ovPrice').textContent=formatPrice(p.price,p.currency,p.coming_soon);
-  document.getElementById('ovDesc').textContent=p.description||'';
-  const btn=document.getElementById('ovBuyBtn');
-  if(p.coming_soon){btn.textContent='Notify Me';btn.style.background='#64748B';}
-  else if(p.category==='consultation'){btn.textContent='Book Consultation Now \u2192';btn.style.background='#7C3AED';}
-  else{btn.textContent='Buy Now \u2014 '+formatPrice(p.price,p.currency,false)+' \u2192';btn.style.background='#1E3A8A';}
-  const ov=document.getElementById('productOverlay');
-  ov.style.display='flex';
-}
-
-function openConsultation(){
-  const p=allProducts.find(x=>x.category==='consultation');
-  if(p)openProd2(p);
-}
-
-function closeOverlay(){
-  document.getElementById('productOverlay').style.display='none';
-  currentProduct=null;
-}
-
-function buyNow(){
-  if(!currentProduct)return;
-  if(currentProduct.coming_soon){alert('We will notify you when '+currentProduct.name+' becomes available!');closeOverlay();return;}
-  if(currentProduct.payment_link){window.open(currentProduct.payment_link,'_blank');}
-  else{alert('Payment link coming soon!');}
-  closeOverlay();
-}
-
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background:#F8FAFC;max-width:430px;margin:0 auto;min-height:100vh;overflow-x:hidden;}
@@ -340,20 +38,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 .st-item:not(:last-child){border-right:1px solid #E2E8F0;}
 .st-val{font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;}
 .st-lbl{font-size:10px;color:#64748B;text-align:center;}
-.ad-banner{background:#1e293b;margin:16px;border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:10px;}
-.ad-rm{font-size:11px;color:#F97316;font-weight:600;cursor:pointer;text-decoration:underline;white-space:nowrap;}
 .sec{padding:20px 16px 0;}
 .sec-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
 .sec-title{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;}
 .see-all{font-size:12px;color:#7C3AED;font-weight:500;cursor:pointer;}
-.cont-card{background:#1E3A8A;border-radius:16px;padding:16px;display:flex;align-items:center;gap:14px;cursor:pointer;position:relative;overflow:hidden;}
-.cont-icon{width:48px;height:48px;background:rgba(255,255,255,0.2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.cont-bar{height:4px;background:rgba(255,255,255,0.3);border-radius:4px;overflow:hidden;margin:4px 0;}
-.cont-fill{height:100%;width:65%;background:#ffffff;border-radius:4px;}
-.play-btn{width:40px;height:40px;background:#ffffff;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.play-tri{width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid #7C3AED;margin-left:3px;}
 .cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .cat-card{border-radius:16px;padding:16px 14px;cursor:pointer;min-height:90px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;}
+.cat-card:active{transform:scale(0.97);}
 .cat-emoji{font-size:26px;margin-bottom:8px;}
 .cat-name{font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:#ffffff;}
 .cat-cnt{font-size:10px;color:rgba(255,255,255,0.85);margin-top:1px;}
@@ -366,8 +57,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 .feat-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
 .pill{font-size:10px;padding:3px 10px;border-radius:10px;font-weight:600;}
 .bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#ffffff;border-top:2px solid #E2E8F0;display:flex;justify-content:space-around;padding:10px 0 24px;z-index:100;}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:0 12px;}
-.nav-ico{font-size:22px;}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:0 8px;}
+.nav-ico{font-size:20px;}
 .nav-lbl{font-size:10px;color:#64748B;}
 .nav-item.active .nav-lbl{color:#1E3A8A;font-weight:700;}
 .nav-dot{width:4px;height:4px;background:#1E3A8A;border-radius:50%;}
@@ -378,106 +69,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 .moti-emo{font-size:40px;margin-bottom:12px;display:block;}
 .moti-quote{font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;color:#ffffff;line-height:1.4;margin-bottom:8px;}
 .moti-sub{font-size:12px;color:rgba(255,255,255,0.7);}
+.prod-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.75);z-index:200;align-items:flex-end;display:none;}
+.prod-overlay.show{display:flex;}
+.prod-card{background:#ffffff;width:100%;border-radius:28px 28px 0 0;padding:28px 24px 40px;animation:slideUp 0.3s ease;}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 .spin{animation:spin 6s linear infinite;}
 .pb80{padding-bottom:80px;}
 .bspace{height:20px;}
-#storeScreen{padding-bottom:80px;overflow-y:auto;}
-
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background:#F8FAFC;max-width:430px;margin:0 auto;min-height:100vh;overflow-x:hidden;}
-
-/* ── HEADER ── */
-.store-header{background:#1E3A8A;padding:52px 20px 28px;position:relative;overflow:hidden;}
-.store-header::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.05);top:-60px;right:-40px;}
-.sh-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
-.sh-title{font-family:'Outfit',sans-serif;font-size:24px;font-weight:800;color:#ffffff;}
-.sh-sub{font-size:13px;color:rgba(255,255,255,0.8);}
-.sh-badge{background:rgba(255,255,255,0.2);border-radius:20px;padding:5px 14px;color:#ffffff;font-size:11px;font-weight:600;display:inline-block;margin-top:8px;}
-
-/* ── SEARCH ── */
-.search-wrap{margin:-16px 16px 0;position:relative;z-index:2;}
-.search-input{width:100%;padding:14px 16px 14px 44px;background:#ffffff;border:2px solid #E2E8F0;border-radius:14px;font-size:14px;color:#0F172A;outline:none;box-shadow:0 4px 16px rgba(30,58,138,0.1);}
-.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;}
-
-/* ── CATEGORIES ── */
-.cat-scroll{display:flex;gap:8px;overflow-x:auto;padding:20px 16px 4px;scrollbar-width:none;}
-.cat-scroll::-webkit-scrollbar{display:none;}
-.cat-pill{flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;}
-.cat-pill.active{background:#1E3A8A;border-color:#1E3A8A;color:#ffffff;}
-
-/* ── SECTION TITLE ── */
-.sec-title{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;padding:16px 16px 8px;}
-
-/* ── PRODUCT CARDS ── */
-.products-list{padding:0 16px;display:flex;flex-direction:column;gap:14px;}
-
-.product-card{background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 2px 16px rgba(15,23,42,0.08);cursor:pointer;transition:transform 0.2s;}
-.product-card:active{transform:scale(0.98);}
-
-.product-thumb{height:130px;display:flex;align-items:center;justify-content:center;font-size:52px;position:relative;}
-.coming-badge{position:absolute;top:10px;right:10px;background:#64748B;color:#ffffff;font-size:9px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;}
-.new-badge{position:absolute;top:10px;right:10px;background:#22C55E;color:#ffffff;font-size:9px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;}
-.cat-tag{position:absolute;top:10px;left:10px;font-size:9px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;}
-
-.product-info{padding:14px 16px;}
-.product-name{font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;margin-bottom:4px;}
-.product-desc{font-size:12px;color:#64748B;line-height:1.5;margin-bottom:12px;}
-.product-footer{display:flex;align-items:center;justify-content:space-between;}
-.product-price{font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#1E3A8A;}
-.product-price.coming{color:#94a3b8;font-size:14px;}
-
-.btn-buy{padding:10px 20px;background:#1E3A8A;border:none;border-radius:12px;color:#ffffff;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
-.btn-coming{padding:10px 20px;background:#f1f5f9;border:none;border-radius:12px;color:#94a3b8;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;cursor:default;}
-.btn-consult{padding:10px 20px;background:#7C3AED;border:none;border-radius:12px;color:#ffffff;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
-
-/* ── DR AMIRAH BANNER ── */
-.dr-banner{margin:16px;background:#1E3A8A;border-radius:20px;padding:20px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;}
-.dr-banner::before{content:'';position:absolute;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.06);top:-30px;right:-20px;}
-.dr-avatar{width:56px;height:56px;background:rgba(255,255,255,0.2);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;}
-.dr-info{flex:1;}
-.dr-name{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#ffffff;margin-bottom:2px;}
-.dr-title{font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:8px;}
-.dr-btn{padding:8px 16px;background:#ffffff;border:none;border-radius:10px;color:#1E3A8A;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;cursor:pointer;}
-
-/* ── PROMO BANNER ── */
-.promo-banner{margin:0 16px 4px;background:#7C3AED;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:10px;}
-.promo-text{flex:1;}
-.promo-label{font-size:10px;color:rgba(255,255,255,0.7);margin-bottom:2px;text-transform:uppercase;letter-spacing:1px;}
-.promo-msg{font-size:13px;color:#ffffff;font-weight:600;}
-
-/* ── BOTTOM NAV ── */
-.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#ffffff;border-top:2px solid #E2E8F0;display:flex;justify-content:space-around;padding:10px 0 24px;z-index:100;}
-.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:0 10px;}
-.nav-ico{font-size:22px;}
-.nav-lbl{font-size:10px;color:#64748B;}
-.nav-item.active .nav-lbl{color:#1E3A8A;font-weight:700;}
-.nav-dot{width:4px;height:4px;background:#1E3A8A;border-radius:50%;}
-
-/* ── LOADING ── */
-.loading{text-align:center;padding:40px;color:#64748B;font-size:14px;}
-
-/* ── PRODUCT DETAIL OVERLAY ── */
-.overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,0.75);z-index:200;align-items:flex-end;border-radius:0;}
-.overlay.show{display:flex;}
-.overlay-card{background:#ffffff;width:100%;border-radius:28px 28px 0 0;padding:28px 24px 40px;animation:slideUp 0.3s ease;}
-@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.ov-close{float:right;width:32px;height:32px;background:#f1f5f9;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;border:none;}
-.ov-emoji{font-size:48px;text-align:center;display:block;margin:8px 0 12px;}
-.ov-name{font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:#0F172A;margin-bottom:6px;}
-.ov-price{font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;color:#1E3A8A;margin-bottom:12px;}
-.ov-desc{font-size:14px;color:#64748B;line-height:1.6;margin-bottom:24px;}
-.ov-buy{width:100%;padding:16px;background:#1E3A8A;border:none;border-radius:16px;font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#ffffff;cursor:pointer;margin-bottom:10px;}
-.ov-buy.purple{background:#7C3AED;}
-.ov-cancel{width:100%;padding:14px;background:#f1f5f9;border:none;border-radius:16px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;color:#64748B;cursor:pointer;}
-
-.bspace{height:100px;}
-
+.scroll-area{flex:1;overflow-y:auto;scrollbar-width:none;}
+.scroll-area::-webkit-scrollbar{display:none;}
 </style>
 </head>
 <body>
 
-<!-- SPLASH -->
+<!-- ══ SPLASH ══ -->
 <div class="screen active" id="splashScreen" style="background:#1E3A8A;align-items:center;justify-content:center;text-align:center;padding:48px 32px;">
   <svg class="spin" style="width:100px;height:100px;margin:0 auto 24px;display:block;" viewBox="0 0 140 140" fill="none">
     <defs>
@@ -491,17 +97,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
     <path d="M89 108C76 116,62 116,50 108C36 99,30 85,30 70" stroke="url(#g1)" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.6"/>
     <path d="M30 68C30 50,42 34,58 30C62 29,66 28,70 30" stroke="url(#g2)" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.6"/>
   </svg>
-  <p style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:400;color:rgba(255,255,255,0.75);letter-spacing:6px;text-transform:uppercase;margin-bottom:4px;">My</p>
+  <p style="font-family:'Outfit',sans-serif;font-size:13px;color:rgba(255,255,255,0.75);letter-spacing:6px;text-transform:uppercase;margin-bottom:4px;">My</p>
   <p style="font-family:'Outfit',sans-serif;font-size:52px;font-weight:900;color:#ffffff;letter-spacing:-2px;margin-bottom:10px;line-height:1;">FitFlow</p>
   <p style="font-size:13px;color:rgba(255,255,255,0.75);letter-spacing:3px;text-transform:uppercase;margin-bottom:60px;">Move · Flow · Thrive</p>
   <button class="btn-white" onclick="goAuth('signup')">Sign Up — It's Free 🚀</button>
   <p style="font-size:14px;color:rgba(255,255,255,0.8);">Already have an account? <span onclick="goAuth('signin')" style="color:#ffffff;font-weight:700;text-decoration:underline;cursor:pointer;">Sign In</span></p>
 </div>
 
-<!-- AUTH -->
+<!-- ══ AUTH ══ -->
 <div class="screen" id="authScreen">
   <div style="background:#1E3A8A;padding:56px 24px 36px;">
-    <button class="back-btn" onclick="show('splashScreen')">←</button>
+    <button class="back-btn" onclick="goScreen('splashScreen')">←</button>
     <p id="authTitle" style="font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;color:#ffffff;margin-bottom:6px;">Join MyFitFlow</p>
     <p id="authSub" style="font-size:14px;color:rgba(255,255,255,0.85);">Set up your account in seconds</p>
   </div>
@@ -526,7 +132,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
   </div>
 </div>
 
-<!-- LEVEL -->
+<!-- ══ LEVEL ══ -->
 <div class="screen" id="levelScreen">
   <div style="background:#1E3A8A;padding:56px 24px 32px;">
     <p style="font-size:11px;color:rgba(255,255,255,0.65);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">One last step</p>
@@ -553,11 +159,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
   </div>
 </div>
 
-<!-- WELCOME -->
+<!-- ══ WELCOME ══ -->
 <div class="screen" id="welcomeScreen" style="background:#1E3A8A;align-items:center;justify-content:center;padding:48px 32px;text-align:center;">
   <p style="font-size:56px;margin-bottom:16px;">🎉</p>
-  
-  <p id="wcName" style="font-family:'Outfit',sans-serif;font-size:40px;font-weight:900;color:#ffffff;margin-bottom:16px;">Welcome, Champ! 👋</p>
+  <p id="wcName" style="font-family:'Outfit',sans-serif;font-size:36px;font-weight:900;color:#ffffff;margin-bottom:16px;">Welcome, Champ! 👋</p>
   <p id="wcBadge" style="background:rgba(255,255,255,0.2);border-radius:20px;padding:8px 18px;color:#ffffff;font-size:13px;font-weight:600;margin-bottom:40px;display:inline-block;">🌱 Beginner · Ready to go!</p>
   <div style="background:rgba(255,255,255,0.15);border-radius:20px;padding:20px;margin-bottom:32px;width:100%;">
     <p style="font-size:12px;color:rgba(255,255,255,0.7);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;">Your free access includes</p>
@@ -567,13 +172,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
       <div style="text-align:center;"><p style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:900;color:#ffffff;">6</p><p style="font-size:10px;color:rgba(255,255,255,0.7);">Categories</p></div>
     </div>
   </div>
-  <button class="btn-start" onclick="goApp()">Let's Start Moving! 💪</button>
+  <button class="btn-start" onclick="goScreen('appScreen');updateApp();">Let's Start Moving! 💪</button>
 </div>
 
-<!-- MAIN APP -->
+<!-- ══ HOME ══ -->
 <div class="screen pb80" id="appScreen">
-  <div style="overflow-y:auto;flex:1;">
-
+  <div class="scroll-area">
     <div style="background:#1E3A8A;padding:52px 20px 32px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
         <div style="display:flex;align-items:center;gap:8px;">
@@ -584,16 +188,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
           </svg>
           <span style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#ffffff;"><span style="font-weight:300;font-size:14px;opacity:0.8;">My</span>FitFlow</span>
         </div>
-        <div style="width:36px;height:36px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;position:relative;">
-          🔔<div style="position:absolute;top:6px;right:6px;width:8px;height:8px;background:#F97316;border-radius:50%;border:2px solid #1E3A8A;"></div>
-        </div>
+        <div style="width:36px;height:36px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;position:relative;">🔔<div style="position:absolute;top:6px;right:6px;width:8px;height:8px;background:#F97316;border-radius:50%;border:2px solid #1E3A8A;"></div></div>
       </div>
       <p style="color:rgba(255,255,255,0.85);font-size:13px;margin-bottom:2px;">Good morning,</p>
       <p id="ahName" style="font-family:'Outfit',sans-serif;font-size:26px;font-weight:800;color:#ffffff;margin-bottom:12px;">Champ 👋</p>
-      <span style="background:rgba(255,255,255,0.2);border-radius:20px;padding:5px 14px;color:#ffffff;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:6px;">
-        <span style="width:8px;height:8px;border-radius:50%;background:#22C55E;display:inline-block;"></span>
-        <span id="ahLevel">Beginner</span> · Week 1
-      </span>
+      <span style="background:rgba(255,255,255,0.2);border-radius:20px;padding:5px 14px;color:#ffffff;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:#22C55E;display:inline-block;"></span><span id="ahLevel">Beginner</span> · Week 1</span>
     </div>
 
     <div class="streak-card">
@@ -602,23 +201,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
       <div class="st-item"><div class="st-val" id="sMins" style="color:#7C3AED;">0m</div><div class="st-lbl">Mins Exercised</div></div>
     </div>
 
-    <div class="ad-banner" id="adBanner">
+    <div style="background:#1e293b;margin:16px;border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:10px;" id="promoBannerHome">
       <span style="font-size:20px;">📢</span>
-      <div style="flex:1;"><p style="font-size:10px;color:rgba(255,255,255,0.45);margin-bottom:1px;letter-spacing:1px;text-transform:uppercase;">MyFitFlow Promotions</p><p style="font-size:12px;color:#ffffff;font-weight:500;" id="promoMsg">Stay healthy with our premium partners</p></div>
-      
+      <div style="flex:1;"><p style="font-size:10px;color:rgba(255,255,255,0.45);margin-bottom:1px;text-transform:uppercase;letter-spacing:1px;">MyFitFlow Promotions</p><p style="font-size:12px;color:#ffffff;font-weight:500;" id="promoMsgHome">Stay healthy with our premium partners</p></div>
     </div>
 
     <div class="sec">
       <div class="sec-hd"><div class="sec-title">Continue Workout</div></div>
-      <div class="cont-card" onclick="moti()">
-        <div class="cont-icon">🏃</div>
+      <div style="background:#1E3A8A;border-radius:16px;padding:16px;display:flex;align-items:center;gap:14px;cursor:pointer;" onclick="moti()">
+        <div style="width:48px;height:48px;background:rgba(255,255,255,0.2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🏃</div>
         <div style="flex:1;">
           <p style="font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:2px;">Last session</p>
           <p style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#ffffff;margin-bottom:4px;">Walk With Me · 30 min</p>
-          <div class="cont-bar"><div class="cont-fill"></div></div>
+          <div style="height:4px;background:rgba(255,255,255,0.3);border-radius:4px;overflow:hidden;margin:4px 0;"><div style="height:100%;width:65%;background:#ffffff;border-radius:4px;"></div></div>
           <p style="font-size:11px;color:rgba(255,255,255,0.85);margin-top:3px;">65% complete</p>
         </div>
-        <div class="play-btn"><div class="play-tri"></div></div>
+        <div style="width:40px;height:40px;background:#ffffff;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid #7C3AED;margin-left:3px;"></div></div>
       </div>
     </div>
 
@@ -638,55 +236,41 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
       <div class="sec-hd"><div class="sec-title">Featured Workouts</div><div class="see-all">See all</div></div>
       <div class="feat-card" onclick="moti()">
         <div class="feat-thumb" style="background:#1E3A8A;">🏋️<div class="feat-badge">⭐ Featured</div><div class="feat-dur">⏱ 30 min</div></div>
-        <div class="feat-info">
-          <div class="feat-name">Full Body Flow · 30 Min</div>
-          <div class="feat-meta"><span class="pill" style="background:#dcfce7;color:#166534;">🟢 Beginner</span><span class="pill" style="background:#fff7ed;color:#9a3412;">Full Body</span><span style="font-size:11px;color:#64748B;margin-left:auto;">🔥 180 kcal</span></div>
-        </div>
+        <div class="feat-info"><div class="feat-name">Full Body Flow · 30 Min</div><div class="feat-meta"><span class="pill" style="background:#dcfce7;color:#166534;">🟢 Beginner</span><span class="pill" style="background:#fff7ed;color:#9a3412;">Full Body</span><span style="font-size:11px;color:#64748B;margin-left:auto;">🔥 180 kcal</span></div></div>
       </div>
       <div class="feat-card" onclick="moti()">
         <div class="feat-thumb" style="background:#7C3AED;">💃<div class="feat-badge">🔥 Popular</div><div class="feat-dur">⏱ 15 min</div></div>
-        <div class="feat-info">
-          <div class="feat-name">Dance &amp; Cardio Blast</div>
-          <div class="feat-meta"><span class="pill" style="background:#ede9fe;color:#5b21b6;">🟡 Intermediate</span><span class="pill" style="background:#dbeafe;color:#1e40af;">Cardio</span><span style="font-size:11px;color:#64748B;margin-left:auto;">🔥 140 kcal</span></div>
-        </div>
+        <div class="feat-info"><div class="feat-name">Dance &amp; Cardio Blast</div><div class="feat-meta"><span class="pill" style="background:#ede9fe;color:#5b21b6;">🟡 Intermediate</span><span class="pill" style="background:#dbeafe;color:#1e40af;">Cardio</span><span style="font-size:11px;color:#64748B;margin-left:auto;">🔥 140 kcal</span></div></div>
       </div>
     </div>
     <div class="bspace"></div>
   </div>
 
   <div class="bottom-nav">
-    <div class="nav-item active"><div class="nav-ico">🏠</div><div class="nav-lbl">Home</div><div class="nav-dot"></div></div>
-    <div class="nav-item"><div class="nav-ico">🏋️</div><div class="nav-lbl">Workouts</div></div>
-    <div class="nav-item" id="storeNav" onclick="showStore()"><div class="nav-ico">🛍️</div><div class="nav-lbl">Store</div></div>
-    <div class="nav-item"><div class="nav-ico">📊</div><div class="nav-lbl">Progress</div></div>
-    <div class="nav-item"><div class="nav-ico">👤</div><div class="nav-lbl">Profile</div></div>
+    <div class="nav-item active" id="homeNav" onclick="switchTab('home')"><div class="nav-ico">🏠</div><div class="nav-lbl">Home</div><div class="nav-dot" id="homeNavDot"></div></div>
+    <div class="nav-item" id="workoutsNav" onclick="switchTab('workouts')"><div class="nav-ico">🏋️</div><div class="nav-lbl">Workouts</div></div>
+    <div class="nav-item" id="storeNav" onclick="switchTab('store')"><div class="nav-ico">🛍️</div><div class="nav-lbl">Store</div></div>
+    <div class="nav-item" id="progressNav" onclick="switchTab('progress')"><div class="nav-ico">📊</div><div class="nav-lbl">Progress</div></div>
+    <div class="nav-item" id="profileNav" onclick="switchTab('profile')"><div class="nav-ico">👤</div><div class="nav-lbl">Profile</div></div>
   </div>
 </div>
 
-
-<!-- ══════════════ STORE ══════════════ -->
+<!-- ══ STORE ══ -->
 <div class="screen" id="storeScreen">
-  <div style="overflow-y:auto;flex:1;padding-bottom:80px;">
-
-    <!-- Store Header -->
-    <div style="background:#1E3A8A;padding:52px 20px 28px;position:relative;overflow:hidden;">
+  <div class="scroll-area" style="padding-bottom:80px;">
+    <div style="background:#1E3A8A;padding:52px 20px 28px;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-        <div>
-          <p style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:800;color:#ffffff;">🛍️ Store</p>
-          <p style="font-size:13px;color:rgba(255,255,255,0.8);">Products & Services by Dr. Amirah</p>
-        </div>
+        <div><p style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:800;color:#ffffff;">🛍️ Store</p><p style="font-size:13px;color:rgba(255,255,255,0.8);">Products &amp; Services by Dr. Amirah</p></div>
         <div style="width:36px;height:36px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;">🛒</div>
       </div>
     </div>
 
-    <!-- Search -->
     <div style="margin:-16px 16px 0;position:relative;z-index:2;">
       <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;">🔍</span>
-      <input style="width:100%;padding:14px 16px 14px 44px;background:#ffffff;border:2px solid #E2E8F0;border-radius:14px;font-size:14px;color:#0F172A;outline:none;box-shadow:0 4px 16px rgba(30,58,138,0.1);" id="searchInput" type="text" placeholder="Search products..." oninput="filterProducts()"/>
+      <input style="width:100%;padding:14px 16px 14px 44px;background:#ffffff;border:2px solid #E2E8F0;border-radius:14px;font-size:14px;color:#0F172A;outline:none;box-shadow:0 4px 16px rgba(30,58,138,0.1);" id="searchInput" type="text" placeholder="Search products..." oninput="applyFilters()"/>
     </div>
 
-    <!-- Categories -->
-    <div style="display:flex;gap:8px;overflow-x:auto;padding:20px 16px 4px;scrollbar-width:none;">
+    <div style="display:flex;gap:8px;overflow-x:auto;padding:20px 16px 8px;scrollbar-width:none;" id="catPills">
       <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#1E3A8A;color:#ffffff;white-space:nowrap;" onclick="filterCat('all',this)">All</div>
       <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterCat('consultation',this)">👩‍⚕️ Consultations</div>
       <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterCat('medical',this)">🏥 Medical</div>
@@ -695,59 +279,37 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
       <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterCat('medications',this)">💊 Medications</div>
     </div>
 
-    <!-- Dr Amirah Banner -->
-    <div style="margin:12px 16px;background:#1E3A8A;border-radius:20px;padding:20px;display:flex;align-items:center;gap:14px;cursor:pointer;" onclick="openConsultation()">
+    <div style="margin:8px 16px;background:#1E3A8A;border-radius:20px;padding:20px;display:flex;align-items:center;gap:14px;cursor:pointer;" onclick="bookConsultation()">
       <div style="width:56px;height:56px;background:rgba(255,255,255,0.2);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;">👩‍⚕️</div>
       <div style="flex:1;">
         <p style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#ffffff;margin-bottom:2px;">Dr. Amirah</p>
-        <p style="font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:8px;">Health & Fitness Consultant</p>
-        <button style="padding:8px 16px;background:#ffffff;border:none;border-radius:10px;color:#1E3A8A;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">Book Consultation →</button>
+        <p style="font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:8px;">Health &amp; Fitness Consultant</p>
+        <button style="padding:8px 16px;background:#ffffff;border:none;border-radius:10px;color:#1E3A8A;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;cursor:pointer;" onclick="event.stopPropagation();bookConsultation();">Book Consultation →</button>
       </div>
     </div>
 
-    <!-- Promo Banner -->
-    <div style="margin:0 16px 4px;background:#7C3AED;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:10px;" id="storePromoBanner">
+    <div style="margin:8px 16px;background:#7C3AED;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:10px;" id="storePromoBanner">
       <span style="font-size:20px;">📢</span>
-      <div style="flex:1;">
-        <p style="font-size:10px;color:rgba(255,255,255,0.7);margin-bottom:2px;text-transform:uppercase;letter-spacing:1px;">MyFitFlow Promotions</p>
-        <p style="font-size:13px;color:#ffffff;font-weight:600;" id="storePromoMsg">Check out our latest products and offers!</p>
-      </div>
+      <div style="flex:1;"><p style="font-size:10px;color:rgba(255,255,255,0.7);margin-bottom:2px;text-transform:uppercase;letter-spacing:1px;">MyFitFlow Promotions</p><p style="font-size:13px;color:#ffffff;font-weight:600;" id="storePromoMsg">Check out our latest products and offers!</p></div>
     </div>
 
-    <!-- Products List -->
     <p style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;padding:16px 16px 8px;">All Products</p>
     <div style="padding:0 16px;display:flex;flex-direction:column;gap:14px;" id="productsList">
-      <div style="text-align:center;padding:40px;color:#64748B;font-size:14px;">Loading products... ⏳</div>
+      <div style="text-align:center;padding:40px;color:#64748B;">Loading products... ⏳</div>
     </div>
-
     <div style="height:20px;"></div>
   </div>
 
-  <!-- Store Bottom Nav -->
   <div class="bottom-nav">
-    <div class="nav-item" onclick="goApp()"><div class="nav-ico">🏠</div><div class="nav-lbl">Home</div></div>
-    <div class="nav-item"><div class="nav-ico">🏋️</div><div class="nav-lbl">Workouts</div></div>
+    <div class="nav-item" onclick="switchTab('home')"><div class="nav-ico">🏠</div><div class="nav-lbl">Home</div></div>
+    <div class="nav-item" onclick="switchTab('workouts')"><div class="nav-ico">🏋️</div><div class="nav-lbl">Workouts</div></div>
     <div class="nav-item active"><div class="nav-ico">🛍️</div><div class="nav-lbl">Store</div><div class="nav-dot"></div></div>
-    <div class="nav-item"><div class="nav-ico">📊</div><div class="nav-lbl">Progress</div></div>
-    <div class="nav-item"><div class="nav-ico">👤</div><div class="nav-lbl">Profile</div></div>
+    <div class="nav-item" onclick="switchTab('progress')"><div class="nav-ico">📊</div><div class="nav-lbl">Progress</div></div>
+    <div class="nav-item" onclick="switchTab('profile')"><div class="nav-ico">👤</div><div class="nav-lbl">Profile</div></div>
   </div>
 </div>
 
-<!-- Product Detail Overlay -->
-<div style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.75);z-index:200;align-items:flex-end;" id="productOverlay">
-  <div style="background:#ffffff;width:100%;border-radius:28px 28px 0 0;padding:28px 24px 40px;">
-    <button style="float:right;width:32px;height:32px;background:#f1f5f9;border-radius:50%;border:none;cursor:pointer;font-size:16px;" onclick="closeOverlay()">✕</button>
-    <p style="font-size:48px;text-align:center;display:block;margin:8px 0 12px;" id="ovEmoji">📦</p>
-    <p style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:#0F172A;margin-bottom:6px;" id="ovName">Product</p>
-    <p style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;color:#1E3A8A;margin-bottom:12px;" id="ovPrice">₦0</p>
-    <p style="font-size:14px;color:#64748B;line-height:1.6;margin-bottom:24px;" id="ovDesc">Description</p>
-    <button style="width:100%;padding:16px;border:none;border-radius:16px;font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#ffffff;cursor:pointer;margin-bottom:10px;background:#1E3A8A;" id="ovBuyBtn" onclick="buyNow()">Buy Now →</button>
-    <button style="width:100%;padding:14px;background:#f1f5f9;border:none;border-radius:16px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;color:#64748B;cursor:pointer;" onclick="closeOverlay()">Maybe later</button>
-  </div>
-</div>
-
-
-<!-- MOTIVATIONAL -->
+<!-- ══ MOTIVATIONAL ══ -->
 <div class="moti-overlay" id="motiOv">
   <div class="moti-box">
     <span class="moti-emo" id="mEmo">💪</span>
@@ -756,50 +318,95 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
   </div>
 </div>
 
+<!-- ══ PRODUCT OVERLAY ══ -->
+<div class="prod-overlay" id="prodOverlay">
+  <div class="prod-card">
+    <button style="float:right;width:32px;height:32px;background:#f1f5f9;border-radius:50%;border:none;cursor:pointer;font-size:16px;" onclick="closeProd()">✕</button>
+    <p style="font-size:48px;text-align:center;display:block;margin:8px 0 12px;" id="ovEmoji">📦</p>
+    <p style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:#0F172A;margin-bottom:6px;" id="ovName">Product</p>
+    <p style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:700;color:#1E3A8A;margin-bottom:12px;" id="ovPrice">₦0</p>
+    <p style="font-size:14px;color:#64748B;line-height:1.6;margin-bottom:24px;" id="ovDesc">Description</p>
+    <button style="width:100%;padding:16px;border:none;border-radius:16px;font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#ffffff;cursor:pointer;margin-bottom:10px;" id="ovBuyBtn" onclick="buyNow()">Buy Now</button>
+    <button style="width:100%;padding:14px;background:#f1f5f9;border:none;border-radius:16px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;color:#64748B;cursor:pointer;" onclick="closeProd()">Maybe later</button>
+  </div>
+</div>
+
 <script>
 const{createClient}=supabase;
 const sb=createClient('https://tdphxzkjvslqukmfihsu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRkcGh4emtqdnNscXVrbWZpaHN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwMDE2MzUsImV4cCI6MjA5MTU3NzYzNX0.yn0xdSYsNEOUH7-Qv4DzDNIut1Q9dNaFDAJja0HVKA0');
-let user=null,profile=null,level=null,authMode='signup';
+
+let user=null,profile=null,chosenLevel=null,authMode='signup';
+let allProducts=[],currentProduct=null,currentCat='all';
 let prices={level_upgrade:10,ad_free:10,advanced_unlock:10};
-const quotes=[{e:"💪",q:"Your body can do it. It's your mind you need to convince!"},{e:"😂",q:"A moment on the lips, forever on the hips!"},{e:"🌟",q:"You didn't come this far to only come this far."},{e:"🔥",q:"Sweat now, shine later."},{e:"😂",q:"The only bad workout is the one that didn't happen."},{e:"🐕",q:"Be the person your dog thinks you are... and take that walk!"},{e:"💃",q:"Life is short. Dance it out!"},{e:"😂",q:"I thought they said rum... not run. Here we are anyway!"},{e:"🌱",q:"Small steps every day lead to big changes."},{e:"😂",q:"Exercise? I thought you said extra fries!"},{e:"⚡",q:"Energy flows where intention goes. Let's flow!"},{e:"🏆",q:"The pain you feel today is the strength you feel tomorrow."}];
 
+const quotes=[
+  {e:"💪",q:"Your body can do it. It's your mind you need to convince!"},
+  {e:"😂",q:"A moment on the lips, forever on the hips!"},
+  {e:"🌟",q:"You didn't come this far to only come this far."},
+  {e:"🔥",q:"Sweat now, shine later."},
+  {e:"😂",q:"The only bad workout is the one that didn't happen."},
+  {e:"🐕",q:"Be the person your dog thinks you are... and take that walk!"},
+  {e:"💃",q:"Life is short. Dance it out!"},
+  {e:"😂",q:"I thought they said rum... not run. Here we are anyway!"},
+  {e:"🌱",q:"Small steps every day lead to big changes."},
+  {e:"😂",q:"Exercise? I thought you said extra fries!"},
+  {e:"⚡",q:"Energy flows where intention goes. Let's flow!"},
+  {e:"🏆",q:"The pain you feel today is the strength you feel tomorrow."},
+];
+
+const catColors={
+  consultation:{bg:'#ede9fe',color:'#5b21b6',label:'Consultation'},
+  medical:{bg:'#dbeafe',color:'#1e40af',label:'Medical'},
+  ebooks:{bg:'#dcfce7',color:'#166534',label:'E-Book'},
+  fitgear:{bg:'#fff7ed',color:'#9a3412',label:'FitGear'},
+  medications:{bg:'#fce7f3',color:'#9d174d',label:'Medications'},
+};
+
+const thumbColors={
+  consultation:'#7C3AED',
+  medical:'#1E3A8A',
+  ebooks:'#16a34a',
+  fitgear:'#F97316',
+  medications:'#ec4899',
+};
+
+// ── INIT ──
 window.addEventListener('load',async()=>{
-  // Load prices from Supabase
-  const{data:priceData}=await sb.from('app_prices').select('*').eq('active',true);
-  if(priceData){priceData.forEach(p=>{prices[p.id]=p.amount;});
-  updatePriceLabels();}
-
-  // Load app settings (promo message etc)
-  const{data:settings}=await sb.from('app_settings').select('*');
-  if(settings){
-    const promo=settings.find(s=>s.id==='promo_message');
-    const link=settings.find(s=>s.id==='promo_link');
-    if(promo){
-      const el=document.getElementById('promoMsg');
-      if(el)el.textContent=promo.value;
-    }
-    if(link&&link.value){
-      const banner=document.getElementById('adBanner');
-      if(banner){
-        banner.style.cursor='pointer';
-        banner.onclick=()=>window.open(link.value,'_blank');
-      }
-    }
-  }
-
   const{data:{session}}=await sb.auth.getSession();
-  if(session){user=session.user;const{data}=await sb.from('profiles').select('*').eq('id',user.id).single();if(data){profile=data;updateApp();show('appScreen');}else show('levelScreen');}
+  if(session){
+    user=session.user;
+    const{data}=await sb.from('profiles').select('*').eq('id',user.id).single();
+    if(data){profile=data;updateApp();goScreen('appScreen');}
+    else goScreen('levelScreen');
+  }
+  loadPrices();
+  loadGlobalSettings();
 });
 
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+// ── SCREEN NAVIGATION ──
+function goScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
 
+function switchTab(tab){
+  if(tab==='home'){goScreen('appScreen');updateApp();}
+  else if(tab==='store'){goScreen('storeScreen');loadProducts();loadStoreSettings();}
+  else if(tab==='workouts'){alert('Workouts screen coming soon! 🏋️');}
+  else if(tab==='progress'){alert('Progress screen coming soon! 📊');}
+  else if(tab==='profile'){alert('Profile screen coming soon! 👤');}
+}
+
+// ── AUTH ──
 function goAuth(mode){
-  authMode=mode;const s=mode==='signup';
+  authMode=mode;
+  const s=mode==='signup';
   document.getElementById('authTitle').textContent=s?'Join MyFitFlow':'Welcome Back!';
   document.getElementById('authSub').textContent=s?'Set up your account in seconds':'Sign in to continue your journey';
   document.getElementById('uGroup').style.display=s?'block':'none';
   document.getElementById('authBtn').textContent=s?'✉️  Continue with Email':'✉️  Sign In';
-  show('authScreen');
+  goScreen('authScreen');
 }
 
 async function doAuth(){
@@ -815,12 +422,16 @@ async function doAuth(){
     if(authMode==='signup'){
       const{data,error}=await sb.auth.signUp({email,password:pass});
       if(error)throw error;
-      user=data.user;localStorage.setItem('mff_u',uname);show('levelScreen');
+      user=data.user;
+      localStorage.setItem('mff_u',uname);
+      goScreen('levelScreen');
     }else{
       const{data,error}=await sb.auth.signInWithPassword({email,password:pass});
       if(error)throw error;
-      user=data.user;const{data:p}=await sb.from('profiles').select('*').eq('id',user.id).single();
-      if(p){profile=p;updateApp();show('appScreen');}else show('levelScreen');
+      user=data.user;
+      const{data:p}=await sb.from('profiles').select('*').eq('id',user.id).single();
+      if(p){profile=p;updateApp();goScreen('appScreen');}
+      else goScreen('levelScreen');
     }
   }catch(e){err.textContent=e.message;err.style.display='block';}
   document.getElementById('authBtn').textContent=authMode==='signup'?'✉️  Continue with Email':'✉️  Sign In';
@@ -829,9 +440,15 @@ async function doAuth(){
 function doGoogle(){sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:window.location.href}});}
 function doApple(){sb.auth.signInWithOAuth({provider:'apple',options:{redirectTo:window.location.href}});}
 
+// ── LEVEL ──
 function pickLevel(l){
-  level=l;
-  ['b','i','a'].forEach(x=>{const c=document.getElementById('lv-'+x);const k=document.getElementById('ck-'+x);c.style.borderColor='#E2E8F0';c.style.background='#ffffff';k.textContent='';k.style.background='transparent';k.style.borderColor='#CBD5E1';});
+  chosenLevel=l;
+  ['b','i','a'].forEach(x=>{
+    const c=document.getElementById('lv-'+x);
+    const k=document.getElementById('ck-'+x);
+    c.style.borderColor='#E2E8F0';c.style.background='#ffffff';
+    k.textContent='';k.style.background='transparent';k.style.borderColor='#CBD5E1';
+  });
   const colors={b:'#22C55E',i:'#7C3AED',a:'#F97316'};
   const bgs={b:'#f0fdf4',i:'#faf5ff',a:'#fff7ed'};
   document.getElementById('lv-'+l).style.borderColor=colors[l];
@@ -843,10 +460,10 @@ function pickLevel(l){
 }
 
 async function doLevel(){
-  if(!level)return;
+  if(!chosenLevel)return;
   const uname=localStorage.getItem('mff_u')||'Champ';
   const lvMap={b:'beginner',i:'intermediate',a:'advanced'};
-  const lvName=lvMap[level];
+  const lvName=lvMap[chosenLevel];
   try{
     const{error}=await sb.from('profiles').insert({id:user.id,username:uname,fitness_level:lvName});
     if(error)throw error;
@@ -855,17 +472,11 @@ async function doLevel(){
     const badges={beginner:'🌱 Beginner · Ready to go!',intermediate:'⚡ Intermediate · Let\'s go!',advanced:'🔥 Advanced · Game on!'};
     document.getElementById('wcName').textContent='Welcome, '+uname+'! 👋';
     document.getElementById('wcBadge').textContent=badges[lvName];
-    show('welcomeScreen');
+    goScreen('welcomeScreen');
   }catch(e){alert('Error: '+e.message);}
 }
 
-function goApp(){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('appScreen').classList.add('active');
-  window.scrollTo(0,0);
-  updateApp();
-}
-
+// ── APP ──
 function updateApp(){
   if(!profile)return;
   document.getElementById('ahName').textContent=profile.username+' 👋';
@@ -873,11 +484,33 @@ function updateApp(){
   document.getElementById('sStreak').textContent='🔥 '+(profile.streak||0);
   document.getElementById('sWorkouts').textContent=profile.total_workouts||0;
   document.getElementById('sMins').textContent=(profile.total_minutes||0)+'m';
-  if(profile.ad_free)document.getElementById('adBanner').style.display='none';
 }
 
 function cap(s){return s?s[0].toUpperCase()+s.slice(1):'';}
 
+// ── PRICES & SETTINGS ──
+async function loadPrices(){
+  const{data}=await sb.from('app_prices').select('*').eq('active',true);
+  if(data)data.forEach(p=>{prices[p.id]=p.amount;});
+}
+
+async function loadGlobalSettings(){
+  const{data}=await sb.from('app_settings').select('*');
+  if(data){
+    const promo=data.find(s=>s.id==='promo_message');
+    const link=data.find(s=>s.id==='promo_link');
+    if(promo&&promo.value){
+      const el=document.getElementById('promoMsgHome');
+      if(el)el.textContent=promo.value;
+    }
+    if(link&&link.value){
+      const banner=document.getElementById('promoBannerHome');
+      if(banner){banner.style.cursor='pointer';banner.onclick=()=>window.open(link.value,'_blank');}
+    }
+  }
+}
+
+// ── MOTIVATIONAL ──
 function moti(){
   const q=quotes[Math.floor(Math.random()*quotes.length)];
   document.getElementById('mEmo').textContent=q.e;
@@ -888,13 +521,109 @@ function moti(){
   setTimeout(()=>ov.classList.remove('show'),3200);
 }
 
-function updatePriceLabels(){
-  // Prices loaded - used when AdMob ads appear
-  console.log('Prices loaded:', prices);
+// ── STORE ──
+async function loadProducts(){
+  const list=document.getElementById('productsList');
+  if(!list)return;
+  list.innerHTML='<div style="text-align:center;padding:40px;color:#64748B;">Loading... ⏳</div>';
+  const{data,error}=await sb.from('store_products').select('*').eq('available',true).order('coming_soon',{ascending:true});
+  if(error){list.innerHTML='<div style="text-align:center;padding:40px;color:#dc2626;">Could not load products. Please try again.</div>';return;}
+  allProducts=data||[];
+  renderProducts(allProducts);
 }
 
-function adFreeOffer(){
-  if(confirm('Remove all ads forever for $10?\n\nOne-time payment!')){alert('✅ Payment coming soon! Thank you!');}
+async function loadStoreSettings(){
+  const{data}=await sb.from('app_settings').select('*');
+  if(data){
+    const promo=data.find(s=>s.id==='promo_message');
+    const link=data.find(s=>s.id==='promo_link');
+    if(promo&&promo.value){const el=document.getElementById('storePromoMsg');if(el)el.textContent=promo.value;}
+    if(link&&link.value){const b=document.getElementById('storePromoBanner');if(b){b.style.cursor='pointer';b.onclick=()=>window.open(link.value,'_blank');}}
+  }
+}
+
+function fmtPrice(price,currency,coming_soon){
+  if(coming_soon)return'Coming Soon';
+  if(currency==='NGN')return'\u20a6'+Number(price).toLocaleString();
+  return'$'+Number(price).toLocaleString();
+}
+
+function renderProducts(products){
+  const list=document.getElementById('productsList');
+  if(!list)return;
+  if(!products||!products.length){list.innerHTML='<div style="text-align:center;padding:40px;color:#64748B;">No products found.</div>';return;}
+  list.innerHTML=products.map((p,idx)=>{
+    const cc=catColors[p.category]||{bg:'#f1f5f9',color:'#64748B',label:p.category};
+    const tc=thumbColors[p.category]||'#1E3A8A';
+    const priceStr=fmtPrice(p.price,p.currency,p.coming_soon);
+    const btnStyle=p.coming_soon?'background:#f1f5f9;color:#94a3b8;cursor:default;':p.category==='consultation'?'background:#7C3AED;color:#ffffff;cursor:pointer;':'background:#1E3A8A;color:#ffffff;cursor:pointer;';
+    const btnText=p.coming_soon?'Coming Soon':p.category==='consultation'?'Book Now \u2192':'Buy Now \u2192';
+    return`<div style="background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 2px 16px rgba(15,23,42,0.08);cursor:pointer;" onclick="openProd(${idx})">
+      <div style="height:130px;display:flex;align-items:center;justify-content:center;font-size:52px;position:relative;background:${tc};">
+        ${p.image_emoji}
+        <div style="position:absolute;top:10px;right:10px;background:${p.coming_soon?'#64748B':'#22C55E'};color:#fff;font-size:9px;font-weight:700;padding:3px 10px;border-radius:20px;">${p.coming_soon?'COMING SOON':'AVAILABLE'}</div>
+        <div style="position:absolute;top:10px;left:10px;background:${cc.bg};color:${cc.color};font-size:9px;font-weight:700;padding:3px 10px;border-radius:20px;">${cc.label.toUpperCase()}</div>
+      </div>
+      <div style="padding:14px 16px;">
+        <p style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;margin-bottom:4px;">${p.name}</p>
+        <p style="font-size:12px;color:#64748B;line-height:1.5;margin-bottom:12px;">${p.description||''}</p>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <p style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:${p.coming_soon?'#94a3b8':'#1E3A8A'};">${priceStr}</p>
+          <button style="padding:10px 20px;border:none;border-radius:12px;font-size:13px;font-weight:700;${btnStyle}" onclick="event.stopPropagation();openProd(${idx})">${btnText}</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterCat(cat,el){
+  currentCat=cat;
+  document.querySelectorAll('#catPills > div').forEach(p=>{
+    p.style.background='#ffffff';p.style.color='#64748B';p.style.border='2px solid #E2E8F0';
+  });
+  el.style.background='#1E3A8A';el.style.color='#ffffff';el.style.border='2px solid #1E3A8A';
+  applyFilters();
+}
+
+function applyFilters(){
+  const search=(document.getElementById('searchInput')||{}).value||'';
+  let filtered=currentCat==='all'?allProducts:allProducts.filter(p=>p.category===currentCat);
+  if(search)filtered=filtered.filter(p=>p.name.toLowerCase().includes(search.toLowerCase())||(p.description||'').toLowerCase().includes(search.toLowerCase()));
+  renderProducts(filtered);
+}
+
+function openProd(idx){
+  const p=allProducts[idx];
+  if(!p)return;
+  currentProduct=p;
+  document.getElementById('ovEmoji').textContent=p.image_emoji||'\ud83d\udce6';
+  document.getElementById('ovName').textContent=p.name;
+  document.getElementById('ovPrice').textContent=fmtPrice(p.price,p.currency,p.coming_soon);
+  document.getElementById('ovDesc').textContent=p.description||'';
+  const btn=document.getElementById('ovBuyBtn');
+  if(p.coming_soon){btn.textContent='Notify Me When Available';btn.style.background='#64748B';}
+  else if(p.category==='consultation'){btn.textContent='Book Consultation Now \u2192';btn.style.background='#7C3AED';}
+  else{btn.textContent='Buy Now \u2014 '+fmtPrice(p.price,p.currency,false)+' \u2192';btn.style.background='#1E3A8A';}
+  document.getElementById('prodOverlay').classList.add('show');
+}
+
+function bookConsultation(){
+  const p=allProducts.find(x=>x.category==='consultation');
+  if(p){const idx=allProducts.indexOf(p);openProd(idx);}
+  else{window.open('https://flutterwave.com/pay/vumseysxgp8a','_blank');}
+}
+
+function closeProd(){
+  document.getElementById('prodOverlay').classList.remove('show');
+  currentProduct=null;
+}
+
+function buyNow(){
+  if(!currentProduct)return;
+  if(currentProduct.coming_soon){alert('We will notify you when '+currentProduct.name+' becomes available! \ud83d\udd14');closeProd();return;}
+  if(currentProduct.payment_link){window.open(currentProduct.payment_link,'_blank');}
+  else{alert('Payment link coming soon!');}
+  closeProd();
 }
 </script>
 </body>
