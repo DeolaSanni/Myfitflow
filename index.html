@@ -7,7 +7,152 @@
 <meta name="theme-color" content="#1E3A8A">
 <title>MyFitFlow</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+// ── WORKOUTS ──
+const workouts = [
+  // WHOLE BODY
+  {id:'wb1',name:'Whole Body Flow',category:'whole',duration:5,level:'all',calories:60,emoji:'🌍',color:'#1E3A8A',desc:'A complete 5-minute whole body session. Perfect when you are short on time but want to move every muscle.',exercises:[{name:'Warm Up With Me',dur:'30 sec',icon:'🔥'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Core Flow With Me',dur:'1 min',icon:'🧘'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Bird Dog With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'30 sec',icon:'😌'}]},
+  {id:'wb2',name:'Whole Body Blast',category:'whole',duration:10,level:'all',calories:110,emoji:'🌍',color:'#1E3A8A',desc:'10 minutes of full body action. Two exercises per category for a complete session.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Lunge With Me',dur:'1 min',icon:'💪'},{name:'Core Flow With Me',dur:'1 min',icon:'🧘'},{name:'Dead Bug With Me',dur:'1 min',icon:'🧘'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Bird Dog With Me',dur:'1 min',icon:'⚖️'},{name:'Balance With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  {id:'wb3',name:'Full Body Flow',category:'whole',duration:30,level:'all',calories:280,emoji:'🌍',color:'#1E3A8A',desc:'The complete MyFitFlow experience. 30 minutes combining every category for a transformative workout.',exercises:[{name:'Warm Up With Me',dur:'3 min',icon:'🔥'},{name:'Walk With Me',dur:'2 min',icon:'🏃'},{name:'Jog With Me',dur:'2 min',icon:'🏃'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Lunge With Me',dur:'1 min',icon:'💪'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Core Flow With Me',dur:'2 min',icon:'🧘'},{name:'Dead Bug With Me',dur:'1 min',icon:'🧘'},{name:'Balance With Me',dur:'2 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'3 min',icon:'😌'}]},
+  {id:'wb4',name:'Full Body Power',category:'whole',duration:60,level:'all',calories:520,emoji:'🌍',color:'#1E3A8A',desc:'The ultimate 60-minute full body challenge. Every category, maximum benefit.',exercises:[{name:'Warm Up With Me',dur:'5 min',icon:'🔥'},{name:'Walk With Me',dur:'3 min',icon:'🏃'},{name:'Jog With Me',dur:'3 min',icon:'🏃'},{name:'Run With Me',dur:'3 min',icon:'🏃'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Lunge With Me',dur:'1 min',icon:'💪'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Core Flow With Me',dur:'2 min',icon:'🧘'},{name:'Dead Bug With Me',dur:'2 min',icon:'🧘'},{name:'Balance With Me',dur:'2 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'5 min',icon:'😌'}]},
+  // TARGETED - ABS
+  {id:'abs1',name:'Abs Burn',category:'targeted',duration:5,level:'all',calories:55,emoji:'🎯',color:'#F97316',desc:'5 minutes targeting your core and abdominals. Feel the burn!',exercises:[{name:'Warm Up With Me',dur:'30 sec',icon:'🔥'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Dead Bug With Me',dur:'1 min',icon:'🧘'},{name:'Bicycle Crunch With Me',dur:'1 min',icon:'💪'},{name:'Leg Raise With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'30 sec',icon:'😌'}]},
+  {id:'abs2',name:'Abs Shred',category:'targeted',duration:10,level:'all',calories:100,emoji:'🎯',color:'#F97316',desc:'10 minutes of intense ab work. Two exercises per category all targeting your core.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Side Plank With Me',dur:'1 min',icon:'💪'},{name:'Dead Bug With Me',dur:'1 min',icon:'🧘'},{name:'Bicycle Crunch With Me',dur:'1 min',icon:'💪'},{name:'Leg Raise With Me',dur:'1 min',icon:'💪'},{name:'Flutter Kick With Me',dur:'1 min',icon:'💪'},{name:'Core Flow With Me',dur:'1 min',icon:'🧘'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  // TARGETED - LEGS
+  {id:'legs1',name:'Leg Day',category:'targeted',duration:5,level:'all',calories:65,emoji:'🦵',color:'#7C3AED',desc:'5 minutes targeting legs and lower body. Simple and effective.',exercises:[{name:'Warm Up With Me',dur:'30 sec',icon:'🔥'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Lunge With Me',dur:'1 min',icon:'💪'},{name:'Wall Sit With Me',dur:'1 min',icon:'💪'},{name:'Leg Swing With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'30 sec',icon:'😌'}]},
+  {id:'legs2',name:'Leg Power',category:'targeted',duration:10,level:'all',calories:120,emoji:'🦵',color:'#7C3AED',desc:'10 minutes of complete lower body training. Squats, lunges and more.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Pulse Squat With Me',dur:'1 min',icon:'💪'},{name:'Lunge With Me',dur:'1 min',icon:'💪'},{name:'Wall Sit With Me',dur:'1 min',icon:'💪'},{name:'Single Leg Deadlift With Me',dur:'1 min',icon:'💪'},{name:'Leg Circle With Me',dur:'1 min',icon:'🧘'},{name:'Leg Swing With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  // TARGETED - GLUTES
+  {id:'glutes1',name:'Glute Lift',category:'targeted',duration:5,level:'all',calories:58,emoji:'🍑',color:'#ec4899',desc:'5 minutes targeting glutes. Bridges, kickbacks and more.',exercises:[{name:'Warm Up With Me',dur:'30 sec',icon:'🔥'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Donkey Kick With Me',dur:'1 min',icon:'💪'},{name:'Fire Hydrant With Me',dur:'1 min',icon:'💪'},{name:'Clamshell With Me',dur:'1 min',icon:'🧘'},{name:'Cool Down With Me',dur:'30 sec',icon:'😌'}]},
+  {id:'glutes2',name:'Glute Burn',category:'targeted',duration:10,level:'all',calories:105,emoji:'🍑',color:'#ec4899',desc:'10 minutes of targeted glute training. Feel the burn in all the right places.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Single Leg Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Donkey Kick With Me',dur:'1 min',icon:'💪'},{name:'Fire Hydrant With Me',dur:'1 min',icon:'💪'},{name:'Clamshell With Me',dur:'1 min',icon:'🧘'},{name:'Side Leg Lift With Me',dur:'1 min',icon:'🧘'},{name:'Hip Circle With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  // TARGETED - ARMS
+  {id:'arms1',name:'Arm Tone',category:'targeted',duration:5,level:'all',calories:50,emoji:'🦾',color:'#0284c7',desc:'5 minutes targeting arms, shoulders and chest. No equipment needed.',exercises:[{name:'Warm Up With Me',dur:'30 sec',icon:'🔥'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Pike Push Up With Me',dur:'1 min',icon:'💪'},{name:'Tricep Dip With Me',dur:'1 min',icon:'💪'},{name:'Arm Circle With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'30 sec',icon:'😌'}]},
+  {id:'arms2',name:'Arm Power',category:'targeted',duration:10,level:'all',calories:95,emoji:'🦾',color:'#0284c7',desc:'10 minutes of complete upper body training. Chest, shoulders, triceps and back.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Knee Push Up With Me',dur:'1 min',icon:'💪'},{name:'Pike Push Up With Me',dur:'1 min',icon:'💪'},{name:'Superman With Me',dur:'1 min',icon:'💪'},{name:'Reverse Snow Angel With Me',dur:'1 min',icon:'💪'},{name:'Wall Slide With Me',dur:'1 min',icon:'⚖️'},{name:'Arm Circle With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  // CARDIO
+  {id:'c1',name:'Cardio Kickstart',category:'cardio',duration:10,level:'all',calories:130,emoji:'🏃',color:'#1E3A8A',desc:'10 minutes of moderate cardio to get your heart pumping. Great for beginners.',exercises:[{name:'Warm Up With Me',dur:'2 min',icon:'🔥'},{name:'March With Me',dur:'2 min',icon:'🏃'},{name:'Walk With Me',dur:'2 min',icon:'🏃'},{name:'Step Jack With Me',dur:'2 min',icon:'🏃'},{name:'Cool Down With Me',dur:'2 min',icon:'😌'}]},
+  {id:'c2',name:'Cardio Blast',category:'cardio',duration:20,level:'all',calories:220,emoji:'🏃',color:'#1E3A8A',desc:'20 minutes of mixed cardio combining moderate and vigorous exercises.',exercises:[{name:'Warm Up With Me',dur:'3 min',icon:'🔥'},{name:'Walk With Me',dur:'2 min',icon:'🏃'},{name:'Jog With Me',dur:'2 min',icon:'🏃'},{name:'Jump With Me',dur:'2 min',icon:'🏃'},{name:'Kick With Me',dur:'2 min',icon:'🏃'},{name:'Dance With Me',dur:'2 min',icon:'💃'},{name:'Cool Down With Me',dur:'3 min',icon:'😌'}]},
+  {id:'c3',name:'HIIT Cardio',category:'cardio',duration:30,level:'all',calories:320,emoji:'🔥',color:'#F97316',desc:'30 minutes of high intensity interval training. The ultimate cardio challenge.',exercises:[{name:'Warm Up With Me',dur:'4 min',icon:'🔥'},{name:'Run With Me',dur:'3 min',icon:'🏃'},{name:'Burpee With Me',dur:'2 min',icon:'💪'},{name:'Climb With Me',dur:'2 min',icon:'🧗'},{name:'Squat With Me',dur:'2 min',icon:'💪'},{name:'Box With Me',dur:'2 min',icon:'🥊'},{name:'Race With Me',dur:'3 min',icon:'🏃'},{name:'Cool Down With Me',dur:'4 min',icon:'😌'}]},
+  // PILATES
+  {id:'p1',name:'Pilates Core',category:'pilates',duration:10,level:'all',calories:75,emoji:'🧘',color:'#7C3AED',desc:'10 minutes of focused Pilates for core strength and posture.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Hundred With Me',dur:'1 min',icon:'🧘'},{name:'Dead Bug With Me',dur:'1 min',icon:'🧘'},{name:'Bird Dog With Me',dur:'1 min',icon:'🧘'},{name:'Single Leg Stretch With Me',dur:'1 min',icon:'🧘'},{name:'Criss Cross With Me',dur:'1 min',icon:'🧘'},{name:'Leg Raise With Me',dur:'1 min',icon:'🧘'},{name:'Roll Up With Me',dur:'1 min',icon:'🧘'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  {id:'p2',name:'Pilates Flow',category:'pilates',duration:20,level:'all',calories:130,emoji:'🧘',color:'#7C3AED',desc:'20 minutes of flowing Pilates combining core, flexibility and spinal health.',exercises:[{name:'Warm Up With Me',dur:'2 min',icon:'🔥'},{name:'Hundred With Me',dur:'2 min',icon:'🧘'},{name:'Single Leg Stretch With Me',dur:'1 min',icon:'🧘'},{name:'Double Leg Stretch With Me',dur:'1 min',icon:'🧘'},{name:'Swan With Me',dur:'1 min',icon:'🧘'},{name:'Cat Cow With Me',dur:'1 min',icon:'🧘'},{name:'Spine Stretch With Me',dur:'1 min',icon:'🧘'},{name:'Core Flow With Me',dur:'2 min',icon:'🧘'},{name:'Mobility Flow With Me',dur:'2 min',icon:'🧘'},{name:'Cool Down With Me',dur:'2 min',icon:'😌'}]},
+  // STRENGTH
+  {id:'s1',name:'Strength Foundation',category:'strength',duration:10,level:'all',calories:95,emoji:'💪',color:'#1e293b',desc:'10 minutes of foundational strength training. Build a strong base with bodyweight exercises.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Lunge With Me',dur:'1 min',icon:'💪'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Dead Bug With Me',dur:'1 min',icon:'💪'},{name:'Bird Dog With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  {id:'s2',name:'Strength Builder',category:'strength',duration:30,level:'all',calories:260,emoji:'💪',color:'#1e293b',desc:'30 minutes of comprehensive strength training targeting all major muscle groups.',exercises:[{name:'Warm Up With Me',dur:'3 min',icon:'🔥'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Pulse Squat With Me',dur:'1 min',icon:'💪'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Pike Push Up With Me',dur:'1 min',icon:'💪'},{name:'Lunge With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Side Plank With Me',dur:'1 min',icon:'💪'},{name:'Dead Bug With Me',dur:'1 min',icon:'💪'},{name:'Superman With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'3 min',icon:'😌'}]},
+];
+
+let currentWktCat='all';
+let currentDur='all';
+let currentWorkout=null;
+
+function showWorkouts(){
+  goScreen('workoutsScreen');
+  if(profile)document.getElementById('wktUsername').textContent=profile.username||'Champ';
+  renderWorkouts();
+}
+
+function filterWktCat(cat,el){
+  currentWktCat=cat;
+  document.querySelectorAll('#wktCatPills > div').forEach(p=>{
+    p.style.background='#ffffff';p.style.color='#64748B';p.style.border='2px solid #E2E8F0';
+  });
+  el.style.background='#1E3A8A';el.style.color='#ffffff';el.style.border='none';
+  renderWorkouts();
+}
+
+function filterDur(dur,el){
+  currentDur=dur;
+  document.querySelectorAll('[onclick^="filterDur"]').forEach(p=>{
+    p.style.background='#ffffff';p.style.color='#64748B';p.style.border='2px solid #E2E8F0';
+  });
+  el.style.background='#1E3A8A';el.style.color='#ffffff';el.style.border='none';
+  renderWorkouts();
+}
+
+function renderWorkouts(){
+  const list=document.getElementById('wktList');
+  let filtered=workouts;
+  if(currentWktCat!=='all')filtered=filtered.filter(w=>w.category===currentWktCat);
+  if(currentDur!=='all')filtered=filtered.filter(w=>w.duration===parseInt(currentDur));
+
+  if(!filtered.length){
+    list.innerHTML='<div style="text-align:center;padding:40px;color:#64748B;">No workouts found for this filter. Try another combination!</div>';
+    return;
+  }
+
+  // Group by category
+  const groups={
+    whole:{label:'🌍 Whole Body',items:[]},
+    targeted:{label:'🎯 Targeted',items:[]},
+    cardio:{label:'🏃 Cardio',items:[]},
+    pilates:{label:'🧘 Pilates',items:[]},
+    strength:{label:'💪 Strength',items:[]},
+  };
+
+  filtered.forEach(w=>{
+    if(groups[w.category])groups[w.category].items.push(w);
+  });
+
+  let html='';
+  Object.values(groups).forEach(g=>{
+    if(!g.items.length)return;
+    html+=`<p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;margin:8px 0 4px;">${g.label}</p>`;
+    g.items.forEach((w,i)=>{
+      const lvBadge=profile?`<span style="background:${profile.fitness_level==='beginner'?'#dcfce7':profile.fitness_level==='intermediate'?'#ede9fe':'#fff7ed'};color:${profile.fitness_level==='beginner'?'#166534':profile.fitness_level==='intermediate'?'#5b21b6':'#9a3412'};font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;">${profile.fitness_level==='beginner'?'🟢 Beginner':profile.fitness_level==='intermediate'?'🟡 Intermediate':'🔴 Advanced'}</span>`:'';
+      html+=`<div style="background:#ffffff;border-radius:16px;padding:14px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 12px rgba(15,23,42,0.07);cursor:pointer;margin-bottom:4px;" onclick="openWktDetail('${w.id}')">
+        <div style="width:52px;height:52px;background:${w.color};border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">${w.emoji}</div>
+        <div style="flex:1;">
+          <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:4px;">${w.name}</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+            ${lvBadge}
+            <span style="font-size:11px;color:#64748B;">⏱ ${w.duration} min</span>
+            <span style="font-size:11px;color:#64748B;">🔥 ${w.calories} kcal</span>
+          </div>
+        </div>
+        <span style="font-size:20px;color:#CBD5E1;">›</span>
+      </div>`;
+    });
+  });
+
+  list.innerHTML=html;
+}
+
+function openWktDetail(id){
+  const w=workouts.find(x=>x.id===id);
+  if(!w)return;
+  currentWorkout=w;
+
+  document.getElementById('wktThumb').style.background=w.color;
+  document.getElementById('wktThumb').querySelector('span')||document.getElementById('wktThumb').childNodes[0];
+  // Update emoji
+  const thumbDiv=document.getElementById('wktThumb');
+  thumbDiv.childNodes[0].textContent=w.emoji;
+
+  document.getElementById('wktDetailName').textContent=w.name;
+  document.getElementById('wktDetailDur').textContent='⏱ '+w.duration+' min';
+  document.getElementById('wktDetailCal').textContent='🔥 '+w.calories+' kcal';
+  document.getElementById('wktDetailExCount').textContent=w.exercises.length;
+  document.getElementById('wktDetailDurStat').textContent=w.duration+'m';
+  document.getElementById('wktDetailCalStat').textContent=w.calories;
+  document.getElementById('wktDetailDesc').textContent=w.desc;
+
+  const lvText=profile?(profile.fitness_level==='beginner'?'🟢 Beginner':profile.fitness_level==='intermediate'?'🟡 Intermediate':'🔴 Advanced'):'🟢 Beginner';
+  document.getElementById('wktDetailLevel').textContent=lvText;
+
+  // Exercise list
+  document.getElementById('wktExList').innerHTML=w.exercises.map((ex,i)=>`
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 12px;background:#ffffff;border-radius:12px;box-shadow:0 1px 6px rgba(15,23,42,0.06);">
+      <div style="width:32px;height:32px;background:#f1f5f9;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">${ex.icon}</div>
+      <div style="flex:1;">
+        <p style="font-size:13px;font-weight:600;color:#0F172A;">${ex.name}</p>
+        <p style="font-size:11px;color:#64748B;">${ex.dur}</p>
+      </div>
+      <span style="font-size:11px;color:#94a3b8;font-weight:600;">${i+1}</span>
+    </div>
+  `).join('');
+
+  goScreen('wktDetailScreen');
+}
+
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background:#F8FAFC;max-width:430px;margin:0 auto;min-height:100vh;overflow-x:hidden;}
@@ -309,6 +454,112 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
   </div>
 </div>
 
+<!-- ══ WORKOUTS ══ -->
+<div class="screen" id="workoutsScreen">
+  <div class="scroll-area" style="padding-bottom:80px;">
+
+    <!-- Header -->
+    <div style="background:#1E3A8A;padding:52px 20px 28px;">
+      <p style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:800;color:#ffffff;margin-bottom:4px;">🏋️ Workouts</p>
+      <p style="font-size:13px;color:rgba(255,255,255,0.8);">Choose your workout, <span id="wktUsername">Champ</span></p>
+    </div>
+
+    <!-- Duration Filter -->
+    <div style="margin:-16px 16px 0;background:#ffffff;border-radius:16px;padding:12px;box-shadow:0 4px 16px rgba(30,58,138,0.12);position:relative;z-index:2;">
+      <p style="font-size:11px;color:#64748B;margin-bottom:8px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Duration</p>
+      <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;">
+        <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#1E3A8A;color:#ffffff;" onclick="filterDur('all',this)" id="durAll">All</div>
+        <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;" onclick="filterDur('5',this)">5 min</div>
+        <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;" onclick="filterDur('10',this)">10 min</div>
+        <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;" onclick="filterDur('15',this)">15 min</div>
+        <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;" onclick="filterDur('30',this)">30 min</div>
+        <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;" onclick="filterDur('60',this)">60 min</div>
+      </div>
+    </div>
+
+    <!-- Category Filter -->
+    <div style="display:flex;gap:8px;overflow-x:auto;padding:16px 16px 4px;scrollbar-width:none;" id="wktCatPills">
+      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#1E3A8A;color:#ffffff;white-space:nowrap;" onclick="filterWktCat('all',this)">All</div>
+      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterWktCat('whole',this)">🌍 Whole Body</div>
+      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterWktCat('targeted',this)">🎯 Targeted</div>
+      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterWktCat('cardio',this)">🏃 Cardio</div>
+      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterWktCat('pilates',this)">🧘 Pilates</div>
+      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterWktCat('strength',this)">💪 Strength</div>
+    </div>
+
+    <!-- Workout List -->
+    <div style="padding:8px 16px;display:flex;flex-direction:column;gap:12px;" id="wktList">
+      <div style="text-align:center;padding:40px;color:#64748B;">Loading workouts... ⏳</div>
+    </div>
+
+    <div style="height:20px;"></div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="switchTab('home')"><div class="nav-ico">🏠</div><div class="nav-lbl">Home</div></div>
+    <div class="nav-item active"><div class="nav-ico">🏋️</div><div class="nav-lbl">Workouts</div><div class="nav-dot"></div></div>
+    <div class="nav-item" onclick="switchTab('store')"><div class="nav-ico">🛍️</div><div class="nav-lbl">Store</div></div>
+    <div class="nav-item" onclick="switchTab('progress')"><div class="nav-ico">📊</div><div class="nav-lbl">Progress</div></div>
+    <div class="nav-item" onclick="switchTab('profile')"><div class="nav-ico">👤</div><div class="nav-lbl">Profile</div></div>
+  </div>
+</div>
+
+<!-- ══ WORKOUT DETAIL ══ -->
+<div class="screen" id="wktDetailScreen">
+  <div class="scroll-area" style="padding-bottom:100px;">
+
+    <!-- Thumb -->
+    <div id="wktThumb" style="height:220px;background:#1E3A8A;display:flex;align-items:center;justify-content:center;font-size:72px;position:relative;">
+      🏋️
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,0.6) 100%);"></div>
+      <button onclick="switchTab('workouts')" style="position:absolute;top:52px;left:16px;width:36px;height:36px;background:rgba(255,255,255,0.2);border:none;border-radius:50%;color:#ffffff;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;">←</button>
+      <div style="position:absolute;bottom:16px;left:20px;right:20px;">
+        <p id="wktDetailName" style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:#ffffff;margin-bottom:4px;">Full Body Flow</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span id="wktDetailLevel" style="background:rgba(255,255,255,0.2);border-radius:20px;padding:3px 10px;color:#ffffff;font-size:11px;font-weight:600;">🟢 Beginner</span>
+          <span id="wktDetailDur" style="background:rgba(255,255,255,0.2);border-radius:20px;padding:3px 10px;color:#ffffff;font-size:11px;font-weight:600;">⏱ 30 min</span>
+          <span id="wktDetailCal" style="background:rgba(255,255,255,0.2);border-radius:20px;padding:3px 10px;color:#ffffff;font-size:11px;font-weight:600;">🔥 180 kcal</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;margin:16px;background:#ffffff;border-radius:16px;box-shadow:0 2px 12px rgba(15,23,42,0.08);overflow:hidden;">
+      <div style="padding:14px;text-align:center;border-right:1px solid #E2E8F0;">
+        <p id="wktDetailExCount" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#1E3A8A;">8</p>
+        <p style="font-size:10px;color:#64748B;margin-top:2px;">Exercises</p>
+      </div>
+      <div style="padding:14px;text-align:center;border-right:1px solid #E2E8F0;">
+        <p id="wktDetailDurStat" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#F97316;">30m</p>
+        <p style="font-size:10px;color:#64748B;margin-top:2px;">Duration</p>
+      </div>
+      <div style="padding:14px;text-align:center;">
+        <p id="wktDetailCalStat" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#22C55E;">180</p>
+        <p style="font-size:10px;color:#64748B;margin-top:2px;">Calories</p>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div style="margin:0 16px 16px;background:#ffffff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(15,23,42,0.08);">
+      <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:8px;">About this workout</p>
+      <p id="wktDetailDesc" style="font-size:13px;color:#64748B;line-height:1.6;">A complete full body workout combining warm up, cardio, resistance, pilates, balance and cool down. Perfect for beginners looking for a structured session.</p>
+    </div>
+
+    <!-- Exercise List -->
+    <div style="margin:0 16px;">
+      <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:12px;">Exercises in this workout</p>
+      <div id="wktExList" style="display:flex;flex-direction:column;gap:8px;"></div>
+    </div>
+
+    <div style="height:20px;"></div>
+  </div>
+
+  <!-- Start Button -->
+  <div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;padding:16px;background:#ffffff;border-top:1px solid #E2E8F0;z-index:100;">
+    <button onclick="moti()" style="width:100%;padding:16px;background:#1E3A8A;border:none;border-radius:16px;font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;color:#ffffff;cursor:pointer;">▶ Start Workout</button>
+  </div>
+</div>
+
 <!-- ══ MOTIVATIONAL ══ -->
 <div class="moti-overlay" id="motiOv">
   <div class="moti-box">
@@ -393,7 +644,7 @@ function goScreen(id){
 function switchTab(tab){
   if(tab==='home'){goScreen('appScreen');updateApp();}
   else if(tab==='store'){goScreen('storeScreen');loadProducts();loadStoreSettings();}
-  else if(tab==='workouts'){alert('Workouts screen coming soon! 🏋️');}
+  else if(tab==='workouts'){showWorkouts();}
   else if(tab==='progress'){alert('Progress screen coming soon! 📊');}
   else if(tab==='profile'){alert('Profile screen coming soon! 👤');}
 }
