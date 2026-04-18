@@ -1,0 +1,15 @@
+{
+  "name": "MyFitFlow",
+  "short_name": "MyFitFlow",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1E3A8A",
+  "theme_color": "#1E3A8A",
+  "icons": [
+    {
+      "src": "https://img.icons8.com/color/96/exercise.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ]
+}
