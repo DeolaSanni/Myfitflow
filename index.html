@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -86,7 +85,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 <body>
 
 <!-- SPLASH -->
-
 <div class="screen active" id="splashScreen" style="background:#1E3A8A;align-items:center;justify-content:center;text-align:center;padding:48px 32px;">
   <svg class="spin" style="width:100px;height:100px;margin:0 auto 24px;display:block;" viewBox="0 0 140 140" fill="none">
     <defs>
@@ -108,7 +106,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- AUTH -->
-
 <div class="screen" id="authScreen">
   <div style="background:#1E3A8A;padding:56px 24px 36px;">
     <button class="back-btn" onclick="show('splashScreen')">←</button>
@@ -137,7 +134,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- LEVEL -->
-
 <div class="screen" id="levelScreen">
   <div style="background:#1E3A8A;padding:56px 24px 32px;">
     <p style="font-size:11px;color:rgba(255,255,255,0.65);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">One last step</p>
@@ -165,10 +161,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- WELCOME -->
-
 <div class="screen" id="welcomeScreen" style="background:#1E3A8A;align-items:center;justify-content:center;padding:48px 32px;text-align:center;">
   <p style="font-size:56px;margin-bottom:16px;">🎉</p>
-
+  
   <p id="wcName" style="font-family:'Outfit',sans-serif;font-size:40px;font-weight:900;color:#ffffff;margin-bottom:16px;">Welcome, Champ! 👋</p>
   <p id="wcBadge" style="background:rgba(255,255,255,0.2);border-radius:20px;padding:8px 18px;color:#ffffff;font-size:13px;font-weight:600;margin-bottom:40px;display:inline-block;">🌱 Beginner · Ready to go!</p>
   <div style="background:rgba(255,255,255,0.15);border-radius:20px;padding:20px;margin-bottom:32px;width:100%;">
@@ -183,103 +178,99 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- MAIN APP -->
-
 <div class="screen pb80" id="appScreen">
   <div style="overflow-y:auto;flex:1;">
 
-```
-<div style="background:#1E3A8A;padding:52px 20px 32px;">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-    <div style="display:flex;align-items:center;gap:8px;">
-      <svg class="spin" style="width:32px;height:32px;" viewBox="0 0 140 140" fill="none">
-        <path d="M70 12C100 8,128 35,128 70C128 90,118 108,102 118" stroke="#ffffff" stroke-width="10" stroke-linecap="round" fill="none"/>
-        <path d="M98 120C80 132,58 132,40 122C22 112,12 92,12 70" stroke="#c4b5fd" stroke-width="10" stroke-linecap="round" fill="none"/>
-        <path d="M12 68C12 45,25 24,48 14C56 11,63 10,70 12" stroke="#ffffff" stroke-width="10" stroke-linecap="round" fill="none"/>
-      </svg>
-      <span style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#ffffff;"><span style="font-weight:300;font-size:14px;opacity:0.8;">My</span>FitFlow</span>
+    <div style="background:#1E3A8A;padding:52px 20px 32px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <svg class="spin" style="width:32px;height:32px;" viewBox="0 0 140 140" fill="none">
+            <path d="M70 12C100 8,128 35,128 70C128 90,118 108,102 118" stroke="#ffffff" stroke-width="10" stroke-linecap="round" fill="none"/>
+            <path d="M98 120C80 132,58 132,40 122C22 112,12 92,12 70" stroke="#c4b5fd" stroke-width="10" stroke-linecap="round" fill="none"/>
+            <path d="M12 68C12 45,25 24,48 14C56 11,63 10,70 12" stroke="#ffffff" stroke-width="10" stroke-linecap="round" fill="none"/>
+          </svg>
+          <span style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#ffffff;"><span style="font-weight:300;font-size:14px;opacity:0.8;">My</span>FitFlow</span>
+        </div>
+        <div style="width:36px;height:36px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;position:relative;">
+          🔔<div style="position:absolute;top:6px;right:6px;width:8px;height:8px;background:#F97316;border-radius:50%;border:2px solid #1E3A8A;"></div>
+        </div>
+      </div>
+      <p style="color:rgba(255,255,255,0.85);font-size:13px;margin-bottom:2px;">Good morning,</p>
+      <p id="ahName" style="font-family:'Outfit',sans-serif;font-size:26px;font-weight:800;color:#ffffff;margin-bottom:12px;">Champ 👋</p>
+      <span style="background:rgba(255,255,255,0.2);border-radius:20px;padding:5px 14px;color:#ffffff;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:6px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#22C55E;display:inline-block;"></span>
+        <span id="ahLevel">Beginner</span> · Week 1
+      </span>
     </div>
-    <div style="width:36px;height:36px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;position:relative;">
-      🔔<div style="position:absolute;top:6px;right:6px;width:8px;height:8px;background:#F97316;border-radius:50%;border:2px solid #1E3A8A;"></div>
+
+    <div class="streak-card">
+      <div class="st-item"><div class="st-val" id="sStreak" style="color:#F97316;">🔥 0</div><div class="st-lbl">Day Streak</div></div>
+      <div class="st-item"><div class="st-val" id="sWorkouts" style="color:#22C55E;">0</div><div class="st-lbl">Workouts Done</div></div>
+      <div class="st-item"><div class="st-val" id="sMins" style="color:#7C3AED;">0m</div><div class="st-lbl">Mins Exercised</div></div>
     </div>
-  </div>
-  <p style="color:rgba(255,255,255,0.85);font-size:13px;margin-bottom:2px;">Good morning,</p>
-  <p id="ahName" style="font-family:'Outfit',sans-serif;font-size:26px;font-weight:800;color:#ffffff;margin-bottom:12px;">Champ 👋</p>
-  <span style="background:rgba(255,255,255,0.2);border-radius:20px;padding:5px 14px;color:#ffffff;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:6px;">
-    <span style="width:8px;height:8px;border-radius:50%;background:#22C55E;display:inline-block;"></span>
-    <span id="ahLevel">Beginner</span> · Week 1
-  </span>
-</div>
 
-<div class="streak-card">
-  <div class="st-item"><div class="st-val" id="sStreak" style="color:#F97316;">🔥 0</div><div class="st-lbl">Day Streak</div></div>
-  <div class="st-item"><div class="st-val" id="sWorkouts" style="color:#22C55E;">0</div><div class="st-lbl">Workouts Done</div></div>
-  <div class="st-item"><div class="st-val" id="sMins" style="color:#7C3AED;">0m</div><div class="st-lbl">Mins Exercised</div></div>
-</div>
-
-<div class="ad-banner" id="adBanner">
-  <span style="font-size:20px;">📢</span>
-  <div style="flex:1;"><p style="font-size:10px;color:rgba(255,255,255,0.45);margin-bottom:1px;letter-spacing:1px;text-transform:uppercase;">MyFitFlow Promotions</p><p style="font-size:12px;color:#ffffff;font-weight:500;" id="promoMsg">Stay healthy with our premium partners</p></div>
-  
-</div>
-
-<div class="sec">
-  <div class="sec-hd"><div class="sec-title">Continue Workout</div></div>
-  <div class="cont-card" onclick="moti()">
-    <div class="cont-icon">🏃</div>
-    <div style="flex:1;">
-      <p style="font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:2px;">Last session</p>
-      <p style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#ffffff;margin-bottom:4px;">Walk With Me · 30 min</p>
-      <div class="cont-bar"><div class="cont-fill"></div></div>
-      <p style="font-size:11px;color:rgba(255,255,255,0.85);margin-top:3px;">65% complete</p>
+    <div class="ad-banner" id="adBanner">
+      <span style="font-size:20px;">📢</span>
+      <div style="flex:1;"><p style="font-size:10px;color:rgba(255,255,255,0.45);margin-bottom:1px;letter-spacing:1px;text-transform:uppercase;">MyFitFlow Promotions</p><p style="font-size:12px;color:#ffffff;font-weight:500;" id="promoMsg">Stay healthy with our premium partners</p></div>
+      
     </div>
-    <div class="play-btn"><div class="play-tri"></div></div>
-  </div>
-</div>
 
-<div class="sec">
-  <div class="sec-hd"><div class="sec-title">Categories</div><div class="see-all">See all</div></div>
-  <div class="cat-grid">
-    <div class="cat-card" style="background:#F97316;" onclick="moti()"><div class="cat-emoji">🔥</div><div><div class="cat-name">Warm Up</div><div class="cat-cnt">20 exercises</div></div></div>
-    <div class="cat-card" style="background:#1E3A8A;" onclick="moti()"><div class="cat-emoji">🏃</div><div><div class="cat-name">Cardio</div><div class="cat-cnt">15 exercises</div></div></div>
-    <div class="cat-card" style="background:#1e293b;" onclick="moti()"><div class="cat-emoji">💪</div><div><div class="cat-name">Resistance</div><div class="cat-cnt">26 exercises</div></div></div>
-    <div class="cat-card" style="background:#7C3AED;" onclick="moti()"><div class="cat-emoji">🧘</div><div><div class="cat-name">Pilates</div><div class="cat-cnt">28 exercises</div></div></div>
-    <div class="cat-card" style="background:#16a34a;" onclick="moti()"><div class="cat-emoji">⚖️</div><div><div class="cat-name">Balance &amp; Mobility</div><div class="cat-cnt">31 exercises</div></div></div>
-    <div class="cat-card" style="background:#0284c7;" onclick="moti()"><div class="cat-emoji">😌</div><div><div class="cat-name">Cool Down</div><div class="cat-cnt">17 exercises</div></div></div>
-  </div>
-</div>
-
-<div class="sec">
-  <div class="sec-hd"><div class="sec-title">Featured Workouts</div><div class="see-all">See all</div></div>
-  <div class="feat-card" onclick="moti()">
-    <div class="feat-thumb" style="background:#1E3A8A;">🏋️<div class="feat-badge">⭐ Featured</div><div class="feat-dur">⏱ 30 min</div></div>
-    <div class="feat-info">
-      <div class="feat-name">Full Body Flow · 30 Min</div>
-      <div class="feat-meta"><span class="pill" style="background:#dcfce7;color:#166534;">🟢 Beginner</span><span class="pill" style="background:#fff7ed;color:#9a3412;">Full Body</span><span style="font-size:11px;color:#64748B;margin-left:auto;">🔥 180 kcal</span></div>
+    <div class="sec">
+      <div class="sec-hd"><div class="sec-title">Continue Workout</div></div>
+      <div class="cont-card" onclick="moti()">
+        <div class="cont-icon">🏃</div>
+        <div style="flex:1;">
+          <p style="font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:2px;">Last session</p>
+          <p style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#ffffff;margin-bottom:4px;">Walk With Me · 30 min</p>
+          <div class="cont-bar"><div class="cont-fill"></div></div>
+          <p style="font-size:11px;color:rgba(255,255,255,0.85);margin-top:3px;">65% complete</p>
+        </div>
+        <div class="play-btn"><div class="play-tri"></div></div>
+      </div>
     </div>
-  </div>
-  <div class="feat-card" onclick="moti()">
-    <div class="feat-thumb" style="background:#7C3AED;">💃<div class="feat-badge">🔥 Popular</div><div class="feat-dur">⏱ 15 min</div></div>
-    <div class="feat-info">
-      <div class="feat-name">Dance &amp; Cardio Blast</div>
-      <div class="feat-meta"><span class="pill" style="background:#ede9fe;color:#5b21b6;">🟡 Intermediate</span><span class="pill" style="background:#dbeafe;color:#1e40af;">Cardio</span><span style="font-size:11px;color:#64748B;margin-left:auto;">🔥 140 kcal</span></div>
-    </div>
-  </div>
-</div>
-<div class="bspace"></div>
-```
 
+    <div class="sec">
+      <div class="sec-hd"><div class="sec-title">Categories</div><div class="see-all">See all</div></div>
+      <div class="cat-grid">
+        <div class="cat-card" style="background:#F97316;" onclick="moti()"><div class="cat-emoji">🔥</div><div><div class="cat-name">Warm Up</div><div class="cat-cnt">20 exercises</div></div></div>
+        <div class="cat-card" style="background:#1E3A8A;" onclick="moti()"><div class="cat-emoji">🏃</div><div><div class="cat-name">Cardio</div><div class="cat-cnt">15 exercises</div></div></div>
+        <div class="cat-card" style="background:#1e293b;" onclick="moti()"><div class="cat-emoji">💪</div><div><div class="cat-name">Resistance</div><div class="cat-cnt">26 exercises</div></div></div>
+        <div class="cat-card" style="background:#7C3AED;" onclick="moti()"><div class="cat-emoji">🧘</div><div><div class="cat-name">Pilates</div><div class="cat-cnt">28 exercises</div></div></div>
+        <div class="cat-card" style="background:#16a34a;" onclick="moti()"><div class="cat-emoji">⚖️</div><div><div class="cat-name">Balance &amp; Mobility</div><div class="cat-cnt">31 exercises</div></div></div>
+        <div class="cat-card" style="background:#0284c7;" onclick="moti()"><div class="cat-emoji">😌</div><div><div class="cat-name">Cool Down</div><div class="cat-cnt">17 exercises</div></div></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-hd"><div class="sec-title">Featured Workouts</div><div class="see-all">See all</div></div>
+      <div class="feat-card" onclick="moti()">
+        <div class="feat-thumb" style="background:#1E3A8A;">🏋️<div class="feat-badge">⭐ Featured</div><div class="feat-dur">⏱ 30 min</div></div>
+        <div class="feat-info">
+          <div class="feat-name">Full Body Flow · 30 Min</div>
+          <div class="feat-meta"><span class="pill" style="background:#dcfce7;color:#166534;">🟢 Beginner</span><span class="pill" style="background:#fff7ed;color:#9a3412;">Full Body</span><span style="font-size:11px;color:#64748B;margin-left:auto;">🔥 180 kcal</span></div>
+        </div>
+      </div>
+      <div class="feat-card" onclick="moti()">
+        <div class="feat-thumb" style="background:#7C3AED;">💃<div class="feat-badge">🔥 Popular</div><div class="feat-dur">⏱ 15 min</div></div>
+        <div class="feat-info">
+          <div class="feat-name">Dance &amp; Cardio Blast</div>
+          <div class="feat-meta"><span class="pill" style="background:#ede9fe;color:#5b21b6;">🟡 Intermediate</span><span class="pill" style="background:#dbeafe;color:#1e40af;">Cardio</span><span style="font-size:11px;color:#64748B;margin-left:auto;">🔥 140 kcal</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="bspace"></div>
   </div>
 
   <div class="bottom-nav">
     <div class="nav-item active"><div class="nav-ico">🏠</div><div class="nav-lbl">Home</div><div class="nav-dot"></div></div>
     <div class="nav-item"><div class="nav-ico">🏋️</div><div class="nav-lbl">Workouts</div></div>
+    <div class="nav-item" onclick="window.location.href='store.html'"><div class="nav-ico">🛍️</div><div class="nav-lbl">Store</div></div>
     <div class="nav-item"><div class="nav-ico">📊</div><div class="nav-lbl">Progress</div></div>
     <div class="nav-item"><div class="nav-ico">👤</div><div class="nav-lbl">Profile</div></div>
   </div>
 </div>
 
 <!-- MOTIVATIONAL -->
-
 <div class="moti-overlay" id="motiOv">
   <div class="moti-box">
     <span class="moti-emo" id="mEmo">💪</span>
@@ -300,6 +291,24 @@ window.addEventListener('load',async()=>{
   const{data:priceData}=await sb.from('app_prices').select('*').eq('active',true);
   if(priceData){priceData.forEach(p=>{prices[p.id]=p.amount;});
   updatePriceLabels();}
+
+  // Load app settings (promo message etc)
+  const{data:settings}=await sb.from('app_settings').select('*');
+  if(settings){
+    const promo=settings.find(s=>s.id==='promo_message');
+    const link=settings.find(s=>s.id==='promo_link');
+    if(promo){
+      const el=document.getElementById('promoMsg');
+      if(el)el.textContent=promo.value;
+    }
+    if(link&&link.value){
+      const banner=document.getElementById('adBanner');
+      if(banner){
+        banner.style.cursor='pointer';
+        banner.onclick=()=>window.open(link.value,'_blank');
+      }
+    }
+  }
 
   const{data:{session}}=await sb.auth.getSession();
   if(session){user=session.user;const{data}=await sb.from('profiles').select('*').eq('id',user.id).single();if(data){profile=data;updateApp();show('appScreen');}else show('levelScreen');}
@@ -406,6 +415,5 @@ function adFreeOffer(){
   if(confirm('Remove all ads forever for $10?\n\nOne-time payment!')){alert('✅ Payment coming soon! Thank you!');}
 }
 </script>
-
 </body>
 </html>
