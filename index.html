@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -84,10 +85,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 .scroll-area{flex:1;overflow-y:auto;scrollbar-width:none;}
 .scroll-area::-webkit-scrollbar{display:none;}
 </style>
+
 </head>
 <body>
 
 <!-- ══ SPLASH ══ -->
+
 <div class="screen active" id="splashScreen" style="background:#1E3A8A;align-items:center;justify-content:center;text-align:center;padding:48px 32px;">
   <svg class="spin" style="width:100px;height:100px;margin:0 auto 24px;display:block;" viewBox="0 0 140 140" fill="none">
     <defs>
@@ -109,6 +112,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- ══ AUTH ══ -->
+
 <div class="screen" id="authScreen">
   <div style="background:#1E3A8A;padding:56px 24px 36px;">
     <button class="back-btn" onclick="goScreen('splashScreen')">←</button>
@@ -137,6 +141,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- ══ LEVEL ══ -->
+
 <div class="screen" id="levelScreen">
   <div style="background:#1E3A8A;padding:56px 24px 32px;">
     <p style="font-size:11px;color:rgba(255,255,255,0.65);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">One last step</p>
@@ -164,6 +169,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- ══ WELCOME ══ -->
+
 <div class="screen" id="welcomeScreen" style="background:#1E3A8A;align-items:center;justify-content:center;padding:48px 32px;text-align:center;">
   <p style="font-size:56px;margin-bottom:16px;">🎉</p>
   <p id="wcName" style="font-family:'Outfit',sans-serif;font-size:36px;font-weight:900;color:#ffffff;margin-bottom:16px;">Welcome, Champ! 👋</p>
@@ -180,6 +186,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- ══ HOME ══ -->
+
 <div class="screen pb80" id="appScreen">
   <div class="scroll-area">
     <div style="background:#1E3A8A;padding:52px 20px 32px;">
@@ -199,55 +206,58 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
       <span style="background:rgba(255,255,255,0.2);border-radius:20px;padding:5px 14px;color:#ffffff;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:#22C55E;display:inline-block;"></span><span id="ahLevel">Beginner</span> · Week 1</span>
     </div>
 
-    <div class="streak-card">
-      <div class="st-item"><div class="st-val" id="sStreak" style="color:#F97316;">🔥 0</div><div class="st-lbl">Day Streak</div></div>
-      <div class="st-item"><div class="st-val" id="sWorkouts" style="color:#22C55E;">0</div><div class="st-lbl">Workouts Done</div></div>
-      <div class="st-item"><div class="st-val" id="sMins" style="color:#7C3AED;">0m</div><div class="st-lbl">Mins Exercised</div></div>
-    </div>
+```
+<div class="streak-card">
+  <div class="st-item"><div class="st-val" id="sStreak" style="color:#F97316;">🔥 0</div><div class="st-lbl">Day Streak</div></div>
+  <div class="st-item"><div class="st-val" id="sWorkouts" style="color:#22C55E;">0</div><div class="st-lbl">Workouts Done</div></div>
+  <div class="st-item"><div class="st-val" id="sMins" style="color:#7C3AED;">0m</div><div class="st-lbl">Mins Exercised</div></div>
+</div>
 
-    <div style="background:#1e293b;margin:16px;border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:10px;" id="promoBannerHome">
-      <span style="font-size:20px;">📢</span>
-      <div style="flex:1;"><p style="font-size:10px;color:rgba(255,255,255,0.45);margin-bottom:1px;text-transform:uppercase;letter-spacing:1px;">MyFitFlow Promotions</p><p style="font-size:12px;color:#ffffff;font-weight:500;" id="promoMsgHome">Stay healthy with our premium partners</p></div>
-    </div>
+<div style="background:#1e293b;margin:16px;border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:10px;" id="promoBannerHome">
+  <span style="font-size:20px;">📢</span>
+  <div style="flex:1;"><p style="font-size:10px;color:rgba(255,255,255,0.45);margin-bottom:1px;text-transform:uppercase;letter-spacing:1px;">MyFitFlow Promotions</p><p style="font-size:12px;color:#ffffff;font-weight:500;" id="promoMsgHome">Stay healthy with our premium partners</p></div>
+</div>
 
-    <div class="sec">
-      <div class="sec-hd"><div class="sec-title">Continue Workout</div></div>
-      <div style="background:#1E3A8A;border-radius:16px;padding:16px;display:flex;align-items:center;gap:14px;cursor:pointer;" onclick="moti()">
-        <div style="width:48px;height:48px;background:rgba(255,255,255,0.2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🏃</div>
-        <div style="flex:1;">
-          <p style="font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:2px;">Last session</p>
-          <p style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#ffffff;margin-bottom:4px;">Walk With Me · 30 min</p>
-          <div style="height:4px;background:rgba(255,255,255,0.3);border-radius:4px;overflow:hidden;margin:4px 0;"><div style="height:100%;width:65%;background:#ffffff;border-radius:4px;"></div></div>
-          <p style="font-size:11px;color:rgba(255,255,255,0.85);margin-top:3px;">65% complete</p>
-        </div>
-        <div style="width:40px;height:40px;background:#ffffff;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid #7C3AED;margin-left:3px;"></div></div>
-      </div>
+<div class="sec">
+  <div class="sec-hd"><div class="sec-title">Continue Workout</div></div>
+  <div style="background:#1E3A8A;border-radius:16px;padding:16px;display:flex;align-items:center;gap:14px;cursor:pointer;" onclick="moti()">
+    <div style="width:48px;height:48px;background:rgba(255,255,255,0.2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🏃</div>
+    <div style="flex:1;">
+      <p style="font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:2px;">Last session</p>
+      <p style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#ffffff;margin-bottom:4px;">Walk With Me · 30 min</p>
+      <div style="height:4px;background:rgba(255,255,255,0.3);border-radius:4px;overflow:hidden;margin:4px 0;"><div style="height:100%;width:65%;background:#ffffff;border-radius:4px;"></div></div>
+      <p style="font-size:11px;color:rgba(255,255,255,0.85);margin-top:3px;">65% complete</p>
     </div>
+    <div style="width:40px;height:40px;background:#ffffff;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><div style="width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid #7C3AED;margin-left:3px;"></div></div>
+  </div>
+</div>
 
-    <div class="sec">
-      <div class="sec-hd"><div class="sec-title">Categories</div><div class="see-all">See all</div></div>
-      <div class="cat-grid">
-        <div class="cat-card" style="background:#F97316;" onclick="moti()"><div class="cat-emoji">🔥</div><div><div class="cat-name">Warm Up</div><div class="cat-cnt">20 exercises</div></div></div>
-        <div class="cat-card" style="background:#1E3A8A;" onclick="moti()"><div class="cat-emoji">🏃</div><div><div class="cat-name">Cardio</div><div class="cat-cnt">15 exercises</div></div></div>
-        <div class="cat-card" style="background:#1e293b;" onclick="moti()"><div class="cat-emoji">💪</div><div><div class="cat-name">Resistance</div><div class="cat-cnt">26 exercises</div></div></div>
-        <div class="cat-card" style="background:#7C3AED;" onclick="moti()"><div class="cat-emoji">🧘</div><div><div class="cat-name">Pilates</div><div class="cat-cnt">28 exercises</div></div></div>
-        <div class="cat-card" style="background:#16a34a;" onclick="moti()"><div class="cat-emoji">⚖️</div><div><div class="cat-name">Balance &amp; Mobility</div><div class="cat-cnt">31 exercises</div></div></div>
-        <div class="cat-card" style="background:#0284c7;" onclick="moti()"><div class="cat-emoji">😌</div><div><div class="cat-name">Cool Down</div><div class="cat-cnt">17 exercises</div></div></div>
-      </div>
-    </div>
+<div class="sec">
+  <div class="sec-hd"><div class="sec-title">Categories</div><div class="see-all">See all</div></div>
+  <div class="cat-grid">
+    <div class="cat-card" style="background:#F97316;" onclick="moti()"><div class="cat-emoji">🔥</div><div><div class="cat-name">Warm Up</div><div class="cat-cnt">20 exercises</div></div></div>
+    <div class="cat-card" style="background:#1E3A8A;" onclick="moti()"><div class="cat-emoji">🏃</div><div><div class="cat-name">Cardio</div><div class="cat-cnt">15 exercises</div></div></div>
+    <div class="cat-card" style="background:#1e293b;" onclick="moti()"><div class="cat-emoji">💪</div><div><div class="cat-name">Resistance</div><div class="cat-cnt">26 exercises</div></div></div>
+    <div class="cat-card" style="background:#7C3AED;" onclick="moti()"><div class="cat-emoji">🧘</div><div><div class="cat-name">Pilates</div><div class="cat-cnt">28 exercises</div></div></div>
+    <div class="cat-card" style="background:#16a34a;" onclick="moti()"><div class="cat-emoji">⚖️</div><div><div class="cat-name">Balance &amp; Mobility</div><div class="cat-cnt">31 exercises</div></div></div>
+    <div class="cat-card" style="background:#0284c7;" onclick="moti()"><div class="cat-emoji">😌</div><div><div class="cat-name">Cool Down</div><div class="cat-cnt">17 exercises</div></div></div>
+  </div>
+</div>
 
-    <div class="sec">
-      <div class="sec-hd"><div class="sec-title">Featured Workouts</div><div class="see-all">See all</div></div>
-      <div class="feat-card" onclick="moti()">
-        <div class="feat-thumb" style="background:#1E3A8A;">🏋️<div class="feat-badge">⭐ Featured</div><div class="feat-dur">⏱ 30 min</div></div>
-        <div class="feat-info"><div class="feat-name">Full Body Flow · 30 Min</div><div class="feat-meta"><span class="pill" style="background:#dcfce7;color:#166534;">🟢 Beginner</span><span class="pill" style="background:#fff7ed;color:#9a3412;">Full Body</span><span style="font-size:11px;color:#64748B;margin-left:auto;">🔥 180 kcal</span></div></div>
-      </div>
-      <div class="feat-card" onclick="moti()">
-        <div class="feat-thumb" style="background:#7C3AED;">💃<div class="feat-badge">🔥 Popular</div><div class="feat-dur">⏱ 15 min</div></div>
-        <div class="feat-info"><div class="feat-name">Dance &amp; Cardio Blast</div><div class="feat-meta"><span class="pill" style="background:#ede9fe;color:#5b21b6;">🟡 Intermediate</span><span class="pill" style="background:#dbeafe;color:#1e40af;">Cardio</span><span style="font-size:11px;color:#64748B;margin-left:auto;">🔥 140 kcal</span></div></div>
-      </div>
-    </div>
-    <div class="bspace"></div>
+<div class="sec">
+  <div class="sec-hd"><div class="sec-title">Featured Workouts</div><div class="see-all">See all</div></div>
+  <div class="feat-card" onclick="moti()">
+    <div class="feat-thumb" style="background:#1E3A8A;">🏋️<div class="feat-badge">⭐ Featured</div><div class="feat-dur">⏱ 30 min</div></div>
+    <div class="feat-info"><div class="feat-name">Full Body Flow · 30 Min</div><div class="feat-meta"><span class="pill" style="background:#dcfce7;color:#166534;">🟢 Beginner</span><span class="pill" style="background:#fff7ed;color:#9a3412;">Full Body</span><span style="font-size:11px;color:#64748B;margin-left:auto;">🔥 180 kcal</span></div></div>
+  </div>
+  <div class="feat-card" onclick="moti()">
+    <div class="feat-thumb" style="background:#7C3AED;">💃<div class="feat-badge">🔥 Popular</div><div class="feat-dur">⏱ 15 min</div></div>
+    <div class="feat-info"><div class="feat-name">Dance &amp; Cardio Blast</div><div class="feat-meta"><span class="pill" style="background:#ede9fe;color:#5b21b6;">🟡 Intermediate</span><span class="pill" style="background:#dbeafe;color:#1e40af;">Cardio</span><span style="font-size:11px;color:#64748B;margin-left:auto;">🔥 140 kcal</span></div></div>
+  </div>
+</div>
+<div class="bspace"></div>
+```
+
   </div>
 
   <div class="bottom-nav">
@@ -260,6 +270,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- ══ STORE ══ -->
+
 <div class="screen" id="storeScreen">
   <div class="scroll-area" style="padding-bottom:80px;">
     <div style="background:#1E3A8A;padding:52px 20px 28px;">
@@ -269,39 +280,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
       </div>
     </div>
 
-    <div style="margin:-16px 16px 0;position:relative;z-index:2;">
-      <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;">🔍</span>
-      <input style="width:100%;padding:14px 16px 14px 44px;background:#ffffff;border:2px solid #E2E8F0;border-radius:14px;font-size:14px;color:#0F172A;outline:none;box-shadow:0 4px 16px rgba(30,58,138,0.1);" id="searchInput" type="text" placeholder="Search products..." oninput="applyFilters()"/>
-    </div>
+```
+<div style="margin:-16px 16px 0;position:relative;z-index:2;">
+  <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:18px;">🔍</span>
+  <input style="width:100%;padding:14px 16px 14px 44px;background:#ffffff;border:2px solid #E2E8F0;border-radius:14px;font-size:14px;color:#0F172A;outline:none;box-shadow:0 4px 16px rgba(30,58,138,0.1);" id="searchInput" type="text" placeholder="Search products..." oninput="applyFilters()"/>
+</div>
 
-    <div style="display:flex;gap:8px;overflow-x:auto;padding:20px 16px 8px;scrollbar-width:none;" id="catPills">
-      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#1E3A8A;color:#ffffff;white-space:nowrap;" onclick="filterCat('all',this)">All</div>
-      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterCat('consultation',this)">👩‍⚕️ Consultations</div>
-      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterCat('medical',this)">🏥 Medical</div>
-      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterCat('ebooks',this)">📚 E-Books</div>
-      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterCat('fitgear',this)">💪 FitGear</div>
-      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterCat('medications',this)">💊 Medications</div>
-    </div>
+<div style="display:flex;gap:8px;overflow-x:auto;padding:20px 16px 8px;scrollbar-width:none;" id="catPills">
+  <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#1E3A8A;color:#ffffff;white-space:nowrap;" onclick="filterCat('all',this)">All</div>
+  <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterCat('consultation',this)">👩‍⚕️ Consultations</div>
+  <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterCat('medical',this)">🏥 Medical</div>
+  <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterCat('ebooks',this)">📚 E-Books</div>
+  <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterCat('fitgear',this)">💪 FitGear</div>
+  <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterCat('medications',this)">💊 Medications</div>
+</div>
 
-    <div style="margin:8px 16px;background:#1E3A8A;border-radius:20px;padding:20px;display:flex;align-items:center;gap:14px;cursor:pointer;" onclick="bookConsultation()">
-      <div style="width:56px;height:56px;background:rgba(255,255,255,0.2);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;">👩‍⚕️</div>
-      <div style="flex:1;">
-        <p style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#ffffff;margin-bottom:2px;">Dr. Amirah</p>
-        <p style="font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:8px;">Health &amp; Fitness Consultant</p>
-        <button style="padding:8px 16px;background:#ffffff;border:none;border-radius:10px;color:#1E3A8A;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;cursor:pointer;" onclick="event.stopPropagation();bookConsultation();">Book Consultation →</button>
-      </div>
-    </div>
+<div style="margin:8px 16px;background:#1E3A8A;border-radius:20px;padding:20px;display:flex;align-items:center;gap:14px;cursor:pointer;" onclick="bookConsultation()">
+  <div style="width:56px;height:56px;background:rgba(255,255,255,0.2);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;">👩‍⚕️</div>
+  <div style="flex:1;">
+    <p style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#ffffff;margin-bottom:2px;">Dr. Amirah</p>
+    <p style="font-size:11px;color:rgba(255,255,255,0.75);margin-bottom:8px;">Health &amp; Fitness Consultant</p>
+    <button style="padding:8px 16px;background:#ffffff;border:none;border-radius:10px;color:#1E3A8A;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;cursor:pointer;" onclick="event.stopPropagation();bookConsultation();">Book Consultation →</button>
+  </div>
+</div>
 
-    <div style="margin:8px 16px;background:#7C3AED;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:10px;" id="storePromoBanner">
-      <span style="font-size:20px;">📢</span>
-      <div style="flex:1;"><p style="font-size:10px;color:rgba(255,255,255,0.7);margin-bottom:2px;text-transform:uppercase;letter-spacing:1px;">MyFitFlow Promotions</p><p style="font-size:13px;color:#ffffff;font-weight:600;" id="storePromoMsg">Check out our latest products and offers!</p></div>
-    </div>
+<div style="margin:8px 16px;background:#7C3AED;border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:10px;" id="storePromoBanner">
+  <span style="font-size:20px;">📢</span>
+  <div style="flex:1;"><p style="font-size:10px;color:rgba(255,255,255,0.7);margin-bottom:2px;text-transform:uppercase;letter-spacing:1px;">MyFitFlow Promotions</p><p style="font-size:13px;color:#ffffff;font-weight:600;" id="storePromoMsg">Check out our latest products and offers!</p></div>
+</div>
 
-    <p style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;padding:16px 16px 8px;">All Products</p>
-    <div style="padding:0 16px;display:flex;flex-direction:column;gap:14px;" id="productsList">
-      <div style="text-align:center;padding:40px;color:#64748B;">Loading products... ⏳</div>
-    </div>
-    <div style="height:20px;"></div>
+<p style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;padding:16px 16px 8px;">All Products</p>
+<div style="padding:0 16px;display:flex;flex-direction:column;gap:14px;" id="productsList">
+  <div style="text-align:center;padding:40px;color:#64748B;">Loading products... ⏳</div>
+</div>
+<div style="height:20px;"></div>
+```
+
   </div>
 
   <div class="bottom-nav">
@@ -314,44 +328,48 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- ══ WORKOUTS ══ -->
+
 <div class="screen" id="workoutsScreen">
   <div class="scroll-area" style="padding-bottom:80px;">
 
-    <!-- Header -->
-    <div style="background:#1E3A8A;padding:52px 20px 28px;">
-      <p style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:800;color:#ffffff;margin-bottom:4px;">🏋️ Workouts</p>
-      <p style="font-size:13px;color:rgba(255,255,255,0.8);">Choose your workout, <span id="wktUsername">Champ</span></p>
-    </div>
+```
+<!-- Header -->
+<div style="background:#1E3A8A;padding:52px 20px 28px;">
+  <p style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:800;color:#ffffff;margin-bottom:4px;">🏋️ Workouts</p>
+  <p style="font-size:13px;color:rgba(255,255,255,0.8);">Choose your workout, <span id="wktUsername">Champ</span></p>
+</div>
 
-    <!-- Duration Filter -->
-    <div style="margin:-16px 16px 0;background:#ffffff;border-radius:16px;padding:12px;box-shadow:0 4px 16px rgba(30,58,138,0.12);position:relative;z-index:2;">
-      <p style="font-size:11px;color:#64748B;margin-bottom:8px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Duration</p>
-      <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;">
-        <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#1E3A8A;color:#ffffff;" onclick="filterDur('all',this)" id="durAll">All</div>
-        <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;" onclick="filterDur('5',this)">5 min</div>
-        <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;" onclick="filterDur('10',this)">10 min</div>
-        <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;" onclick="filterDur('15',this)">15 min</div>
-        <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;" onclick="filterDur('30',this)">30 min</div>
-        <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;" onclick="filterDur('60',this)">60 min</div>
-      </div>
-    </div>
+<!-- Duration Filter -->
+<div style="margin:-16px 16px 0;background:#ffffff;border-radius:16px;padding:12px;box-shadow:0 4px 16px rgba(30,58,138,0.12);position:relative;z-index:2;">
+  <p style="font-size:11px;color:#64748B;margin-bottom:8px;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Duration</p>
+  <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;">
+    <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#1E3A8A;color:#ffffff;" onclick="filterDur('all',this)" id="durAll">All</div>
+    <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;" onclick="filterDur('5',this)">5 min</div>
+    <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;" onclick="filterDur('10',this)">10 min</div>
+    <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;" onclick="filterDur('15',this)">15 min</div>
+    <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;" onclick="filterDur('30',this)">30 min</div>
+    <div style="flex-shrink:0;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;" onclick="filterDur('60',this)">60 min</div>
+  </div>
+</div>
 
-    <!-- Category Filter -->
-    <div style="display:flex;gap:8px;overflow-x:auto;padding:16px 16px 4px;scrollbar-width:none;" id="wktCatPills">
-      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#1E3A8A;color:#ffffff;white-space:nowrap;" onclick="filterWktCat('all',this)">All</div>
-      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterWktCat('whole',this)">🌍 Whole Body</div>
-      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterWktCat('targeted',this)">🎯 Targeted</div>
-      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterWktCat('cardio',this)">🏃 Cardio</div>
-      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterWktCat('pilates',this)">🧘 Pilates</div>
-      <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterWktCat('strength',this)">💪 Strength</div>
-    </div>
+<!-- Category Filter -->
+<div style="display:flex;gap:8px;overflow-x:auto;padding:16px 16px 4px;scrollbar-width:none;" id="wktCatPills">
+  <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:#1E3A8A;color:#ffffff;white-space:nowrap;" onclick="filterWktCat('all',this)">All</div>
+  <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterWktCat('whole',this)">🌍 Whole Body</div>
+  <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterWktCat('targeted',this)">🎯 Targeted</div>
+  <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterWktCat('cardio',this)">🏃 Cardio</div>
+  <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterWktCat('pilates',this)">🧘 Pilates</div>
+  <div style="flex-shrink:0;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;white-space:nowrap;" onclick="filterWktCat('strength',this)">💪 Strength</div>
+</div>
 
-    <!-- Workout List -->
-    <div style="padding:8px 16px;display:flex;flex-direction:column;gap:12px;" id="wktList">
-      <div style="text-align:center;padding:40px;color:#64748B;">Loading workouts... ⏳</div>
-    </div>
+<!-- Workout List -->
+<div style="padding:8px 16px;display:flex;flex-direction:column;gap:12px;" id="wktList">
+  <div style="text-align:center;padding:40px;color:#64748B;">Loading workouts... ⏳</div>
+</div>
 
-    <div style="height:20px;"></div>
+<div style="height:20px;"></div>
+```
+
   </div>
 
   <div class="bottom-nav">
@@ -364,280 +382,289 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- ══ WORKOUT DETAIL ══ -->
+
 <div class="screen" id="wktDetailScreen">
   <div class="scroll-area" style="padding-bottom:100px;">
 
-    <!-- Thumb -->
-    <div id="wktThumb" style="height:220px;background:#1E3A8A;display:flex;align-items:center;justify-content:center;font-size:72px;position:relative;">
-      <span id="wktEmoji">🏋️</span>
-      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,0.6) 100%);"></div>
-      <button onclick="switchTab('workouts')" style="position:absolute;top:52px;left:16px;width:36px;height:36px;background:rgba(255,255,255,0.2);border:none;border-radius:50%;color:#ffffff;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;">←</button>
-      <div style="position:absolute;bottom:16px;left:20px;right:20px;">
-        <p id="wktDetailName" style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:#ffffff;margin-bottom:4px;">Full Body Flow</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <span id="wktDetailLevel" style="background:rgba(255,255,255,0.2);border-radius:20px;padding:3px 10px;color:#ffffff;font-size:11px;font-weight:600;">🟢 Beginner</span>
-          <span id="wktDetailDur" style="background:rgba(255,255,255,0.2);border-radius:20px;padding:3px 10px;color:#ffffff;font-size:11px;font-weight:600;">⏱ 30 min</span>
-          <span id="wktDetailCal" style="background:rgba(255,255,255,0.2);border-radius:20px;padding:3px 10px;color:#ffffff;font-size:11px;font-weight:600;">🔥 180 kcal</span>
-        </div>
-      </div>
+```
+<!-- Thumb -->
+<div id="wktThumb" style="height:220px;background:#1E3A8A;display:flex;align-items:center;justify-content:center;font-size:72px;position:relative;">
+  <span id="wktEmoji">🏋️</span>
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,0.6) 100%);"></div>
+  <button onclick="switchTab('workouts')" style="position:absolute;top:52px;left:16px;width:36px;height:36px;background:rgba(255,255,255,0.2);border:none;border-radius:50%;color:#ffffff;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;">←</button>
+  <div style="position:absolute;bottom:16px;left:20px;right:20px;">
+    <p id="wktDetailName" style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:#ffffff;margin-bottom:4px;">Full Body Flow</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <span id="wktDetailLevel" style="background:rgba(255,255,255,0.2);border-radius:20px;padding:3px 10px;color:#ffffff;font-size:11px;font-weight:600;">🟢 Beginner</span>
+      <span id="wktDetailDur" style="background:rgba(255,255,255,0.2);border-radius:20px;padding:3px 10px;color:#ffffff;font-size:11px;font-weight:600;">⏱ 30 min</span>
+      <span id="wktDetailCal" style="background:rgba(255,255,255,0.2);border-radius:20px;padding:3px 10px;color:#ffffff;font-size:11px;font-weight:600;">🔥 180 kcal</span>
     </div>
+  </div>
+</div>
 
-    <!-- Stats Row -->
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;margin:16px;background:#ffffff;border-radius:16px;box-shadow:0 2px 12px rgba(15,23,42,0.08);overflow:hidden;">
-      <div style="padding:14px;text-align:center;border-right:1px solid #E2E8F0;">
-        <p id="wktDetailExCount" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#1E3A8A;">8</p>
-        <p style="font-size:10px;color:#64748B;margin-top:2px;">Exercises</p>
-      </div>
-      <div style="padding:14px;text-align:center;border-right:1px solid #E2E8F0;">
-        <p id="wktDetailDurStat" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#F97316;">30m</p>
-        <p style="font-size:10px;color:#64748B;margin-top:2px;">Duration</p>
-      </div>
-      <div style="padding:14px;text-align:center;">
-        <p id="wktDetailCalStat" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#22C55E;">180</p>
-        <p style="font-size:10px;color:#64748B;margin-top:2px;">kcal</p>
-      </div>
-    </div>
+<!-- Stats Row -->
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;margin:16px;background:#ffffff;border-radius:16px;box-shadow:0 2px 12px rgba(15,23,42,0.08);overflow:hidden;">
+  <div style="padding:14px;text-align:center;border-right:1px solid #E2E8F0;">
+    <p id="wktDetailExCount" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#1E3A8A;">8</p>
+    <p style="font-size:10px;color:#64748B;margin-top:2px;">Exercises</p>
+  </div>
+  <div style="padding:14px;text-align:center;border-right:1px solid #E2E8F0;">
+    <p id="wktDetailDurStat" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#F97316;">30m</p>
+    <p style="font-size:10px;color:#64748B;margin-top:2px;">Duration</p>
+  </div>
+  <div style="padding:14px;text-align:center;">
+    <p id="wktDetailCalStat" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#22C55E;">180</p>
+    <p style="font-size:10px;color:#64748B;margin-top:2px;">kcal</p>
+  </div>
+</div>
 
-    <!-- Description -->
-    <div style="margin:0 16px 16px;background:#ffffff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(15,23,42,0.08);">
-      <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:8px;">About this workout</p>
-      <p id="wktDetailDesc" style="font-size:13px;color:#64748B;line-height:1.6;">A complete full body workout combining warm up, cardio, resistance, pilates, balance and cool down. Perfect for beginners looking for a structured session.</p>
-    </div>
+<!-- Description -->
+<div style="margin:0 16px 16px;background:#ffffff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(15,23,42,0.08);">
+  <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:8px;">About this workout</p>
+  <p id="wktDetailDesc" style="font-size:13px;color:#64748B;line-height:1.6;">A complete full body workout combining warm up, cardio, resistance, pilates, balance and cool down. Perfect for beginners looking for a structured session.</p>
+</div>
 
-    <!-- Exercise List -->
-    <div style="margin:0 16px;">
-      <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:12px;">Exercises in this workout</p>
-      <div id="wktExList" style="display:flex;flex-direction:column;gap:8px;"></div>
-    </div>
+<!-- Exercise List -->
+<div style="margin:0 16px;">
+  <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:12px;">Exercises in this workout</p>
+  <div id="wktExList" style="display:flex;flex-direction:column;gap:8px;"></div>
+</div>
 
-    <div style="height:20px;"></div>
+<div style="height:20px;"></div>
+```
+
   </div>
 
   <!-- Start Button -->
+
   <div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;padding:16px;background:#ffffff;border-top:1px solid #E2E8F0;z-index:100;">
     <button onclick="moti()" style="width:100%;padding:16px;background:#1E3A8A;border:none;border-radius:16px;font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;color:#ffffff;cursor:pointer;">▶ Start Workout</button>
   </div>
 </div>
 
 <!-- ══ PROGRESS ══ -->
+
 <div class="screen" id="progressScreen">
   <div class="scroll-area" style="padding-bottom:80px;">
 
-    <!-- Header -->
-    <div style="background:#1E3A8A;padding:52px 20px 32px;position:relative;overflow:hidden;">
-      <div style="position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.05);top:-60px;right:-40px;"></div>
-      <p style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:800;color:#ffffff;margin-bottom:4px;">📊 My Progress</p>
-      <p style="font-size:13px;color:rgba(255,255,255,0.8);">Keep moving, <span id="progressUsername">Champ</span>!</p>
-    </div>
+```
+<!-- Header -->
+<div style="background:#1E3A8A;padding:52px 20px 32px;position:relative;overflow:hidden;">
+  <div style="position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.05);top:-60px;right:-40px;"></div>
+  <p style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:800;color:#ffffff;margin-bottom:4px;">📊 My Progress</p>
+  <p style="font-size:13px;color:rgba(255,255,255,0.8);">Keep moving, <span id="progressUsername">Champ</span>!</p>
+</div>
 
-    <!-- Stats Cards -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:-16px 16px 0;position:relative;z-index:2;">
-      <div style="background:#ffffff;border-radius:16px;padding:14px;box-shadow:0 4px 16px rgba(15,23,42,0.08);display:flex;align-items:center;gap:10px;">
-        <div style="width:40px;height:40px;border-radius:12px;background:#fff7ed;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔥</div>
-        <div><p id="pStreak" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#F97316;">0</p><p style="font-size:10px;color:#64748B;">Day Streak</p></div>
-      </div>
-      <div style="background:#ffffff;border-radius:16px;padding:14px;box-shadow:0 4px 16px rgba(15,23,42,0.08);display:flex;align-items:center;gap:10px;">
-        <div style="width:40px;height:40px;border-radius:12px;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🏋️</div>
-        <div><p id="pWorkouts" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#22C55E;">0</p><p style="font-size:10px;color:#64748B;">Workouts Done</p></div>
-      </div>
-      <div style="background:#ffffff;border-radius:16px;padding:14px;box-shadow:0 4px 16px rgba(15,23,42,0.08);display:flex;align-items:center;gap:10px;">
-        <div style="width:40px;height:40px;border-radius:12px;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⏱</div>
-        <div><p id="pMins" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#1E3A8A;">0</p><p style="font-size:10px;color:#64748B;">Mins Exercised</p></div>
-      </div>
-      <div style="background:#ffffff;border-radius:16px;padding:14px;box-shadow:0 4px 16px rgba(15,23,42,0.08);display:flex;align-items:center;gap:10px;">
-        <div style="width:40px;height:40px;border-radius:12px;background:#ede9fe;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⚡</div>
-        <div><p id="pKcal" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#7C3AED;">0</p><p style="font-size:10px;color:#64748B;">kcal Burned</p></div>
-      </div>
-    </div>
+<!-- Stats Cards -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:-16px 16px 0;position:relative;z-index:2;">
+  <div style="background:#ffffff;border-radius:16px;padding:14px;box-shadow:0 4px 16px rgba(15,23,42,0.08);display:flex;align-items:center;gap:10px;">
+    <div style="width:40px;height:40px;border-radius:12px;background:#fff7ed;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔥</div>
+    <div><p id="pStreak" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#F97316;">0</p><p style="font-size:10px;color:#64748B;">Day Streak</p></div>
+  </div>
+  <div style="background:#ffffff;border-radius:16px;padding:14px;box-shadow:0 4px 16px rgba(15,23,42,0.08);display:flex;align-items:center;gap:10px;">
+    <div style="width:40px;height:40px;border-radius:12px;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🏋️</div>
+    <div><p id="pWorkouts" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#22C55E;">0</p><p style="font-size:10px;color:#64748B;">Workouts Done</p></div>
+  </div>
+  <div style="background:#ffffff;border-radius:16px;padding:14px;box-shadow:0 4px 16px rgba(15,23,42,0.08);display:flex;align-items:center;gap:10px;">
+    <div style="width:40px;height:40px;border-radius:12px;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⏱</div>
+    <div><p id="pMins" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#1E3A8A;">0</p><p style="font-size:10px;color:#64748B;">Mins Exercised</p></div>
+  </div>
+  <div style="background:#ffffff;border-radius:16px;padding:14px;box-shadow:0 4px 16px rgba(15,23,42,0.08);display:flex;align-items:center;gap:10px;">
+    <div style="width:40px;height:40px;border-radius:12px;background:#ede9fe;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⚡</div>
+    <div><p id="pKcal" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#7C3AED;">0</p><p style="font-size:10px;color:#64748B;">kcal Burned</p></div>
+  </div>
+</div>
 
-    <!-- Weekly Goal -->
-    <div style="padding:20px 16px 0;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <p style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;">Weekly Goal</p>
-        <div style="display:flex;gap:6px;">
-          <span onclick="setGoal(3)" id="goal3" style="padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;">3x</span>
-          <span onclick="setGoal(4)" id="goal4" style="padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;background:#1E3A8A;color:#ffffff;border:2px solid #1E3A8A;">4x</span>
-          <span onclick="setGoal(5)" id="goal5" style="padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;">5x</span>
-          <span onclick="setGoal(7)" id="goal7" style="padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;">7x</span>
-        </div>
+<!-- Weekly Goal -->
+<div style="padding:20px 16px 0;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+    <p style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;">Weekly Goal</p>
+    <div style="display:flex;gap:6px;">
+      <span onclick="setGoal(3)" id="goal3" style="padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;">3x</span>
+      <span onclick="setGoal(4)" id="goal4" style="padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;background:#1E3A8A;color:#ffffff;border:2px solid #1E3A8A;">4x</span>
+      <span onclick="setGoal(5)" id="goal5" style="padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;">5x</span>
+      <span onclick="setGoal(7)" id="goal7" style="padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:2px solid #E2E8F0;background:#ffffff;color:#64748B;">7x</span>
+    </div>
+  </div>
+  <div style="background:#ffffff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(15,23,42,0.06);">
+    <div style="display:flex;gap:6px;margin-bottom:12px;" id="weekDays">
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <div onclick="toggleDay(0)" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day0">M</div>
+        <p style="font-size:9px;color:#64748B;">Mon</p>
       </div>
-      <div style="background:#ffffff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(15,23,42,0.06);">
-        <div style="display:flex;gap:6px;margin-bottom:12px;" id="weekDays">
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-            <div onclick="toggleDay(0)" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day0">M</div>
-            <p style="font-size:9px;color:#64748B;">Mon</p>
-          </div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-            <div onclick="toggleDay(1)" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day1">T</div>
-            <p style="font-size:9px;color:#64748B;">Tue</p>
-          </div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-            <div onclick="toggleDay(2)" style="width:32px;height:32px;border-radius:50%;border:2px solid #22C55E;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;background:#22C55E;color:#ffffff;" id="day2">✓</div>
-            <p style="font-size:9px;color:#64748B;">Wed</p>
-          </div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-            <div onclick="toggleDay(3)" style="width:32px;height:32px;border-radius:50%;border:2px solid #1E3A8A;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#1E3A8A;cursor:pointer;" id="day3">T</div>
-            <p style="font-size:9px;color:#64748B;">Thu</p>
-          </div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-            <div onclick="toggleDay(4)" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day4">F</div>
-            <p style="font-size:9px;color:#64748B;">Fri</p>
-          </div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-            <div onclick="toggleDay(5)" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day5">S</div>
-            <p style="font-size:9px;color:#64748B;">Sat</p>
-          </div>
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-            <div onclick="toggleDay(6)" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day6">S</div>
-            <p style="font-size:9px;color:#64748B;">Sun</p>
-          </div>
-        </div>
-        <div style="height:6px;background:#E2E8F0;border-radius:6px;overflow:hidden;margin-bottom:6px;">
-          <div id="goalBar" style="height:100%;background:#22C55E;border-radius:6px;width:25%;transition:width 0.5s;"></div>
-        </div>
-        <p id="goalText" style="font-size:11px;color:#64748B;"><span style="color:#22C55E;font-weight:600;">1 of 4</span> workouts done this week</p>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <div onclick="toggleDay(1)" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day1">T</div>
+        <p style="font-size:9px;color:#64748B;">Tue</p>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <div onclick="toggleDay(2)" style="width:32px;height:32px;border-radius:50%;border:2px solid #22C55E;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;background:#22C55E;color:#ffffff;" id="day2">✓</div>
+        <p style="font-size:9px;color:#64748B;">Wed</p>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <div onclick="toggleDay(3)" style="width:32px;height:32px;border-radius:50%;border:2px solid #1E3A8A;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#1E3A8A;cursor:pointer;" id="day3">T</div>
+        <p style="font-size:9px;color:#64748B;">Thu</p>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <div onclick="toggleDay(4)" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day4">F</div>
+        <p style="font-size:9px;color:#64748B;">Fri</p>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <div onclick="toggleDay(5)" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day5">S</div>
+        <p style="font-size:9px;color:#64748B;">Sat</p>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <div onclick="toggleDay(6)" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day6">S</div>
+        <p style="font-size:9px;color:#64748B;">Sun</p>
       </div>
     </div>
+    <div style="height:6px;background:#E2E8F0;border-radius:6px;overflow:hidden;margin-bottom:6px;">
+      <div id="goalBar" style="height:100%;background:#22C55E;border-radius:6px;width:25%;transition:width 0.5s;"></div>
+    </div>
+    <p id="goalText" style="font-size:11px;color:#64748B;"><span style="color:#22C55E;font-weight:600;">1 of 4</span> workouts done this week</p>
+  </div>
+</div>
 
-    <!-- Level Progress -->
-    <div style="padding:20px 16px 0;">
-      <p style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;margin-bottom:12px;">Level Progress</p>
-      <div style="background:#ffffff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(15,23,42,0.06);">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
-          <div id="currentLevelIcon" style="width:48px;height:48px;border-radius:14px;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🌱</div>
-          <div style="flex:1;">
-            <p id="currentLevelName" style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#0F172A;">Beginner</p>
-            <p style="font-size:11px;color:#64748B;margin-top:2px;">Your current level</p>
-          </div>
-        </div>
-        <div style="height:8px;background:#E2E8F0;border-radius:8px;overflow:hidden;margin-bottom:6px;">
-          <div id="levelBar" style="height:100%;background:#1E3A8A;border-radius:8px;width:45%;transition:width 0.8s;"></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:10px;color:#64748B;margin-bottom:14px;">
-          <span>Progress to next level</span>
-          <span style="color:#7C3AED;font-weight:600;">45%</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="width:48px;height:48px;border-radius:14px;background:#ede9fe;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">⚡</div>
-          <div style="flex:1;">
-            <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;">Intermediate</p>
-            <p style="font-size:11px;color:#64748B;">Unlock for $<span id="levelPrice">10</span> · one time</p>
-          </div>
-          <button onclick="unlockLevel()" style="padding:8px 14px;background:#1E3A8A;border:none;border-radius:10px;color:#ffffff;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;cursor:pointer;">🔓 Unlock</button>
-        </div>
+<!-- Level Progress -->
+<div style="padding:20px 16px 0;">
+  <p style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;margin-bottom:12px;">Level Progress</p>
+  <div style="background:#ffffff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(15,23,42,0.06);">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+      <div id="currentLevelIcon" style="width:48px;height:48px;border-radius:14px;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🌱</div>
+      <div style="flex:1;">
+        <p id="currentLevelName" style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:#0F172A;">Beginner</p>
+        <p style="font-size:11px;color:#64748B;margin-top:2px;">Your current level</p>
       </div>
     </div>
-
-    <!-- Achievements -->
-    <div style="padding:20px 16px 0;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <p style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;">Achievements 🏅</p>
-        <p style="font-size:12px;color:#64748B;">Tap to share</p>
+    <div style="height:8px;background:#E2E8F0;border-radius:8px;overflow:hidden;margin-bottom:6px;">
+      <div id="levelBar" style="height:100%;background:#1E3A8A;border-radius:8px;width:45%;transition:width 0.8s;"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:#64748B;margin-bottom:14px;">
+      <span>Progress to next level</span>
+      <span style="color:#7C3AED;font-weight:600;">45%</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:48px;height:48px;border-radius:14px;background:#ede9fe;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">⚡</div>
+      <div style="flex:1;">
+        <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;">Intermediate</p>
+        <p style="font-size:11px;color:#64748B;">Unlock for $<span id="levelPrice">10</span> · one time</p>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
-        <div onclick="shareBadge('First Step','🥇','You completed your very first workout!')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 12px rgba(245,158,11,0.3);">🥇</div>
-          <p style="font-size:9px;color:#0F172A;text-align:center;font-weight:600;">First Workout</p>
-        </div>
-        <div onclick="shareBadge('On Fire','🔥','7 day streak — nothing can stop you!')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#F97316,#ea580c);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 12px rgba(249,115,22,0.3);">🔥</div>
-          <p style="font-size:9px;color:#0F172A;text-align:center;font-weight:600;">7 Day Streak</p>
-        </div>
-        <div onclick="shareBadge('Dedicated','💪','10 workouts completed!')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#1E3A8A,#2563eb);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 12px rgba(30,58,138,0.3);">💪</div>
-          <p style="font-size:9px;color:#0F172A;text-align:center;font-weight:600;">10 Workouts</p>
-        </div>
-        <div onclick="shareBadge('Cardio Star','🏃','First cardio session completed!')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#22C55E,#16a34a);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 12px rgba(34,197,94,0.3);">🏃</div>
-          <p style="font-size:9px;color:#0F172A;text-align:center;font-weight:600;">Cardio Star</p>
-        </div>
-        <div onclick="shareBadge('Pilates Pro','🧘','5 Pilates sessions done!')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#7C3AED,#a855f7);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 12px rgba(124,58,237,0.3);">🧘</div>
-          <p style="font-size:9px;color:#0F172A;text-align:center;font-weight:600;">Pilates Pro</p>
-        </div>
-        <div onclick="shareBadge('Early Bird','☀️','Worked out before 8am!')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
-          <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#0ea5e9,#0284c7);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 12px rgba(14,165,233,0.3);">☀️</div>
-          <p style="font-size:9px;color:#0F172A;text-align:center;font-weight:600;">Early Bird</p>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:5px;opacity:0.35;">
-          <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:26px;">⭐</div>
-          <p style="font-size:9px;color:#64748B;text-align:center;font-weight:600;">50 Workouts</p>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:5px;opacity:0.35;">
-          <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#F97316,#ea580c);display:flex;align-items:center;justify-content:center;font-size:26px;">🗓️</div>
-          <p style="font-size:9px;color:#64748B;text-align:center;font-weight:600;">30 Day Streak</p>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:5px;opacity:0.35;">
-          <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#1e293b,#334155);display:flex;align-items:center;justify-content:center;font-size:26px;">⏰</div>
-          <p style="font-size:9px;color:#64748B;text-align:center;font-weight:600;">Hour Power</p>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:5px;opacity:0.35;">
-          <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#ec4899,#db2777);display:flex;align-items:center;justify-content:center;font-size:26px;">🎯</div>
-          <p style="font-size:9px;color:#64748B;text-align:center;font-weight:600;">All Rounder</p>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:5px;opacity:0.35;">
-          <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#22C55E,#16a34a);display:flex;align-items:center;justify-content:center;font-size:26px;">🔥</div>
-          <p style="font-size:9px;color:#64748B;text-align:center;font-weight:600;">10k kcal</p>
-        </div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:5px;opacity:0.35;">
-          <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#7C3AED,#a855f7);display:flex;align-items:center;justify-content:center;font-size:26px;">🔓</div>
-          <p style="font-size:9px;color:#64748B;text-align:center;font-weight:600;">Level Up</p>
-        </div>
+      <button onclick="unlockLevel()" style="padding:8px 14px;background:#1E3A8A;border:none;border-radius:10px;color:#ffffff;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;cursor:pointer;">🔓 Unlock</button>
+    </div>
+  </div>
+</div>
+
+<!-- Achievements -->
+<div style="padding:20px 16px 0;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+    <p style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;">Achievements 🏅</p>
+    <p style="font-size:12px;color:#64748B;">Tap to share</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+    <div onclick="shareBadge('First Step','🥇','You completed your very first workout!')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
+      <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 12px rgba(245,158,11,0.3);">🥇</div>
+      <p style="font-size:9px;color:#0F172A;text-align:center;font-weight:600;">First Workout</p>
+    </div>
+    <div onclick="shareBadge('On Fire','🔥','7 day streak — nothing can stop you!')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
+      <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#F97316,#ea580c);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 12px rgba(249,115,22,0.3);">🔥</div>
+      <p style="font-size:9px;color:#0F172A;text-align:center;font-weight:600;">7 Day Streak</p>
+    </div>
+    <div onclick="shareBadge('Dedicated','💪','10 workouts completed!')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
+      <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#1E3A8A,#2563eb);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 12px rgba(30,58,138,0.3);">💪</div>
+      <p style="font-size:9px;color:#0F172A;text-align:center;font-weight:600;">10 Workouts</p>
+    </div>
+    <div onclick="shareBadge('Cardio Star','🏃','First cardio session completed!')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
+      <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#22C55E,#16a34a);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 12px rgba(34,197,94,0.3);">🏃</div>
+      <p style="font-size:9px;color:#0F172A;text-align:center;font-weight:600;">Cardio Star</p>
+    </div>
+    <div onclick="shareBadge('Pilates Pro','🧘','5 Pilates sessions done!')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
+      <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#7C3AED,#a855f7);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 12px rgba(124,58,237,0.3);">🧘</div>
+      <p style="font-size:9px;color:#0F172A;text-align:center;font-weight:600;">Pilates Pro</p>
+    </div>
+    <div onclick="shareBadge('Early Bird','☀️','Worked out before 8am!')" style="display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;">
+      <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#0ea5e9,#0284c7);display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 12px rgba(14,165,233,0.3);">☀️</div>
+      <p style="font-size:9px;color:#0F172A;text-align:center;font-weight:600;">Early Bird</p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:5px;opacity:0.35;">
+      <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:26px;">⭐</div>
+      <p style="font-size:9px;color:#64748B;text-align:center;font-weight:600;">50 Workouts</p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:5px;opacity:0.35;">
+      <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#F97316,#ea580c);display:flex;align-items:center;justify-content:center;font-size:26px;">🗓️</div>
+      <p style="font-size:9px;color:#64748B;text-align:center;font-weight:600;">30 Day Streak</p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:5px;opacity:0.35;">
+      <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#1e293b,#334155);display:flex;align-items:center;justify-content:center;font-size:26px;">⏰</div>
+      <p style="font-size:9px;color:#64748B;text-align:center;font-weight:600;">Hour Power</p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:5px;opacity:0.35;">
+      <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#ec4899,#db2777);display:flex;align-items:center;justify-content:center;font-size:26px;">🎯</div>
+      <p style="font-size:9px;color:#64748B;text-align:center;font-weight:600;">All Rounder</p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:5px;opacity:0.35;">
+      <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#22C55E,#16a34a);display:flex;align-items:center;justify-content:center;font-size:26px;">🔥</div>
+      <p style="font-size:9px;color:#64748B;text-align:center;font-weight:600;">10k kcal</p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:5px;opacity:0.35;">
+      <div style="width:58px;height:58px;border-radius:16px;background:linear-gradient(135deg,#7C3AED,#a855f7);display:flex;align-items:center;justify-content:center;font-size:26px;">🔓</div>
+      <p style="font-size:9px;color:#64748B;text-align:center;font-weight:600;">Level Up</p>
+    </div>
+  </div>
+</div>
+
+<!-- Recent Workouts -->
+<div style="padding:20px 16px 0;">
+  <p style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;margin-bottom:12px;">Recent Workouts</p>
+  <div style="background:#ffffff;border-radius:16px;padding:8px 16px;box-shadow:0 2px 12px rgba(15,23,42,0.06);">
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #E2E8F0;">
+      <div style="width:40px;height:40px;border-radius:12px;background:#1E3A8A;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🌍</div>
+      <div style="flex:1;">
+        <p style="font-size:13px;font-weight:600;color:#0F172A;">Full Body Flow · 30 Min</p>
+        <p style="font-size:11px;color:#64748B;">🟢 Beginner · All categories</p>
+      </div>
+      <div style="text-align:right;">
+        <p style="font-size:13px;font-weight:700;color:#F97316;">🔥 280 kcal</p>
+        <p style="font-size:10px;color:#64748B;">Today</p>
       </div>
     </div>
-
-    <!-- Recent Workouts -->
-    <div style="padding:20px 16px 0;">
-      <p style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0F172A;margin-bottom:12px;">Recent Workouts</p>
-      <div style="background:#ffffff;border-radius:16px;padding:8px 16px;box-shadow:0 2px 12px rgba(15,23,42,0.06);">
-        <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #E2E8F0;">
-          <div style="width:40px;height:40px;border-radius:12px;background:#1E3A8A;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🌍</div>
-          <div style="flex:1;">
-            <p style="font-size:13px;font-weight:600;color:#0F172A;">Full Body Flow · 30 Min</p>
-            <p style="font-size:11px;color:#64748B;">🟢 Beginner · All categories</p>
-          </div>
-          <div style="text-align:right;">
-            <p style="font-size:13px;font-weight:700;color:#F97316;">🔥 280 kcal</p>
-            <p style="font-size:10px;color:#64748B;">Today</p>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #E2E8F0;">
-          <div style="width:40px;height:40px;border-radius:12px;background:#7C3AED;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🧘</div>
-          <div style="flex:1;">
-            <p style="font-size:13px;font-weight:600;color:#0F172A;">Pilates Core · 10 Min</p>
-            <p style="font-size:11px;color:#64748B;">🟢 Beginner · Core</p>
-          </div>
-          <div style="text-align:right;">
-            <p style="font-size:13px;font-weight:700;color:#F97316;">🔥 75 kcal</p>
-            <p style="font-size:10px;color:#64748B;">Yesterday</p>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #E2E8F0;">
-          <div style="width:40px;height:40px;border-radius:12px;background:#F97316;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🏃</div>
-          <div style="flex:1;">
-            <p style="font-size:13px;font-weight:600;color:#0F172A;">Cardio Blast · 30 Min</p>
-            <p style="font-size:11px;color:#64748B;">🟢 Beginner · Cardio</p>
-          </div>
-          <div style="text-align:right;">
-            <p style="font-size:13px;font-weight:700;color:#F97316;">🔥 320 kcal</p>
-            <p style="font-size:10px;color:#64748B;">Mon</p>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;padding:12px 0;">
-          <div style="width:40px;height:40px;border-radius:12px;background:#1e293b;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">💪</div>
-          <div style="flex:1;">
-            <p style="font-size:13px;font-weight:600;color:#0F172A;">Strength Foundation · 10 Min</p>
-            <p style="font-size:11px;color:#64748B;">🟢 Beginner · Strength</p>
-          </div>
-          <div style="text-align:right;">
-            <p style="font-size:13px;font-weight:700;color:#F97316;">🔥 95 kcal</p>
-            <p style="font-size:10px;color:#64748B;">Sun</p>
-          </div>
-        </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #E2E8F0;">
+      <div style="width:40px;height:40px;border-radius:12px;background:#7C3AED;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🧘</div>
+      <div style="flex:1;">
+        <p style="font-size:13px;font-weight:600;color:#0F172A;">Pilates Core · 10 Min</p>
+        <p style="font-size:11px;color:#64748B;">🟢 Beginner · Core</p>
+      </div>
+      <div style="text-align:right;">
+        <p style="font-size:13px;font-weight:700;color:#F97316;">🔥 75 kcal</p>
+        <p style="font-size:10px;color:#64748B;">Yesterday</p>
       </div>
     </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #E2E8F0;">
+      <div style="width:40px;height:40px;border-radius:12px;background:#F97316;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🏃</div>
+      <div style="flex:1;">
+        <p style="font-size:13px;font-weight:600;color:#0F172A;">Cardio Blast · 30 Min</p>
+        <p style="font-size:11px;color:#64748B;">🟢 Beginner · Cardio</p>
+      </div>
+      <div style="text-align:right;">
+        <p style="font-size:13px;font-weight:700;color:#F97316;">🔥 320 kcal</p>
+        <p style="font-size:10px;color:#64748B;">Mon</p>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 0;">
+      <div style="width:40px;height:40px;border-radius:12px;background:#1e293b;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">💪</div>
+      <div style="flex:1;">
+        <p style="font-size:13px;font-weight:600;color:#0F172A;">Strength Foundation · 10 Min</p>
+        <p style="font-size:11px;color:#64748B;">🟢 Beginner · Strength</p>
+      </div>
+      <div style="text-align:right;">
+        <p style="font-size:13px;font-weight:700;color:#F97316;">🔥 95 kcal</p>
+        <p style="font-size:10px;color:#64748B;">Sun</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <div style="height:20px;"></div>
+<div style="height:20px;"></div>
+```
+
   </div>
 
   <div class="bottom-nav">
@@ -650,6 +677,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- Badge Share Overlay -->
+
 <div style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:300;align-items:center;justify-content:center;padding:32px;" id="badgeShareOverlay">
   <div style="background:#ffffff;border-radius:24px;width:100%;max-width:340px;overflow:hidden;">
     <!-- Share Card -->
@@ -687,6 +715,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- ══ MOTIVATIONAL ══ -->
+
 <div class="moti-overlay" id="motiOv">
   <div class="moti-box">
     <span class="moti-emo" id="mEmo">💪</span>
@@ -696,6 +725,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- ══ PRODUCT OVERLAY ══ -->
+
 <div class="prod-overlay" id="prodOverlay">
   <div class="prod-card">
     <button style="float:right;width:32px;height:32px;background:#f1f5f9;border-radius:50%;border:none;cursor:pointer;font-size:16px;" onclick="closeProd()">✕</button>
@@ -708,155 +738,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-// ── PROGRESS ──
-let weeklyGoal = 4;
-let daysCompleted = [false, false, true, false, false, false, false];
-let currentBadge = null;
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-function showProgress(){
-  goScreen('progressScreen');
-  if(profile){
-    document.getElementById('progressUsername').textContent = profile.username || 'Champ';
-    document.getElementById('pStreak').textContent = profile.streak || 0;
-    document.getElementById('pWorkouts').textContent = profile.total_workouts || 0;
-    document.getElementById('pMins').textContent = profile.total_minutes || 0;
-    document.getElementById('pKcal').textContent = profile.total_calories || 0;
-    updateLevelDisplay();
-  }
-  updateGoalDisplay();
-}
-
-function updateLevelDisplay(){
-  if(!profile) return;
-  const lvl = profile.fitness_level || 'beginner';
-  const icons = {beginner:'🌱', intermediate:'⚡', advanced:'🔥'};
-  const names = {beginner:'Beginner', intermediate:'Intermediate', advanced:'Advanced'};
-  const bgs = {beginner:'#dcfce7', intermediate:'#ede9fe', advanced:'#fff7ed'};
-  document.getElementById('currentLevelIcon').textContent = icons[lvl];
-  document.getElementById('currentLevelIcon').style.background = bgs[lvl];
-  document.getElementById('currentLevelName').textContent = names[lvl];
-  document.getElementById('levelPrice').textContent = prices.level_upgrade || 10;
-}
-
-function setGoal(n){
-  weeklyGoal = n;
-  [3,4,5,7].forEach(x=>{
-    const el = document.getElementById('goal'+x);
-    if(el){
-      el.style.background = x===n ? '#1E3A8A' : '#ffffff';
-      el.style.color = x===n ? '#ffffff' : '#64748B';
-      el.style.border = x===n ? '2px solid #1E3A8A' : '2px solid #E2E8F0';
-    }
-  });
-  updateGoalDisplay();
-}
-
-function toggleDay(idx){
-  daysCompleted[idx] = !daysCompleted[idx];
-  const el = document.getElementById('day'+idx);
-  const labels = ['M','T','W','T','F','S','S'];
-  if(daysCompleted[idx]){
-    el.textContent = '✓';
-    el.style.background = '#22C55E';
-    el.style.borderColor = '#22C55E';
-    el.style.color = '#ffffff';
-    el.style.fontSize = '14px';
-  } else {
-    el.textContent = labels[idx];
-    el.style.background = '#ffffff';
-    el.style.borderColor = '#E2E8F0';
-    el.style.color = '#64748B';
-    el.style.fontSize = '12px';
-  }
-  updateGoalDisplay();
-}
-
-function updateGoalDisplay(){
-  const done = daysCompleted.filter(Boolean).length;
-  const pct = Math.min((done/weeklyGoal)*100, 100);
-  const bar = document.getElementById('goalBar');
-  const txt = document.getElementById('goalText');
-  if(bar) bar.style.width = pct + '%';
-  if(txt) txt.innerHTML = '<span style="color:#22C55E;font-weight:600;">'+done+' of '+weeklyGoal+'</span> workouts done this week';
-}
-
-function unlockLevel(){
-  const price = prices.level_upgrade || 10;
-  if(confirm('Unlock next fitness level for $'+price+'?\n\nOne-time payment — yours forever!')){
-    alert('✅ Payment integration coming soon!\n\nThank you for your interest!');
-  }
-}
-
-const badgeQuotes = [
-  "A healthy body makes a strong mind.",
-  "Every rep brings you closer to your best self.",
-  "Small steps every day lead to big changes.",
-  "Sweat now, shine later.",
-  "Your health is your wealth.",
-  "Strong body, stronger mind.",
-  "Move daily, live fully.",
-  "Fitness is not a destination — it is a journey.",
-];
-
-let badgeQuoteIndex = 0;
-let badgeQuoteTimer = null;
-
-function rotateBadgeQuote(){
-  badgeQuoteIndex = (badgeQuoteIndex + 1) % badgeQuotes.length;
-  const el = document.getElementById('badgeQuoteText');
-  if(el){
-    el.style.opacity = '0';
-    setTimeout(()=>{
-      el.textContent = '"' + badgeQuotes[badgeQuoteIndex] + '"';
-      el.style.opacity = '1';
-    }, 300);
-  }
-}
-
-function shareBadge(name, icon, desc){
-  currentBadge = {name, icon, desc};
-  document.getElementById('shareBadgeIcon').textContent = icon;
-  document.getElementById('shareBadgeName').textContent = name;
-  document.getElementById('shareBadgeDesc').textContent = desc;
-  // Start rotating quotes
-  badgeQuoteIndex = Math.floor(Math.random() * badgeQuotes.length);
-  const el = document.getElementById('badgeQuoteText');
-  if(el) el.textContent = '"' + badgeQuotes[badgeQuoteIndex] + '"';
-  if(badgeQuoteTimer) clearInterval(badgeQuoteTimer);
-  badgeQuoteTimer = setInterval(rotateBadgeQuote, 3000);
-  document.getElementById('badgeShareOverlay').style.display = 'flex';
-}
-
-function closeBadgeShare(){
-  document.getElementById('badgeShareOverlay').style.display = 'none';
-  currentBadge = null;
-  if(badgeQuoteTimer){clearInterval(badgeQuoteTimer);badgeQuoteTimer=null;}
-}
-
-function getShareMessage(){
-  const streak = profile ? (profile.streak || 0) : 0;
-  const weeks = Math.floor(streak / 7);
-  const streakText = weeks > 0 ? weeks+'-week streak' : streak+'-day streak';
-  return 'I just completed a '+streakText+' on MyFitFlow app. Join me at myfitflow-vert.vercel.app to enjoy seamless workout at home 💪';
-}
-
-function shareToPlat(platform){
-  const msg = getShareMessage();
-  alert('Opening '+platform+'...\n\n"'+msg+'"');
-  closeBadgeShare();
-}
-
-function copyBadgeLink(){
-  const text = getShareMessage();
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(text).then(()=>alert('✅ Copied! Share it with your friends!'));
-  } else {
-    alert('Copy this:\n\n'+text);
-  }
-}
-
-</script>
 <script>
 const{createClient}=supabase;
 const sb=createClient('https://tdphxzkjvslqukmfihsu.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRkcGh4emtqdnNscXVrbWZpaHN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwMDE2MzUsImV4cCI6MjA5MTU3NzYzNX0.yn0xdSYsNEOUH7-Qv4DzDNIut1Q9dNaFDAJja0HVKA0');
@@ -1328,6 +1211,156 @@ function openWktDetail(id){
 }
 
 
+
+// ── PROGRESS ──
+let weeklyGoal = 4;
+let daysCompleted = [false, false, true, false, false, false, false];
+let currentBadge = null;
+
+function showProgress(){
+  goScreen('progressScreen');
+  if(profile){
+    document.getElementById('progressUsername').textContent = profile.username || 'Champ';
+    document.getElementById('pStreak').textContent = profile.streak || 0;
+    document.getElementById('pWorkouts').textContent = profile.total_workouts || 0;
+    document.getElementById('pMins').textContent = profile.total_minutes || 0;
+    document.getElementById('pKcal').textContent = profile.total_calories || 0;
+    updateLevelDisplay();
+  }
+  updateGoalDisplay();
+}
+
+function updateLevelDisplay(){
+  if(!profile) return;
+  const lvl = profile.fitness_level || 'beginner';
+  const icons = {beginner:'🌱', intermediate:'⚡', advanced:'🔥'};
+  const names = {beginner:'Beginner', intermediate:'Intermediate', advanced:'Advanced'};
+  const bgs = {beginner:'#dcfce7', intermediate:'#ede9fe', advanced:'#fff7ed'};
+  document.getElementById('currentLevelIcon').textContent = icons[lvl];
+  document.getElementById('currentLevelIcon').style.background = bgs[lvl];
+  document.getElementById('currentLevelName').textContent = names[lvl];
+  document.getElementById('levelPrice').textContent = prices.level_upgrade || 10;
+}
+
+function setGoal(n){
+  weeklyGoal = n;
+  [3,4,5,7].forEach(x=>{
+    const el = document.getElementById('goal'+x);
+    if(el){
+      el.style.background = x===n ? '#1E3A8A' : '#ffffff';
+      el.style.color = x===n ? '#ffffff' : '#64748B';
+      el.style.border = x===n ? '2px solid #1E3A8A' : '2px solid #E2E8F0';
+    }
+  });
+  updateGoalDisplay();
+}
+
+function toggleDay(idx){
+  daysCompleted[idx] = !daysCompleted[idx];
+  const el = document.getElementById('day'+idx);
+  const labels = ['M','T','W','T','F','S','S'];
+  if(daysCompleted[idx]){
+    el.textContent = '✓';
+    el.style.background = '#22C55E';
+    el.style.borderColor = '#22C55E';
+    el.style.color = '#ffffff';
+    el.style.fontSize = '14px';
+  } else {
+    el.textContent = labels[idx];
+    el.style.background = '#ffffff';
+    el.style.borderColor = '#E2E8F0';
+    el.style.color = '#64748B';
+    el.style.fontSize = '12px';
+  }
+  updateGoalDisplay();
+}
+
+function updateGoalDisplay(){
+  const done = daysCompleted.filter(Boolean).length;
+  const pct = Math.min((done/weeklyGoal)*100, 100);
+  const bar = document.getElementById('goalBar');
+  const txt = document.getElementById('goalText');
+  if(bar) bar.style.width = pct + '%';
+  if(txt) txt.innerHTML = '<span style="color:#22C55E;font-weight:600;">'+done+' of '+weeklyGoal+'</span> workouts done this week';
+}
+
+function unlockLevel(){
+  const price = prices.level_upgrade || 10;
+  if(confirm('Unlock next fitness level for $'+price+'?\n\nOne-time payment — yours forever!')){
+    alert('✅ Payment integration coming soon!\n\nThank you for your interest!');
+  }
+}
+
+const badgeQuotes = [
+  "A healthy body makes a strong mind.",
+  "Every rep brings you closer to your best self.",
+  "Small steps every day lead to big changes.",
+  "Sweat now, shine later.",
+  "Your health is your wealth.",
+  "Strong body, stronger mind.",
+  "Move daily, live fully.",
+  "Fitness is not a destination — it is a journey.",
+];
+
+let badgeQuoteIndex = 0;
+let badgeQuoteTimer = null;
+
+function rotateBadgeQuote(){
+  badgeQuoteIndex = (badgeQuoteIndex + 1) % badgeQuotes.length;
+  const el = document.getElementById('badgeQuoteText');
+  if(el){
+    el.style.opacity = '0';
+    setTimeout(()=>{
+      el.textContent = '"' + badgeQuotes[badgeQuoteIndex] + '"';
+      el.style.opacity = '1';
+    }, 300);
+  }
+}
+
+function shareBadge(name, icon, desc){
+  currentBadge = {name, icon, desc};
+  document.getElementById('shareBadgeIcon').textContent = icon;
+  document.getElementById('shareBadgeName').textContent = name;
+  document.getElementById('shareBadgeDesc').textContent = desc;
+  // Start rotating quotes
+  badgeQuoteIndex = Math.floor(Math.random() * badgeQuotes.length);
+  const el = document.getElementById('badgeQuoteText');
+  if(el) el.textContent = '"' + badgeQuotes[badgeQuoteIndex] + '"';
+  if(badgeQuoteTimer) clearInterval(badgeQuoteTimer);
+  badgeQuoteTimer = setInterval(rotateBadgeQuote, 3000);
+  document.getElementById('badgeShareOverlay').style.display = 'flex';
+}
+
+function closeBadgeShare(){
+  document.getElementById('badgeShareOverlay').style.display = 'none';
+  currentBadge = null;
+  if(badgeQuoteTimer){clearInterval(badgeQuoteTimer);badgeQuoteTimer=null;}
+}
+
+function getShareMessage(){
+  const streak = profile ? (profile.streak || 0) : 0;
+  const weeks = Math.floor(streak / 7);
+  const streakText = weeks > 0 ? weeks+'-week streak' : streak+'-day streak';
+  return 'I just completed a '+streakText+' on MyFitFlow app. Join me at myfitflow-vert.vercel.app to enjoy seamless workout at home 💪';
+}
+
+function shareToPlat(platform){
+  const msg = getShareMessage();
+  alert('Opening '+platform+'...\n\n"'+msg+'"');
+  closeBadgeShare();
+}
+
+function copyBadgeLink(){
+  const text = getShareMessage();
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>alert('✅ Copied! Share it with your friends!'));
+  } else {
+    alert('Copy this:\n\n'+text);
+  }
+}
+
+
 </script>
+
 </body>
 </html>
