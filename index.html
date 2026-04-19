@@ -542,14 +542,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
       <span>Progress to next level</span>
       <span style="color:#7C3AED;font-weight:600;">45%</span>
     </div>
-    <div style="display:flex;align-items:center;gap:12px;">
-      <div style="width:48px;height:48px;border-radius:14px;background:#ede9fe;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">⚡</div>
-      <div style="flex:1;">
-        <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;">Intermediate</p>
-        <p style="font-size:11px;color:#64748B;">Unlock for $<span id="levelPrice">10</span> · one time</p>
-      </div>
-      <button onclick="unlockLevel()" style="padding:8px 14px;background:#1E3A8A;border:none;border-radius:10px;color:#ffffff;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;cursor:pointer;">🔓 Unlock</button>
-    </div>
+    <div id="unlockableLevels" style="display:flex;flex-direction:column;gap:10px;"></div>
   </div>
 </div>
 
@@ -1236,10 +1229,30 @@ function updateLevelDisplay(){
   const icons = {beginner:'🌱', intermediate:'⚡', advanced:'🔥'};
   const names = {beginner:'Beginner', intermediate:'Intermediate', advanced:'Advanced'};
   const bgs = {beginner:'#dcfce7', intermediate:'#ede9fe', advanced:'#fff7ed'};
+
+  // Update current level display
   document.getElementById('currentLevelIcon').textContent = icons[lvl];
   document.getElementById('currentLevelIcon').style.background = bgs[lvl];
   document.getElementById('currentLevelName').textContent = names[lvl];
-  document.getElementById('levelPrice').textContent = prices.level_upgrade || 10;
+
+  // Show all OTHER levels as unlockable
+  const allLevels = ['beginner','intermediate','advanced'];
+  const unlockable = allLevels.filter(l => l !== lvl);
+  const price = prices.level_upgrade || 10;
+
+  const container = document.getElementById('unlockableLevels');
+  if(!container) return;
+
+  container.innerHTML = unlockable.map(l => `
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:48px;height:48px;border-radius:14px;background:${bgs[l]};display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">${icons[l]}</div>
+      <div style="flex:1;">
+        <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;">${names[l]}</p>
+        <p style="font-size:11px;color:#64748B;">Unlock for $${price} · one time</p>
+      </div>
+      <button onclick="unlockLevel('${l}')" style="padding:8px 14px;background:#1E3A8A;border:none;border-radius:10px;color:#ffffff;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;cursor:pointer;">🔓 Unlock</button>
+    </div>
+  `).join('<div style="height:1px;background:#E2E8F0;margin:4px 0;"></div>');
 }
 
 function setGoal(n){
@@ -1284,9 +1297,11 @@ function updateGoalDisplay(){
   if(txt) txt.innerHTML = '<span style="color:#22C55E;font-weight:600;">'+done+' of '+weeklyGoal+'</span> workouts done this week';
 }
 
-function unlockLevel(){
+function unlockLevel(levelName){
   const price = prices.level_upgrade || 10;
-  if(confirm('Unlock next fitness level for $'+price+'?\n\nOne-time payment — yours forever!')){
+  const names = {beginner:'Beginner', intermediate:'Intermediate', advanced:'Advanced'};
+  const display = names[levelName] || levelName;
+  if(confirm('Unlock '+display+' level for $'+price+'?\n\nOne-time payment — yours forever!')){
     alert('✅ Payment integration coming soon!\n\nThank you for your interest!');
   }
 }
