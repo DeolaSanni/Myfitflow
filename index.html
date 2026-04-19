@@ -501,7 +501,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
         <p style="font-size:9px;color:#64748B;">Wed</p>
       </div>
       <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-        <div style="width:32px;height:32px;border-radius:50%;border:2px solid #1E3A8A;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#1E3A8A;cursor:pointer;" id="day3">T</div>
+        <div style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;" id="day3">T</div>
         <p style="font-size:9px;color:#64748B;">Thu</p>
       </div>
       <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
@@ -686,7 +686,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
       </div>
       <div id="shareBadgeIcon" style="font-size:56px;margin-bottom:12px;">🥇</div>
       <p id="shareBadgeName" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#ffffff;margin-bottom:6px;">First Step!</p>
-      <p id="shareInviteMsg" style="font-size:13px;color:#ffffff;font-weight:500;line-height:1.5;margin-bottom:10px;">I just completed my first workout on MyFitFlow app. <a href="https://myfitflow-vert.vercel.app" style="color:#fbbf24;font-weight:800;text-decoration:underline;" target="_blank">Join me</a> to enjoy seamless workout at home!</p>
+      <p id="shareInviteMsg" style="font-size:13px;color:#ffffff;font-weight:500;line-height:1.5;margin-bottom:10px;">I just completed my first workout on MyFitFlow app. <a href="https://myfitflow-vert.vercel.app" style="color:#fbbf24;font-weight:800;text-decoration:underline;" target="_blank">Join now</a> to enjoy seamless workout at home!</p>
       <p id="badgeQuoteText" style="font-size:12px;color:rgba(255,255,255,0.75);font-style:italic;transition:opacity 0.3s;">"A healthy body makes a strong mind."</p>
       <div style="margin-top:12px;background:rgba(255,255,255,0.15);border-radius:10px;padding:6px 12px;display:inline-block;">
         <p style="font-size:10px;color:rgba(255,255,255,0.8);">🔗 Join free at myfitflow-vert.vercel.app</p>
@@ -1356,7 +1356,7 @@ function shareBadge(name, icon, desc){
   // Update invite message
   const msg = badgeMessages[name] || 'I just earned the '+name+' badge on MyFitFlow app.';
   const inviteEl = document.getElementById('shareInviteMsg');
-  if(inviteEl) inviteEl.innerHTML = msg+' <a href="https://myfitflow-vert.vercel.app" style="color:#fbbf24;font-weight:800;text-decoration:underline;" target="_blank">Join me</a> to enjoy seamless workout at home!';
+  if(inviteEl) inviteEl.innerHTML = msg+' <a href="https://myfitflow-vert.vercel.app" style="color:#fbbf24;font-weight:800;text-decoration:underline;" target="_blank">Join now</a> to enjoy seamless workout at home!';
   // Start rotating quotes
   badgeQuoteIndex = Math.floor(Math.random() * badgeQuotes.length);
   const el = document.getElementById('badgeQuoteText');
@@ -1375,12 +1375,12 @@ function closeBadgeShare(){
 function getShareMessage(){
   if(currentBadge){
     const msg = badgeMessages[currentBadge.name] || 'I just earned the '+currentBadge.name+' badge on MyFitFlow app.';
-    return msg+' Join me -> https://myfitflow-vert.vercel.app to enjoy seamless workout at home!';
+    return msg+' Join now -> https://myfitflow-vert.vercel.app to enjoy seamless workout at home!';
   }
   const streak = profile ? (profile.streak || 0) : 0;
   const weeks = Math.floor(streak / 7);
   const streakText = weeks > 0 ? weeks+'-week streak' : streak+'-day streak';
-  return 'I just completed a '+streakText+' on MyFitFlow app. Join me -> https://myfitflow-vert.vercel.app to enjoy seamless workout at home!';
+  return 'I just completed a '+streakText+' on MyFitFlow app. Join now -> https://myfitflow-vert.vercel.app to enjoy seamless workout at home!';
 }
 
 function shareToPlat(platform){
