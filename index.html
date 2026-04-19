@@ -497,7 +497,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
         <p style="font-size:9px;color:#64748B;">Tue</p>
       </div>
       <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-        <div style="width:32px;height:32px;border-radius:50%;border:2px solid #22C55E;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;background:#22C55E;color:#ffffff;" id="day2">✓</div>
+        <div style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;" id="day2">W</div>
         <p style="font-size:9px;color:#64748B;">Wed</p>
       </div>
       <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
@@ -686,7 +686,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
       </div>
       <div id="shareBadgeIcon" style="font-size:56px;margin-bottom:12px;">🥇</div>
       <p id="shareBadgeName" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#ffffff;margin-bottom:6px;">First Step!</p>
-      <p id="shareBadgeDesc" style="font-size:13px;color:rgba(255,255,255,0.8);margin-bottom:6px;">Achievement unlocked</p>
       <p id="shareInviteMsg" style="font-size:13px;color:#ffffff;font-weight:500;line-height:1.5;margin-bottom:10px;">I just completed my first workout on MyFitFlow app. <a href="https://myfitflow-vert.vercel.app" style="color:#fbbf24;font-weight:800;text-decoration:underline;" target="_blank">Join me</a> to enjoy seamless workout at home!</p>
       <p id="badgeQuoteText" style="font-size:12px;color:rgba(255,255,255,0.75);font-style:italic;transition:opacity 0.3s;">"A healthy body makes a strong mind."</p>
       <div style="margin-top:12px;background:rgba(255,255,255,0.15);border-radius:10px;padding:6px 12px;display:inline-block;">
@@ -1354,7 +1353,6 @@ function shareBadge(name, icon, desc){
   currentBadge = {name, icon, desc};
   document.getElementById('shareBadgeIcon').textContent = icon;
   document.getElementById('shareBadgeName').textContent = name;
-  document.getElementById('shareBadgeDesc').textContent = desc;
   // Update invite message
   const msg = badgeMessages[name] || 'I just earned the '+name+' badge on MyFitFlow app.';
   const inviteEl = document.getElementById('shareInviteMsg');
