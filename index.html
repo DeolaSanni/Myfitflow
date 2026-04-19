@@ -438,7 +438,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
   <!-- Start Button -->
 
   <div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;padding:16px;background:#ffffff;border-top:1px solid #E2E8F0;z-index:100;">
-    <button onclick="moti()" style="width:100%;padding:16px;background:#1E3A8A;border:none;border-radius:16px;font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;color:#ffffff;cursor:pointer;">▶ Start Workout</button>
+    <button onclick="startWorkout()" style="width:100%;padding:16px;background:#1E3A8A;border:none;border-radius:16px;font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;color:#ffffff;cursor:pointer;">▶ Start Workout</button>
   </div>
 </div>
 
@@ -489,31 +489,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
   <div style="background:#ffffff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(15,23,42,0.06);">
     <div style="display:flex;gap:6px;margin-bottom:12px;" id="weekDays">
       <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-        <div onclick="toggleDay(0)" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day0">M</div>
+        <div style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day0">M</div>
         <p style="font-size:9px;color:#64748B;">Mon</p>
       </div>
       <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-        <div onclick="toggleDay(1)" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day1">T</div>
+        <div style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day1">T</div>
         <p style="font-size:9px;color:#64748B;">Tue</p>
       </div>
       <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-        <div onclick="toggleDay(2)" style="width:32px;height:32px;border-radius:50%;border:2px solid #22C55E;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;background:#22C55E;color:#ffffff;" id="day2">✓</div>
+        <div style="width:32px;height:32px;border-radius:50%;border:2px solid #22C55E;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;background:#22C55E;color:#ffffff;" id="day2">✓</div>
         <p style="font-size:9px;color:#64748B;">Wed</p>
       </div>
       <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-        <div onclick="toggleDay(3)" style="width:32px;height:32px;border-radius:50%;border:2px solid #1E3A8A;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#1E3A8A;cursor:pointer;" id="day3">T</div>
+        <div style="width:32px;height:32px;border-radius:50%;border:2px solid #1E3A8A;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#1E3A8A;cursor:pointer;" id="day3">T</div>
         <p style="font-size:9px;color:#64748B;">Thu</p>
       </div>
       <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-        <div onclick="toggleDay(4)" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day4">F</div>
+        <div style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day4">F</div>
         <p style="font-size:9px;color:#64748B;">Fri</p>
       </div>
       <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-        <div onclick="toggleDay(5)" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day5">S</div>
+        <div style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day5">S</div>
         <p style="font-size:9px;color:#64748B;">Sat</p>
       </div>
       <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
-        <div onclick="toggleDay(6)" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day6">S</div>
+        <div style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;" id="day6">S</div>
         <p style="font-size:9px;color:#64748B;">Sun</p>
       </div>
     </div>
@@ -686,7 +686,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
       </div>
       <div id="shareBadgeIcon" style="font-size:56px;margin-bottom:12px;">🥇</div>
       <p id="shareBadgeName" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#ffffff;margin-bottom:6px;">First Step!</p>
-      <p id="shareBadgeDesc" style="font-size:13px;color:rgba(255,255,255,0.8);margin-bottom:14px;">Achievement unlocked</p>
+      <p id="shareBadgeDesc" style="font-size:13px;color:rgba(255,255,255,0.8);margin-bottom:6px;">Achievement unlocked</p>
+      <p id="shareInviteMsg" style="font-size:13px;color:#ffffff;font-weight:500;line-height:1.5;margin-bottom:10px;">I just completed my first workout on MyFitFlow app. <a href="https://myfitflow-vert.vercel.app" style="color:#fbbf24;font-weight:800;text-decoration:underline;" target="_blank">Join me</a> to enjoy seamless workout at home!</p>
       <p id="badgeQuoteText" style="font-size:12px;color:rgba(255,255,255,0.75);font-style:italic;transition:opacity 0.3s;">"A healthy body makes a strong mind."</p>
       <div style="margin-top:12px;background:rgba(255,255,255,0.15);border-radius:10px;padding:6px 12px;display:inline-block;">
         <p style="font-size:10px;color:rgba(255,255,255,0.8);">🔗 Join free at myfitflow-vert.vercel.app</p>
@@ -699,7 +700,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
         <button onclick="shareToPlat('WhatsApp')" style="padding:10px;background:#25D366;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">💬 WhatsApp</button>
         <button onclick="shareToPlat('Instagram')" style="padding:10px;background:#E1306C;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">📸 Instagram</button>
         <button onclick="shareToPlat('Facebook')" style="padding:10px;background:#1877F2;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">📘 Facebook</button>
-        <button onclick="shareToPlat('X')" style="padding:10px;background:#0F172A;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">🐦 X / Twitter</button>
+        <button onclick="shareToPlat('X')" style="padding:10px;background:#0F172A;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">X / Twitter</button>
+        <button onclick="shareToPlat('Threads')" style="padding:10px;background:#0F172A;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">Threads</button>
+        <button onclick="shareToPlat('TikTok')" style="padding:10px;background:#010101;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">TikTok</button>
       </div>
       <button onclick="copyBadgeLink()" style="width:100%;padding:12px;background:#1E3A8A;border:none;border-radius:12px;color:#ffffff;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:8px;">📋 Copy Download Link</button>
       <button onclick="closeBadgeShare()" style="width:100%;padding:12px;background:#f1f5f9;border:none;border-radius:12px;color:#64748B;font-size:13px;font-weight:600;cursor:pointer;">Close</button>
@@ -790,6 +793,7 @@ window.addEventListener('load',async()=>{
   }
   loadPrices();
   loadGlobalSettings();
+  loadWeeklyProgress();
 });
 
 // ── SCREEN NAVIGATION ──
@@ -1220,6 +1224,8 @@ function showProgress(){
     document.getElementById('pKcal').textContent = profile.total_calories || 0;
     updateLevelDisplay();
   }
+  loadWeeklyProgress();
+  daysCompleted.forEach((done,idx)=>{ if(done) markDayUI(idx); });
   updateGoalDisplay();
 }
 
@@ -1337,6 +1343,10 @@ function shareBadge(name, icon, desc){
   document.getElementById('shareBadgeIcon').textContent = icon;
   document.getElementById('shareBadgeName').textContent = name;
   document.getElementById('shareBadgeDesc').textContent = desc;
+  // Update invite message
+  const msg = badgeMessages[name] || 'I just earned the '+name+' badge on MyFitFlow app.';
+  const inviteEl = document.getElementById('shareInviteMsg');
+  if(inviteEl) inviteEl.innerHTML = msg+' <a href="https://myfitflow-vert.vercel.app" style="color:#fbbf24;font-weight:800;text-decoration:underline;" target="_blank">Join me</a> to enjoy seamless workout at home!';
   // Start rotating quotes
   badgeQuoteIndex = Math.floor(Math.random() * badgeQuotes.length);
   const el = document.getElementById('badgeQuoteText');
@@ -1353,10 +1363,14 @@ function closeBadgeShare(){
 }
 
 function getShareMessage(){
+  if(currentBadge){
+    const msg = badgeMessages[currentBadge.name] || 'I just earned the '+currentBadge.name+' badge on MyFitFlow app.';
+    return msg+' Join me -> https://myfitflow-vert.vercel.app to enjoy seamless workout at home!';
+  }
   const streak = profile ? (profile.streak || 0) : 0;
   const weeks = Math.floor(streak / 7);
   const streakText = weeks > 0 ? weeks+'-week streak' : streak+'-day streak';
-  return 'I just completed a '+streakText+' on MyFitFlow app. Join me at myfitflow-vert.vercel.app to enjoy seamless workout at home 💪';
+  return 'I just completed a '+streakText+' on MyFitFlow app. Join me -> https://myfitflow-vert.vercel.app to enjoy seamless workout at home!';
 }
 
 function shareToPlat(platform){
@@ -1374,6 +1388,53 @@ function copyBadgeLink(){
   }
 }
 
+
+
+// ── START WORKOUT — auto marks today ──
+function startWorkout(){
+  markTodayDone();
+  moti();
+}
+
+function markTodayDone(){
+  const today = new Date().getDay();
+  const idx = today === 0 ? 6 : today - 1;
+  if(!daysCompleted[idx]){
+    daysCompleted[idx] = true;
+    saveWeeklyProgress();
+    markDayUI(idx);
+    updateGoalDisplay();
+  }
+}
+
+function markDayUI(idx){
+  const el = document.getElementById('day'+idx);
+  if(el){
+    el.textContent = '✓';
+    el.style.background = '#22C55E';
+    el.style.borderColor = '#22C55E';
+    el.style.color = '#ffffff';
+    el.style.fontSize = '14px';
+  }
+}
+
+function getWeekKey(){
+  const now = new Date();
+  const day = now.getDay();
+  const diff = day === 0 ? 6 : day - 1;
+  const mon = new Date(now);
+  mon.setDate(now.getDate() - diff);
+  return mon.toISOString().split('T')[0];
+}
+
+function saveWeeklyProgress(){
+  localStorage.setItem('mff_week_'+getWeekKey(), JSON.stringify(daysCompleted));
+}
+
+function loadWeeklyProgress(){
+  const saved = localStorage.getItem('mff_week_'+getWeekKey());
+  if(saved){try{daysCompleted=JSON.parse(saved);}catch(e){daysCompleted=[false,false,false,false,false,false,false];}}
+}
 
 </script>
 
