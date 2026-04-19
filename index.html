@@ -1211,7 +1211,28 @@ function openWktDetail(id){
 
 // ── PROGRESS ──
 let weeklyGoal = 4;
-let daysCompleted = [false, false, true, false, false, false, false];
+let daysCompleted = [false, false, false, false, false, false, false];
+
+const badgeMessages = {
+  'First Step':  'I just completed my first workout on MyFitFlow app.',
+  'On Fire':     'I just hit a 7-day workout streak on MyFitFlow app.',
+  'Dedicated':   'I just completed 10 workouts on MyFitFlow app.',
+  'Cardio Star': 'I just completed my first cardio session on MyFitFlow app.',
+  'Pilates Pro': 'I just completed 5 Pilates sessions on MyFitFlow app.',
+  'Early Bird':  'I just worked out before 8am on MyFitFlow app.',
+};
+
+const badgeQuotes = [
+  "A healthy body makes a strong mind.",
+  "Every rep brings you closer to your best self.",
+  "Small steps every day lead to big changes.",
+  "Sweat now, shine later.",
+  "Your health is your wealth.",
+  "Strong body, stronger mind.",
+  "Move daily, live fully.",
+  "Fitness is not a destination — it is a journey.",
+];
+
 let currentBadge = null;
 
 function showProgress(){
@@ -1312,16 +1333,7 @@ function unlockLevel(levelName){
   }
 }
 
-const badgeQuotes = [
-  "A healthy body makes a strong mind.",
-  "Every rep brings you closer to your best self.",
-  "Small steps every day lead to big changes.",
-  "Sweat now, shine later.",
-  "Your health is your wealth.",
-  "Strong body, stronger mind.",
-  "Move daily, live fully.",
-  "Fitness is not a destination — it is a journey.",
-];
+// badgeQuotes declared above
 
 let badgeQuoteIndex = 0;
 let badgeQuoteTimer = null;
@@ -1390,10 +1402,31 @@ function copyBadgeLink(){
 
 
 
+
+// ── ACHIEVEMENT UNLOCK NOTIFICATION ──
+function checkAndAwardBadge(badgeName, icon, desc){
+  const key = 'mff_badge_'+badgeName.replace(/\s/g,'_');
+  if(!localStorage.getItem(key)){
+    localStorage.setItem(key, '1');
+    showAchievementPopup(badgeName, icon, desc);
+  }
+}
+
+function showAchievementPopup(name, icon, desc){
+  const overlay = document.getElementById('achievementPopup');
+  document.getElementById('achIcon').textContent = icon;
+  document.getElementById('achName').textContent = name;
+  document.getElementById('achDesc').textContent = desc;
+  overlay.style.display = 'flex';
+  setTimeout(()=>{ overlay.style.display = 'none'; }, 4000);
+}
+
 // ── START WORKOUT — auto marks today ──
 function startWorkout(){
   markTodayDone();
   moti();
+  // Check first workout achievement
+  checkAndAwardBadge('First Step', '🥇', 'You completed your very first workout!');
 }
 
 function markTodayDone(){
