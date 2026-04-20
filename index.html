@@ -686,26 +686,44 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
       </div>
       <div id="shareBadgeIcon" style="font-size:56px;margin-bottom:12px;">🥇</div>
       <p id="shareBadgeName" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#ffffff;margin-bottom:6px;">First Step!</p>
-      <p id="shareInviteMsg" style="font-size:13px;color:#ffffff;font-weight:500;line-height:1.5;margin-bottom:10px;">I just completed my first workout on MyFitFlow app. <a href="https://myfitflow-vert.vercel.app" style="color:#fbbf24;font-weight:800;text-decoration:underline;" target="_blank">Join now</a> to enjoy seamless workout at home!</p>
-      <p id="badgeQuoteText" style="font-size:12px;color:rgba(255,255,255,0.75);font-style:italic;transition:opacity 0.3s;">"A healthy body makes a strong mind."</p>
-      <div style="margin-top:12px;background:rgba(255,255,255,0.15);border-radius:10px;padding:6px 12px;display:inline-block;">
-        <p style="font-size:10px;color:rgba(255,255,255,0.8);">🔗 Join free at myfitflow-vert.vercel.app</p>
-      </div>
+
+```
+  <p id="shareInviteMsg" style="font-size:13px;color:#ffffff;font-weight:500;line-height:1.5;margin-bottom:10px;">I just completed my first workout on MyFitFlow app. <a href="https://myfitflow-vert.vercel.app" style="color:#fbbf24;font-weight:800;text-decoration:underline;" target="_blank">Join now</a> to enjoy seamless workout at home!</p>
+  <p id="badgeQuoteText" style="font-size:12px;color:rgba(255,255,255,0.75);font-style:italic;transition:opacity 0.3s;">"A healthy body makes a strong mind."</p>
+  <div style="margin-top:12px;background:rgba(255,255,255,0.15);border-radius:10px;padding:6px 12px;display:inline-block;">
+    <p style="font-size:10px;color:rgba(255,255,255,0.8);">🔗 Join free at myfitflow-vert.vercel.app</p>
+  </div>
+</div>
+<!-- Share Buttons -->
+<div style="padding:20px 16px;">
+  <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:12px;text-align:center;">Share your achievement!</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+    <button onclick="shareToPlat('WhatsApp')" style="padding:10px;background:#25D366;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">💬 WhatsApp</button>
+    <button onclick="shareToPlat('Instagram')" style="padding:10px;background:#E1306C;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">📸 Instagram</button>
+    <button onclick="shareToPlat('Facebook')" style="padding:10px;background:#1877F2;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">📘 Facebook</button>
+    <button onclick="shareToPlat('X')" style="padding:10px;background:#0F172A;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">X / Twitter</button>
+    <button onclick="shareToPlat('Threads')" style="padding:10px;background:#0F172A;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">Threads</button>
+    <button onclick="shareToPlat('TikTok')" style="padding:10px;background:#010101;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">TikTok</button>
+  </div>
+  <button onclick="copyBadgeLink()" style="width:100%;padding:12px;background:#1E3A8A;border:none;border-radius:12px;color:#ffffff;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:8px;">📋 Copy Download Link</button>
+  <button onclick="closeBadgeShare()" style="width:100%;padding:12px;background:#f1f5f9;border:none;border-radius:12px;color:#64748B;font-size:13px;font-weight:600;cursor:pointer;">Close</button>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- ACHIEVEMENT POPUP -->
+
+<div id="achievementPopup" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.7);z-index:500;align-items:flex-end;justify-content:center;padding:24px;">
+  <div style="background:#ffffff;border-radius:24px;padding:24px;width:100%;max-width:398px;display:flex;align-items:center;gap:16px;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:slideUp 0.4s ease;">
+    <div id="achIcon" style="font-size:44px;flex-shrink:0;">🥇</div>
+    <div style="flex:1;">
+      <p style="font-size:11px;color:#22C55E;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">Achievement Unlocked! 🎉</p>
+      <p id="achName" style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;color:#0F172A;margin-bottom:3px;">First Step!</p>
+      <p style="font-size:12px;color:#64748B;">Congratulations! Check your badges to share. 🏅</p>
     </div>
-    <!-- Share Buttons -->
-    <div style="padding:20px 16px;">
-      <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:12px;text-align:center;">Share your achievement!</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
-        <button onclick="shareToPlat('WhatsApp')" style="padding:10px;background:#25D366;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">💬 WhatsApp</button>
-        <button onclick="shareToPlat('Instagram')" style="padding:10px;background:#E1306C;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">📸 Instagram</button>
-        <button onclick="shareToPlat('Facebook')" style="padding:10px;background:#1877F2;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">📘 Facebook</button>
-        <button onclick="shareToPlat('X')" style="padding:10px;background:#0F172A;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">X / Twitter</button>
-        <button onclick="shareToPlat('Threads')" style="padding:10px;background:#0F172A;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">Threads</button>
-        <button onclick="shareToPlat('TikTok')" style="padding:10px;background:#010101;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">TikTok</button>
-      </div>
-      <button onclick="copyBadgeLink()" style="width:100%;padding:12px;background:#1E3A8A;border:none;border-radius:12px;color:#ffffff;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:8px;">📋 Copy Download Link</button>
-      <button onclick="closeBadgeShare()" style="width:100%;padding:12px;background:#f1f5f9;border:none;border-radius:12px;color:#64748B;font-size:13px;font-weight:600;cursor:pointer;">Close</button>
-    </div>
+    <button onclick="document.getElementById('achievementPopup').style.display='none'" style="width:28px;height:28px;background:#f1f5f9;border-radius:50%;border:none;cursor:pointer;font-size:14px;flex-shrink:0;">✕</button>
   </div>
 </div>
 
@@ -1093,6 +1111,57 @@ const workouts = [
   {id:'s3',name:'Strength Builder',category:'strength',duration:15,level:'all',calories:140,emoji:'💪',color:'#1e293b',desc:'15 minutes of progressive strength training.',exercises:[{name:'Warm Up With Me',dur:'2 min',icon:'🔥'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Lunge With Me',dur:'1 min',icon:'💪'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Side Plank With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Superman With Me',dur:'1 min',icon:'💪'},{name:'Dead Bug With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'2 min',icon:'😌'}]},
   {id:'s4',name:'Strength Power',category:'strength',duration:30,level:'all',calories:260,emoji:'💪',color:'#1e293b',desc:'30 minutes of comprehensive strength training for all muscle groups.',exercises:[{name:'Warm Up With Me',dur:'3 min',icon:'🔥'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Pulse Squat With Me',dur:'1 min',icon:'💪'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Pike Push Up With Me',dur:'1 min',icon:'💪'},{name:'Lunge With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Side Plank With Me',dur:'1 min',icon:'💪'},{name:'Dead Bug With Me',dur:'1 min',icon:'💪'},{name:'Superman With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'3 min',icon:'😌'}]},
   {id:'s5',name:'Strength Master',category:'strength',duration:60,level:'all',calories:480,emoji:'💪',color:'#1e293b',desc:'60 minutes of the ultimate strength challenge.',exercises:[{name:'Warm Up With Me',dur:'5 min',icon:'🔥'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Pulse Squat With Me',dur:'1 min',icon:'💪'},{name:'Jump Squat With Me',dur:'1 min',icon:'💪'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Pike Push Up With Me',dur:'1 min',icon:'💪'},{name:'Lunge With Me',dur:'1 min',icon:'💪'},{name:'Single Leg Deadlift With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Side Plank With Me',dur:'1 min',icon:'💪'},{name:'Dead Bug With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'5 min',icon:'😌'}]},
+
+  // ── CARDIO ABS ──
+  {id:'ca1',name:'Cardio Abs Burn',category:'cardio',duration:5,level:'all',calories:70,emoji:'🔥',color:'#F97316',desc:'5 minutes of cardio-based ab work to torch your core.',exercises:[{name:'Warm Up With Me',dur:'30 sec',icon:'🔥'},{name:'High Knees With Me',dur:'1 min',icon:'🏃'},{name:'Bicycle Crunch With Me',dur:'1 min',icon:'💪'},{name:'Mountain Climber With Me',dur:'1 min',icon:'🏃'},{name:'Leg Raise With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'30 sec',icon:'😌'}]},
+  {id:'ca2',name:'Cardio Abs Shred',category:'cardio',duration:10,level:'all',calories:130,emoji:'🔥',color:'#F97316',desc:'10 minutes of high energy cardio ab training.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'High Knees With Me',dur:'1 min',icon:'🏃'},{name:'Bicycle Crunch With Me',dur:'1 min',icon:'💪'},{name:'Mountain Climber With Me',dur:'1 min',icon:'🏃'},{name:'Leg Raise With Me',dur:'1 min',icon:'💪'},{name:'Flutter Kick With Me',dur:'1 min',icon:'💪'},{name:'Burpee With Me',dur:'1 min',icon:'🏃'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  {id:'ca3',name:'Cardio Abs Sculpt',category:'cardio',duration:15,level:'all',calories:185,emoji:'🔥',color:'#F97316',desc:'15 minutes combining cardio bursts with targeted ab exercises.',exercises:[{name:'Warm Up With Me',dur:'2 min',icon:'🔥'},{name:'High Knees With Me',dur:'1 min',icon:'🏃'},{name:'Bicycle Crunch With Me',dur:'1 min',icon:'💪'},{name:'Mountain Climber With Me',dur:'1 min',icon:'🏃'},{name:'Leg Raise With Me',dur:'1 min',icon:'💪'},{name:'Jump With Me',dur:'1 min',icon:'🏃'},{name:'Flutter Kick With Me',dur:'1 min',icon:'💪'},{name:'Burpee With Me',dur:'1 min',icon:'🏃'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Core Flow With Me',dur:'2 min',icon:'🧘'},{name:'Cool Down With Me',dur:'2 min',icon:'😌'}]},
+  {id:'ca4',name:'Cardio Abs Power',category:'cardio',duration:30,level:'all',calories:340,emoji:'🔥',color:'#F97316',desc:'30 minutes of intense cardio ab training for a strong defined core.',exercises:[{name:'Warm Up With Me',dur:'3 min',icon:'🔥'},{name:'High Knees With Me',dur:'2 min',icon:'🏃'},{name:'Bicycle Crunch With Me',dur:'1 min',icon:'💪'},{name:'Mountain Climber With Me',dur:'2 min',icon:'🏃'},{name:'Leg Raise With Me',dur:'1 min',icon:'💪'},{name:'Jump With Me',dur:'2 min',icon:'🏃'},{name:'Flutter Kick With Me',dur:'1 min',icon:'💪'},{name:'Burpee With Me',dur:'2 min',icon:'🏃'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Climb With Me',dur:'2 min',icon:'🧗'},{name:'Dead Bug With Me',dur:'1 min',icon:'🧘'},{name:'Cool Down With Me',dur:'3 min',icon:'😌'}]},
+  // ── CARDIO LEGS ──
+  {id:'cl1',name:'Cardio Legs Burn',category:'cardio',duration:5,level:'all',calories:75,emoji:'🦵',color:'#1E3A8A',desc:'5 minutes of cardio leg work to fire up your lower body.',exercises:[{name:'Warm Up With Me',dur:'30 sec',icon:'🔥'},{name:'Jump Squat With Me',dur:'1 min',icon:'🏃'},{name:'Lunge Jump With Me',dur:'1 min',icon:'🏃'},{name:'Step Jack With Me',dur:'1 min',icon:'🏃'},{name:'High Knees With Me',dur:'1 min',icon:'🏃'},{name:'Cool Down With Me',dur:'30 sec',icon:'😌'}]},
+  {id:'cl2',name:'Cardio Legs Power',category:'cardio',duration:10,level:'all',calories:145,emoji:'🦵',color:'#1E3A8A',desc:'10 minutes of cardio leg training for strength and endurance.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Jump Squat With Me',dur:'1 min',icon:'🏃'},{name:'Lunge Jump With Me',dur:'1 min',icon:'🏃'},{name:'Step Jack With Me',dur:'1 min',icon:'🏃'},{name:'High Knees With Me',dur:'1 min',icon:'🏃'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Wall Sit With Me',dur:'1 min',icon:'💪'},{name:'Run With Me',dur:'1 min',icon:'🏃'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  {id:'cl3',name:'Cardio Legs Sculpt',category:'cardio',duration:15,level:'all',calories:195,emoji:'🦵',color:'#1E3A8A',desc:'15 minutes of cardio and leg toning combined.',exercises:[{name:'Warm Up With Me',dur:'2 min',icon:'🔥'},{name:'Jump Squat With Me',dur:'1 min',icon:'🏃'},{name:'Lunge Jump With Me',dur:'1 min',icon:'🏃'},{name:'Step Jack With Me',dur:'1 min',icon:'🏃'},{name:'High Knees With Me',dur:'1 min',icon:'🏃'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Wall Sit With Me',dur:'1 min',icon:'💪'},{name:'Race With Me',dur:'2 min',icon:'🏃'},{name:'Leg Swing With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'2 min',icon:'😌'}]},
+  {id:'cl4',name:'Cardio Legs Blast',category:'cardio',duration:30,level:'all',calories:360,emoji:'🦵',color:'#1E3A8A',desc:'30 minutes of full lower body cardio blast.',exercises:[{name:'Warm Up With Me',dur:'3 min',icon:'🔥'},{name:'Jump Squat With Me',dur:'2 min',icon:'🏃'},{name:'Lunge Jump With Me',dur:'2 min',icon:'🏃'},{name:'Step Jack With Me',dur:'2 min',icon:'🏃'},{name:'High Knees With Me',dur:'2 min',icon:'🏃'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Wall Sit With Me',dur:'1 min',icon:'💪'},{name:'Race With Me',dur:'2 min',icon:'🏃'},{name:'Run With Me',dur:'2 min',icon:'🏃'},{name:'Leg Swing With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'3 min',icon:'😌'}]},
+  // ── CARDIO GLUTES ──
+  {id:'cg1',name:'Cardio Glutes Lift',category:'cardio',duration:5,level:'all',calories:68,emoji:'🍑',color:'#ec4899',desc:'5 minutes of cardio glute activation and toning.',exercises:[{name:'Warm Up With Me',dur:'30 sec',icon:'🔥'},{name:'Donkey Kick With Me',dur:'1 min',icon:'🏃'},{name:'Jump Squat With Me',dur:'1 min',icon:'🏃'},{name:'Fire Hydrant With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'30 sec',icon:'😌'}]},
+  {id:'cg2',name:'Cardio Glutes Burn',category:'cardio',duration:10,level:'all',calories:135,emoji:'🍑',color:'#ec4899',desc:'10 minutes of cardio-based glute training.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Jump Squat With Me',dur:'1 min',icon:'🏃'},{name:'Donkey Kick With Me',dur:'1 min',icon:'💪'},{name:'Fire Hydrant With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Lunge Jump With Me',dur:'1 min',icon:'🏃'},{name:'Side Leg Lift With Me',dur:'1 min',icon:'🧘'},{name:'Hip Circle With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  {id:'cg3',name:'Cardio Glutes Sculpt',category:'cardio',duration:15,level:'all',calories:180,emoji:'🍑',color:'#ec4899',desc:'15 minutes targeting glutes with cardio bursts.',exercises:[{name:'Warm Up With Me',dur:'2 min',icon:'🔥'},{name:'Jump Squat With Me',dur:'1 min',icon:'🏃'},{name:'Donkey Kick With Me',dur:'1 min',icon:'💪'},{name:'Fire Hydrant With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Lunge Jump With Me',dur:'1 min',icon:'🏃'},{name:'Side Leg Lift With Me',dur:'1 min',icon:'🧘'},{name:'Hip Circle With Me',dur:'1 min',icon:'⚖️'},{name:'Race With Me',dur:'2 min',icon:'🏃'},{name:'Cool Down With Me',dur:'2 min',icon:'😌'}]},
+  {id:'cg4',name:'Cardio Glutes Power',category:'cardio',duration:30,level:'all',calories:320,emoji:'🍑',color:'#ec4899',desc:'30 minutes of comprehensive cardio glute training.',exercises:[{name:'Warm Up With Me',dur:'3 min',icon:'🔥'},{name:'Jump Squat With Me',dur:'2 min',icon:'🏃'},{name:'Donkey Kick With Me',dur:'1 min',icon:'💪'},{name:'Fire Hydrant With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Lunge Jump With Me',dur:'2 min',icon:'🏃'},{name:'Side Leg Lift With Me',dur:'1 min',icon:'🧘'},{name:'Hip Circle With Me',dur:'1 min',icon:'⚖️'},{name:'Race With Me',dur:'2 min',icon:'🏃'},{name:'Run With Me',dur:'2 min',icon:'🏃'},{name:'Cool Down With Me',dur:'3 min',icon:'😌'}]},
+  // ── CARDIO ARMS ──
+  {id:'carm1',name:'Cardio Arms Tone',category:'cardio',duration:5,level:'all',calories:60,emoji:'🦾',color:'#0284c7',desc:'5 minutes of cardio arm toning.',exercises:[{name:'Warm Up With Me',dur:'30 sec',icon:'🔥'},{name:'Punch With Me',dur:'1 min',icon:'🥊'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Box With Me',dur:'1 min',icon:'🥊'},{name:'Arm Circle With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'30 sec',icon:'😌'}]},
+  {id:'carm2',name:'Cardio Arms Power',category:'cardio',duration:10,level:'all',calories:120,emoji:'🦾',color:'#0284c7',desc:'10 minutes of cardio upper body training.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Punch With Me',dur:'1 min',icon:'🥊'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Box With Me',dur:'1 min',icon:'🥊'},{name:'Fight With Me',dur:'1 min',icon:'🥊'},{name:'Pike Push Up With Me',dur:'1 min',icon:'💪'},{name:'Arm Circle With Me',dur:'1 min',icon:'⚖️'},{name:'Wall Slide With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  {id:'carm3',name:'Cardio Arms Sculpt',category:'cardio',duration:15,level:'all',calories:165,emoji:'🦾',color:'#0284c7',desc:'15 minutes of cardio arm sculpting.',exercises:[{name:'Warm Up With Me',dur:'2 min',icon:'🔥'},{name:'Punch With Me',dur:'1 min',icon:'🥊'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Box With Me',dur:'1 min',icon:'🥊'},{name:'Fight With Me',dur:'1 min',icon:'🥊'},{name:'Pike Push Up With Me',dur:'1 min',icon:'💪'},{name:'Burpee With Me',dur:'1 min',icon:'🏃'},{name:'Superman With Me',dur:'1 min',icon:'💪'},{name:'Arm Circle With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'2 min',icon:'😌'}]},
+  {id:'carm4',name:'Cardio Arms Blast',category:'cardio',duration:30,level:'all',calories:300,emoji:'🦾',color:'#0284c7',desc:'30 minutes of high energy cardio arm training.',exercises:[{name:'Warm Up With Me',dur:'3 min',icon:'🔥'},{name:'Punch With Me',dur:'2 min',icon:'🥊'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Box With Me',dur:'2 min',icon:'🥊'},{name:'Fight With Me',dur:'2 min',icon:'🥊'},{name:'Pike Push Up With Me',dur:'1 min',icon:'💪'},{name:'Burpee With Me',dur:'2 min',icon:'🏃'},{name:'Superman With Me',dur:'1 min',icon:'💪'},{name:'Arm Circle With Me',dur:'1 min',icon:'⚖️'},{name:'Wall Slide With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'3 min',icon:'😌'}]},
+  // ── PILATES ABS ──
+  {id:'pabs1',name:'Pilates Abs Intro',category:'pilates',duration:5,level:'all',calories:48,emoji:'🧘',color:'#7C3AED',desc:'5 minutes of gentle Pilates ab work focusing on deep core activation.',exercises:[{name:'Warm Up With Me',dur:'30 sec',icon:'🔥'},{name:'Hundred With Me',dur:'1 min',icon:'🧘'},{name:'Dead Bug With Me',dur:'1 min',icon:'🧘'},{name:'Pelvic Tilt With Me',dur:'1 min',icon:'🧘'},{name:'Roll Up With Me',dur:'1 min',icon:'🧘'},{name:'Cool Down With Me',dur:'30 sec',icon:'😌'}]},
+  {id:'pabs2',name:'Pilates Abs Core',category:'pilates',duration:10,level:'all',calories:72,emoji:'🧘',color:'#7C3AED',desc:'10 minutes of targeted Pilates ab training.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Hundred With Me',dur:'1 min',icon:'🧘'},{name:'Dead Bug With Me',dur:'1 min',icon:'🧘'},{name:'Single Leg Stretch With Me',dur:'1 min',icon:'🧘'},{name:'Criss Cross With Me',dur:'1 min',icon:'🧘'},{name:'Leg Raise With Me',dur:'1 min',icon:'🧘'},{name:'Roll Up With Me',dur:'1 min',icon:'🧘'},{name:'Pelvic Tilt With Me',dur:'1 min',icon:'🧘'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  {id:'pabs3',name:'Pilates Abs Flow',category:'pilates',duration:15,level:'all',calories:105,emoji:'🧘',color:'#7C3AED',desc:'15 minutes of flowing Pilates ab and core work.',exercises:[{name:'Warm Up With Me',dur:'2 min',icon:'🔥'},{name:'Hundred With Me',dur:'1 min',icon:'🧘'},{name:'Dead Bug With Me',dur:'1 min',icon:'🧘'},{name:'Single Leg Stretch With Me',dur:'1 min',icon:'🧘'},{name:'Double Leg Stretch With Me',dur:'1 min',icon:'🧘'},{name:'Criss Cross With Me',dur:'1 min',icon:'🧘'},{name:'Leg Raise With Me',dur:'1 min',icon:'🧘'},{name:'Roll Up With Me',dur:'1 min',icon:'🧘'},{name:'Bird Dog With Me',dur:'1 min',icon:'🧘'},{name:'Cool Down With Me',dur:'2 min',icon:'😌'}]},
+  {id:'pabs4',name:'Pilates Abs Power',category:'pilates',duration:30,level:'all',calories:195,emoji:'🧘',color:'#7C3AED',desc:'30 minutes of comprehensive Pilates ab and core training.',exercises:[{name:'Warm Up With Me',dur:'3 min',icon:'🔥'},{name:'Hundred With Me',dur:'2 min',icon:'🧘'},{name:'Dead Bug With Me',dur:'1 min',icon:'🧘'},{name:'Single Leg Stretch With Me',dur:'1 min',icon:'🧘'},{name:'Double Leg Stretch With Me',dur:'1 min',icon:'🧘'},{name:'Criss Cross With Me',dur:'1 min',icon:'🧘'},{name:'Leg Raise With Me',dur:'1 min',icon:'🧘'},{name:'Roll Up With Me',dur:'1 min',icon:'🧘'},{name:'Bird Dog With Me',dur:'1 min',icon:'🧘'},{name:'Swimming With Me',dur:'1 min',icon:'🧘'},{name:'Core Flow With Me',dur:'2 min',icon:'🧘'},{name:'Cool Down With Me',dur:'3 min',icon:'😌'}]},
+  // ── PILATES UPPER BODY ──
+  {id:'pub1',name:'Pilates Upper Intro',category:'pilates',duration:5,level:'all',calories:45,emoji:'🧘',color:'#7C3AED',desc:'5 minutes of Pilates for chest, shoulders and arms.',exercises:[{name:'Warm Up With Me',dur:'30 sec',icon:'🔥'},{name:'Swan With Me',dur:'1 min',icon:'🧘'},{name:'Superman With Me',dur:'1 min',icon:'🧘'},{name:'Prone YT With Me',dur:'1 min',icon:'🧘'},{name:'Wall Slide With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'30 sec',icon:'😌'}]},
+  {id:'pub2',name:'Pilates Upper Flow',category:'pilates',duration:10,level:'all',calories:70,emoji:'🧘',color:'#7C3AED',desc:'10 minutes of Pilates upper body strengthening.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Swan With Me',dur:'1 min',icon:'🧘'},{name:'Superman With Me',dur:'1 min',icon:'🧘'},{name:'Prone YT With Me',dur:'1 min',icon:'🧘'},{name:'Back Extension With Me',dur:'1 min',icon:'🧘'},{name:'Reverse Snow Angel With Me',dur:'1 min',icon:'🧘'},{name:'Wall Slide With Me',dur:'1 min',icon:'⚖️'},{name:'Thread With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  {id:'pub3',name:'Pilates Upper Power',category:'pilates',duration:15,level:'all',calories:100,emoji:'🧘',color:'#7C3AED',desc:'15 minutes of flowing Pilates upper body work.',exercises:[{name:'Warm Up With Me',dur:'2 min',icon:'🔥'},{name:'Swan With Me',dur:'1 min',icon:'🧘'},{name:'Swimming With Me',dur:'1 min',icon:'🧘'},{name:'Superman With Me',dur:'1 min',icon:'🧘'},{name:'Prone YT With Me',dur:'1 min',icon:'🧘'},{name:'Back Extension With Me',dur:'1 min',icon:'🧘'},{name:'Reverse Snow Angel With Me',dur:'1 min',icon:'🧘'},{name:'Wall Slide With Me',dur:'1 min',icon:'⚖️'},{name:'Thread With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'2 min',icon:'😌'}]},
+  {id:'pub4',name:'Pilates Upper Blast',category:'pilates',duration:30,level:'all',calories:185,emoji:'🧘',color:'#7C3AED',desc:'30 minutes of comprehensive Pilates upper body training.',exercises:[{name:'Warm Up With Me',dur:'3 min',icon:'🔥'},{name:'Swan With Me',dur:'2 min',icon:'🧘'},{name:'Swimming With Me',dur:'2 min',icon:'🧘'},{name:'Superman With Me',dur:'1 min',icon:'🧘'},{name:'Prone YT With Me',dur:'1 min',icon:'🧘'},{name:'Back Extension With Me',dur:'1 min',icon:'🧘'},{name:'Reverse Snow Angel With Me',dur:'1 min',icon:'🧘'},{name:'Wall Slide With Me',dur:'2 min',icon:'⚖️'},{name:'Thread With Me',dur:'2 min',icon:'⚖️'},{name:'Spine Stretch With Me',dur:'1 min',icon:'🧘'},{name:'Cool Down With Me',dur:'3 min',icon:'😌'}]},
+  // ── PILATES LOWER BODY ──
+  {id:'plb1',name:'Pilates Lower Intro',category:'pilates',duration:5,level:'all',calories:46,emoji:'🧘',color:'#7C3AED',desc:'5 minutes of Pilates for hips, legs and glutes.',exercises:[{name:'Warm Up With Me',dur:'30 sec',icon:'🔥'},{name:'Clamshell With Me',dur:'1 min',icon:'🧘'},{name:'Side Leg Lift With Me',dur:'1 min',icon:'🧘'},{name:'Glute Bridge With Me',dur:'1 min',icon:'🧘'},{name:'Leg Circle With Me',dur:'1 min',icon:'🧘'},{name:'Cool Down With Me',dur:'30 sec',icon:'😌'}]},
+  {id:'plb2',name:'Pilates Lower Flow',category:'pilates',duration:10,level:'all',calories:72,emoji:'🧘',color:'#7C3AED',desc:'10 minutes of Pilates lower body toning.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Clamshell With Me',dur:'1 min',icon:'🧘'},{name:'Side Leg Lift With Me',dur:'1 min',icon:'🧘'},{name:'Glute Bridge With Me',dur:'1 min',icon:'🧘'},{name:'Single Leg Glute Bridge With Me',dur:'1 min',icon:'🧘'},{name:'Leg Circle With Me',dur:'1 min',icon:'🧘'},{name:'Hip Circle With Me',dur:'1 min',icon:'⚖️'},{name:'90/90 Hip Rotation With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  {id:'plb3',name:'Pilates Lower Power',category:'pilates',duration:15,level:'all',calories:105,emoji:'🧘',color:'#7C3AED',desc:'15 minutes of Pilates hip, leg and glute work.',exercises:[{name:'Warm Up With Me',dur:'2 min',icon:'🔥'},{name:'Clamshell With Me',dur:'1 min',icon:'🧘'},{name:'Side Leg Lift With Me',dur:'1 min',icon:'🧘'},{name:'Glute Bridge With Me',dur:'1 min',icon:'🧘'},{name:'Single Leg Glute Bridge With Me',dur:'1 min',icon:'🧘'},{name:'Leg Circle With Me',dur:'1 min',icon:'🧘'},{name:'Hip Circle With Me',dur:'1 min',icon:'⚖️'},{name:'90/90 Hip Rotation With Me',dur:'1 min',icon:'⚖️'},{name:'Donkey Kick With Me',dur:'1 min',icon:'🧘'},{name:'Cool Down With Me',dur:'2 min',icon:'😌'}]},
+  {id:'plb4',name:'Pilates Lower Blast',category:'pilates',duration:30,level:'all',calories:190,emoji:'🧘',color:'#7C3AED',desc:'30 minutes of comprehensive Pilates lower body training.',exercises:[{name:'Warm Up With Me',dur:'3 min',icon:'🔥'},{name:'Clamshell With Me',dur:'2 min',icon:'🧘'},{name:'Side Leg Lift With Me',dur:'2 min',icon:'🧘'},{name:'Glute Bridge With Me',dur:'1 min',icon:'🧘'},{name:'Single Leg Glute Bridge With Me',dur:'1 min',icon:'🧘'},{name:'Leg Circle With Me',dur:'2 min',icon:'🧘'},{name:'Hip Circle With Me',dur:'1 min',icon:'⚖️'},{name:'90/90 Hip Rotation With Me',dur:'1 min',icon:'⚖️'},{name:'Donkey Kick With Me',dur:'2 min',icon:'🧘'},{name:'Fire Hydrant With Me',dur:'1 min',icon:'🧘'},{name:'Cool Down With Me',dur:'3 min',icon:'😌'}]},
+  // ── STRENGTH UPPER BODY ──
+  {id:'su1',name:'Upper Body Starter',category:'strength',duration:5,level:'all',calories:55,emoji:'💪',color:'#1e293b',desc:'5 minutes targeting chest, shoulders and arms.',exercises:[{name:'Warm Up With Me',dur:'30 sec',icon:'🔥'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Pike Push Up With Me',dur:'1 min',icon:'💪'},{name:'Superman With Me',dur:'1 min',icon:'💪'},{name:'Wall Slide With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'30 sec',icon:'😌'}]},
+  {id:'su2',name:'Upper Body Builder',category:'strength',duration:10,level:'all',calories:100,emoji:'💪',color:'#1e293b',desc:'10 minutes of upper body strength training.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Pike Push Up With Me',dur:'1 min',icon:'💪'},{name:'Knee Push Up With Me',dur:'1 min',icon:'💪'},{name:'Superman With Me',dur:'1 min',icon:'💪'},{name:'Prone YT With Me',dur:'1 min',icon:'💪'},{name:'Wall Slide With Me',dur:'1 min',icon:'⚖️'},{name:'Reverse Snow Angel With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  {id:'su3',name:'Upper Body Power',category:'strength',duration:15,level:'all',calories:145,emoji:'💪',color:'#1e293b',desc:'15 minutes of progressive upper body strength.',exercises:[{name:'Warm Up With Me',dur:'2 min',icon:'🔥'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Pike Push Up With Me',dur:'1 min',icon:'💪'},{name:'Incline Push Up With Me',dur:'1 min',icon:'💪'},{name:'Superman With Me',dur:'1 min',icon:'💪'},{name:'Prone YT With Me',dur:'1 min',icon:'💪'},{name:'Back Extension With Me',dur:'1 min',icon:'💪'},{name:'Wall Slide With Me',dur:'1 min',icon:'⚖️'},{name:'Reverse Snow Angel With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'2 min',icon:'😌'}]},
+  {id:'su4',name:'Upper Body Blast',category:'strength',duration:30,level:'all',calories:265,emoji:'💪',color:'#1e293b',desc:'30 minutes of comprehensive upper body strength.',exercises:[{name:'Warm Up With Me',dur:'3 min',icon:'🔥'},{name:'Push Up With Me',dur:'1 min',icon:'💪'},{name:'Pike Push Up With Me',dur:'1 min',icon:'💪'},{name:'Incline Push Up With Me',dur:'1 min',icon:'💪'},{name:'Knee Push Up With Me',dur:'1 min',icon:'💪'},{name:'Superman With Me',dur:'1 min',icon:'💪'},{name:'Prone YT With Me',dur:'1 min',icon:'💪'},{name:'Back Extension With Me',dur:'1 min',icon:'💪'},{name:'Wall Slide With Me',dur:'1 min',icon:'⚖️'},{name:'Reverse Snow Angel With Me',dur:'1 min',icon:'💪'},{name:'Thread With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'3 min',icon:'😌'}]},
+  // ── STRENGTH LOWER BODY ──
+  {id:'sl1',name:'Lower Body Starter',category:'strength',duration:5,level:'all',calories:60,emoji:'💪',color:'#1e293b',desc:'5 minutes of lower body strength training.',exercises:[{name:'Warm Up With Me',dur:'30 sec',icon:'🔥'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Lunge With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Leg Swing With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'30 sec',icon:'😌'}]},
+  {id:'sl2',name:'Lower Body Builder',category:'strength',duration:10,level:'all',calories:115,emoji:'💪',color:'#1e293b',desc:'10 minutes of lower body strength work.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Pulse Squat With Me',dur:'1 min',icon:'💪'},{name:'Lunge With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Wall Sit With Me',dur:'1 min',icon:'💪'},{name:'Hamstring Walkout With Me',dur:'1 min',icon:'💪'},{name:'Leg Swing With Me',dur:'1 min',icon:'⚖️'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  {id:'sl3',name:'Lower Body Power',category:'strength',duration:15,level:'all',calories:160,emoji:'💪',color:'#1e293b',desc:'15 minutes of progressive lower body strength.',exercises:[{name:'Warm Up With Me',dur:'2 min',icon:'🔥'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Pulse Squat With Me',dur:'1 min',icon:'💪'},{name:'Lunge With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Single Leg Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Wall Sit With Me',dur:'1 min',icon:'💪'},{name:'Hip Hinge With Me',dur:'1 min',icon:'💪'},{name:'Hamstring Walkout With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'2 min',icon:'😌'}]},
+  {id:'sl4',name:'Lower Body Blast',category:'strength',duration:30,level:'all',calories:280,emoji:'💪',color:'#1e293b',desc:'30 minutes of comprehensive lower body strength.',exercises:[{name:'Warm Up With Me',dur:'3 min',icon:'🔥'},{name:'Squat With Me',dur:'1 min',icon:'💪'},{name:'Pulse Squat With Me',dur:'1 min',icon:'💪'},{name:'Jump Squat With Me',dur:'1 min',icon:'💪'},{name:'Lunge With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Single Leg Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Wall Sit With Me',dur:'1 min',icon:'💪'},{name:'Hip Hinge With Me',dur:'1 min',icon:'💪'},{name:'Single Leg Deadlift With Me',dur:'1 min',icon:'💪'},{name:'Hamstring Walkout With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'3 min',icon:'😌'}]},
+  // ── STRENGTH CORE ──
+  {id:'sc1',name:'Core Strength Intro',category:'strength',duration:5,level:'all',calories:52,emoji:'💪',color:'#1e293b',desc:'5 minutes of strength-focused core training.',exercises:[{name:'Warm Up With Me',dur:'30 sec',icon:'🔥'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Dead Bug With Me',dur:'1 min',icon:'💪'},{name:'Bird Dog With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'30 sec',icon:'😌'}]},
+  {id:'sc2',name:'Core Strength Builder',category:'strength',duration:10,level:'all',calories:95,emoji:'💪',color:'#1e293b',desc:'10 minutes of core strength and stability.',exercises:[{name:'Warm Up With Me',dur:'1 min',icon:'🔥'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Side Plank With Me',dur:'1 min',icon:'💪'},{name:'Dead Bug With Me',dur:'1 min',icon:'💪'},{name:'Bird Dog With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Superman With Me',dur:'1 min',icon:'💪'},{name:'Leg Raise With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'1 min',icon:'😌'}]},
+  {id:'sc3',name:'Core Strength Power',category:'strength',duration:15,level:'all',calories:138,emoji:'💪',color:'#1e293b',desc:'15 minutes of progressive core strength training.',exercises:[{name:'Warm Up With Me',dur:'2 min',icon:'🔥'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Side Plank With Me',dur:'1 min',icon:'💪'},{name:'Dead Bug With Me',dur:'1 min',icon:'💪'},{name:'Bird Dog With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Superman With Me',dur:'1 min',icon:'💪'},{name:'Leg Raise With Me',dur:'1 min',icon:'💪'},{name:'Flutter Kick With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'2 min',icon:'😌'}]},
+  {id:'sc4',name:'Core Strength Blast',category:'strength',duration:30,level:'all',calories:255,emoji:'💪',color:'#1e293b',desc:'30 minutes of comprehensive core strength work.',exercises:[{name:'Warm Up With Me',dur:'3 min',icon:'🔥'},{name:'Plank With Me',dur:'1 min',icon:'💪'},{name:'Side Plank With Me',dur:'1 min',icon:'💪'},{name:'Dead Bug With Me',dur:'1 min',icon:'💪'},{name:'Bird Dog With Me',dur:'1 min',icon:'💪'},{name:'Glute Bridge With Me',dur:'1 min',icon:'💪'},{name:'Superman With Me',dur:'1 min',icon:'💪'},{name:'Leg Raise With Me',dur:'1 min',icon:'💪'},{name:'Flutter Kick With Me',dur:'1 min',icon:'💪'},{name:'Slow Climb With Me',dur:'1 min',icon:'💪'},{name:'Roll Up With Me',dur:'1 min',icon:'💪'},{name:'Cool Down With Me',dur:'3 min',icon:'😌'}]},
 ];
 
 let currentWktCat='all';
@@ -1135,23 +1204,35 @@ function renderWorkouts(){
   }
 
   // Group by category
-  const groups={
-    whole:{label:'🌍 Whole Body',items:[]},
-    targeted:{label:'🎯 Targeted',items:[]},
-    cardio:{label:'🏃 Cardio',items:[]},
-    pilates:{label:'🧘 Pilates',items:[]},
-    strength:{label:'💪 Strength',items:[]},
+  const subLabels={
+    wb1:'🌍 Whole Body',wb2:'🌍 Whole Body',wb3:'🌍 Whole Body',wb4:'🌍 Whole Body',wb5:'🌍 Whole Body',
+    abs1:'🎯 Abs',abs2:'🎯 Abs',abs3:'🎯 Abs',abs4:'🎯 Abs',
+    legs1:'🦵 Legs',legs2:'🦵 Legs',legs3:'🦵 Legs',legs4:'🦵 Legs',
+    gl1:'🍑 Glutes',gl2:'🍑 Glutes',gl3:'🍑 Glutes',gl4:'🍑 Glutes',
+    ar1:'🦾 Arms',ar2:'🦾 Arms',ar3:'🦾 Arms',ar4:'🦾 Arms',
+    c0:'🏃 Cardio',c1:'🏃 Cardio',c2:'🏃 Cardio',c3:'🏃 Cardio',c4:'🏃 Cardio',
+    ca1:'🔥 Cardio Abs',ca2:'🔥 Cardio Abs',ca3:'🔥 Cardio Abs',ca4:'🔥 Cardio Abs',
+    cl1:'🦵 Cardio Legs',cl2:'🦵 Cardio Legs',cl3:'🦵 Cardio Legs',cl4:'🦵 Cardio Legs',
+    cg1:'🍑 Cardio Glutes',cg2:'🍑 Cardio Glutes',cg3:'🍑 Cardio Glutes',cg4:'🍑 Cardio Glutes',
+    carm1:'🦾 Cardio Arms',carm2:'🦾 Cardio Arms',carm3:'🦾 Cardio Arms',carm4:'🦾 Cardio Arms',
+    p1:'🧘 Pilates',p2:'🧘 Pilates',p3:'🧘 Pilates',p4:'🧘 Pilates',p5:'🧘 Pilates',
+    pabs1:'🧘 Pilates Abs',pabs2:'🧘 Pilates Abs',pabs3:'🧘 Pilates Abs',pabs4:'🧘 Pilates Abs',
+    pub1:'🧘 Pilates Upper Body',pub2:'🧘 Pilates Upper Body',pub3:'🧘 Pilates Upper Body',pub4:'🧘 Pilates Upper Body',
+    plb1:'🧘 Pilates Lower Body',plb2:'🧘 Pilates Lower Body',plb3:'🧘 Pilates Lower Body',plb4:'🧘 Pilates Lower Body',
+    s1:'💪 Strength',s2:'💪 Strength',s3:'💪 Strength',s4:'💪 Strength',s5:'💪 Strength',
+    su1:'💪 Upper Body Strength',su2:'💪 Upper Body Strength',su3:'💪 Upper Body Strength',su4:'💪 Upper Body Strength',
+    sl1:'💪 Lower Body Strength',sl2:'💪 Lower Body Strength',sl3:'💪 Lower Body Strength',sl4:'💪 Lower Body Strength',
+    sc1:'💪 Core Strength',sc2:'💪 Core Strength',sc3:'💪 Core Strength',sc4:'💪 Core Strength',
   };
-
-  filtered.forEach(w=>{
-    if(groups[w.category])groups[w.category].items.push(w);
-  });
-
+  const groupOrder=['🌍 Whole Body','🎯 Abs','🦵 Legs','🍑 Glutes','🦾 Arms','🏃 Cardio','🔥 Cardio Abs','🦵 Cardio Legs','🍑 Cardio Glutes','🦾 Cardio Arms','🧘 Pilates','🧘 Pilates Abs','🧘 Pilates Upper Body','🧘 Pilates Lower Body','💪 Strength','💪 Upper Body Strength','💪 Lower Body Strength','💪 Core Strength'];
+  const groups={};
+  groupOrder.forEach(l=>{groups[l]={label:l,items:[]};});
+  filtered.forEach(w=>{const lbl=subLabels[w.id]||w.category;if(groups[lbl])groups[lbl].items.push(w);});
   let html='';
   Object.values(groups).forEach(g=>{
     if(!g.items.length)return;
     html+=`<p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;margin:8px 0 4px;">${g.label}</p>`;
-    g.items.forEach((w,i)=>{
+    g.items.forEach(w=>{
       const lvBadge=profile?`<span style="background:${profile.fitness_level==='beginner'?'#dcfce7':profile.fitness_level==='intermediate'?'#ede9fe':'#fff7ed'};color:${profile.fitness_level==='beginner'?'#166534':profile.fitness_level==='intermediate'?'#5b21b6':'#9a3412'};font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;">${profile.fitness_level==='beginner'?'🟢 Beginner':profile.fitness_level==='intermediate'?'🟡 Intermediate':'🔴 Advanced'}</span>`:'';
       html+=`<div style="background:#ffffff;border-radius:16px;padding:14px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 12px rgba(15,23,42,0.07);cursor:pointer;margin-bottom:4px;" onclick="openWktDetail('${w.id}')">
         <div style="width:52px;height:52px;background:${w.color};border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">${w.emoji}</div>
@@ -1220,17 +1301,6 @@ const badgeMessages = {
   'Pilates Pro': 'I just completed 5 Pilates sessions on MyFitFlow app.',
   'Early Bird':  'I just worked out before 8am on MyFitFlow app.',
 };
-
-const badgeQuotes = [
-  "A healthy body makes a strong mind.",
-  "Every rep brings you closer to your best self.",
-  "Small steps every day lead to big changes.",
-  "Sweat now, shine later.",
-  "Your health is your wealth.",
-  "Strong body, stronger mind.",
-  "Move daily, live fully.",
-  "Fitness is not a destination — it is a journey.",
-];
 
 let currentBadge = null;
 
@@ -1332,7 +1402,16 @@ function unlockLevel(levelName){
   }
 }
 
-// badgeQuotes declared above
+const badgeQuotes = [
+  "A healthy body makes a strong mind.",
+  "Every rep brings you closer to your best self.",
+  "Small steps every day lead to big changes.",
+  "Sweat now, shine later.",
+  "Your health is your wealth.",
+  "Strong body, stronger mind.",
+  "Move daily, live fully.",
+  "Fitness is not a destination — it is a journey.",
+];
 
 let badgeQuoteIndex = 0;
 let badgeQuoteTimer = null;
@@ -1353,7 +1432,6 @@ function shareBadge(name, icon, desc){
   currentBadge = {name, icon, desc};
   document.getElementById('shareBadgeIcon').textContent = icon;
   document.getElementById('shareBadgeName').textContent = name;
-  // Update invite message
   const msg = badgeMessages[name] || 'I just earned the '+name+' badge on MyFitFlow app.';
   const inviteEl = document.getElementById('shareInviteMsg');
   if(inviteEl) inviteEl.innerHTML = msg+' <a href="https://myfitflow-vert.vercel.app" style="color:#fbbf24;font-weight:800;text-decoration:underline;" target="_blank">Join now</a> to enjoy seamless workout at home!';
@@ -1373,14 +1451,10 @@ function closeBadgeShare(){
 }
 
 function getShareMessage(){
-  if(currentBadge){
-    const msg = badgeMessages[currentBadge.name] || 'I just earned the '+currentBadge.name+' badge on MyFitFlow app.';
-    return msg+' Join now -> https://myfitflow-vert.vercel.app to enjoy seamless workout at home!';
-  }
   const streak = profile ? (profile.streak || 0) : 0;
   const weeks = Math.floor(streak / 7);
   const streakText = weeks > 0 ? weeks+'-week streak' : streak+'-day streak';
-  return 'I just completed a '+streakText+' on MyFitFlow app. Join now -> https://myfitflow-vert.vercel.app to enjoy seamless workout at home!';
+  return 'I just completed a '+streakText+' on MyFitFlow app. Join now at myfitflow-vert.vercel.app to enjoy seamless workout at home 💪';
 }
 
 function shareToPlat(platform){
@@ -1400,37 +1474,34 @@ function copyBadgeLink(){
 
 
 
+// ── ACHIEVEMENT + AUTO WORKOUT DAY ──
 
-// ── ACHIEVEMENT UNLOCK NOTIFICATION ──
-function checkAndAwardBadge(badgeName, icon){
-  const key = 'mff_badge_'+badgeName.replace(/\s/g,'_');
-  if(!localStorage.getItem(key)){
-    localStorage.setItem(key, '1');
-    showAchievementPopup(badgeName, icon);
-  }
+
+function checkAndAwardBadge(badgeName,icon){
+  const key='mff_badge_'+badgeName.replace(/\s/g,'_');
+  if(!localStorage.getItem(key)){localStorage.setItem(key,'1');showAchievementPopup(badgeName,icon);}
 }
 
-function showAchievementPopup(name, icon){
-  const overlay = document.getElementById('achievementPopup');
-  document.getElementById('achIcon').textContent = icon;
-  document.getElementById('achName').textContent = name;
-  overlay.style.display = 'flex';
-  setTimeout(()=>{ overlay.style.display = 'none'; }, 4000);
+function showAchievementPopup(name,icon){
+  const overlay=document.getElementById('achievementPopup');
+  if(!overlay)return;
+  document.getElementById('achIcon').textContent=icon;
+  document.getElementById('achName').textContent=name;
+  overlay.style.display='flex';
+  setTimeout(()=>{overlay.style.display='none';},4000);
 }
 
-// ── START WORKOUT — auto marks today ──
 function startWorkout(){
   markTodayDone();
   moti();
-  // Check first workout achievement
-  checkAndAwardBadge('First Step', '🥇');
+  checkAndAwardBadge('First Step','🥇');
 }
 
 function markTodayDone(){
-  const today = new Date().getDay();
-  const idx = today === 0 ? 6 : today - 1;
+  const today=new Date().getDay();
+  const idx=today===0?6:today-1;
   if(!daysCompleted[idx]){
-    daysCompleted[idx] = true;
+    daysCompleted[idx]=true;
     saveWeeklyProgress();
     markDayUI(idx);
     updateGoalDisplay();
@@ -1438,33 +1509,25 @@ function markTodayDone(){
 }
 
 function markDayUI(idx){
-  const el = document.getElementById('day'+idx);
-  if(el){
-    el.textContent = '✓';
-    el.style.background = '#22C55E';
-    el.style.borderColor = '#22C55E';
-    el.style.color = '#ffffff';
-    el.style.fontSize = '14px';
-  }
+  const el=document.getElementById('day'+idx);
+  if(el){el.textContent='✓';el.style.background='#22C55E';el.style.borderColor='#22C55E';el.style.color='#ffffff';el.style.fontSize='14px';}
 }
 
 function getWeekKey(){
-  const now = new Date();
-  const day = now.getDay();
-  const diff = day === 0 ? 6 : day - 1;
-  const mon = new Date(now);
-  mon.setDate(now.getDate() - diff);
+  const now=new Date();const day=now.getDay();const diff=day===0?6:day-1;
+  const mon=new Date(now);mon.setDate(now.getDate()-diff);
   return mon.toISOString().split('T')[0];
 }
 
-function saveWeeklyProgress(){
-  localStorage.setItem('mff_week_'+getWeekKey(), JSON.stringify(daysCompleted));
-}
+function saveWeeklyProgress(){localStorage.setItem('mff_week_'+getWeekKey(),JSON.stringify(daysCompleted));}
 
 function loadWeeklyProgress(){
-  const saved = localStorage.getItem('mff_week_'+getWeekKey());
+  const saved=localStorage.getItem('mff_week_'+getWeekKey());
   if(saved){try{daysCompleted=JSON.parse(saved);}catch(e){daysCompleted=[false,false,false,false,false,false,false];}}
 }
+
+// Load on start
+loadWeeklyProgress();
 
 </script>
 
