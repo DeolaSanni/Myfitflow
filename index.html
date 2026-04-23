@@ -686,231 +686,225 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
       </div>
       <div id="shareBadgeIcon" style="font-size:56px;margin-bottom:12px;">🥇</div>
       <p id="shareBadgeName" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#ffffff;margin-bottom:6px;">First Step!</p>
+      
+      <p id="shareInviteMsg" style="font-size:13px;color:#ffffff;font-weight:500;line-height:1.5;margin-bottom:10px;">I just completed my first workout on MyFitFlow app. <a href="https://myfitflow-vert.vercel.app" style="color:#fbbf24;font-weight:800;text-decoration:underline;" target="_blank">Join now</a> to enjoy seamless workout at home!</p>
+      <p id="badgeQuoteText" style="font-size:12px;color:rgba(255,255,255,0.75);font-style:italic;transition:opacity 0.3s;">"A healthy body makes a strong mind."</p>
+      <div style="margin-top:12px;background:rgba(255,255,255,0.15);border-radius:10px;padding:6px 12px;display:inline-block;">
+        <p style="font-size:10px;color:rgba(255,255,255,0.8);">🔗 Join free at myfitflow-vert.vercel.app</p>
+      </div>
+    </div>
+    <!-- Share Buttons -->
+    <div style="padding:20px 16px;">
+      <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:12px;text-align:center;">Share your achievement!</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+        <button onclick="shareToPlat('WhatsApp')" style="padding:10px;background:#25D366;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">💬 WhatsApp</button>
+        <button onclick="shareToPlat('Instagram')" style="padding:10px;background:#E1306C;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">📸 Instagram</button>
+        <button onclick="shareToPlat('Facebook')" style="padding:10px;background:#1877F2;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">📘 Facebook</button>
+        <button onclick="shareToPlat('X')" style="padding:10px;background:#0F172A;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">X / Twitter</button>
+        <button onclick="shareToPlat('Threads')" style="padding:10px;background:#0F172A;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">Threads</button>
+        <button onclick="shareToPlat('TikTok')" style="padding:10px;background:#010101;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">TikTok</button>
+      </div>
+      <button onclick="copyBadgeLink()" style="width:100%;padding:12px;background:#1E3A8A;border:none;border-radius:12px;color:#ffffff;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:8px;">📋 Copy Download Link</button>
+      <button onclick="closeBadgeShare()" style="width:100%;padding:12px;background:#f1f5f9;border:none;border-radius:12px;color:#64748B;font-size:13px;font-weight:600;cursor:pointer;">Close</button>
+    </div>
+  </div>
+</div>
 
-```
-  <p id="shareInviteMsg" style="font-size:13px;color:#ffffff;font-weight:500;line-height:1.5;margin-bottom:10px;">I just completed my first workout on MyFitFlow app. <a href="https://myfitflow-vert.vercel.app" style="color:#fbbf24;font-weight:800;text-decoration:underline;" target="_blank">Join now</a> to enjoy seamless workout at home!</p>
-  <p id="badgeQuoteText" style="font-size:12px;color:rgba(255,255,255,0.75);font-style:italic;transition:opacity 0.3s;">"A healthy body makes a strong mind."</p>
-  <div style="margin-top:12px;background:rgba(255,255,255,0.15);border-radius:10px;padding:6px 12px;display:inline-block;">
-    <p style="font-size:10px;color:rgba(255,255,255,0.8);">🔗 Join free at myfitflow-vert.vercel.app</p>
-  </div>
-</div>
-<!-- Share Buttons -->
-<div style="padding:20px 16px;">
-  <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#0F172A;margin-bottom:12px;text-align:center;">Share your achievement!</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
-    <button onclick="shareToPlat('WhatsApp')" style="padding:10px;background:#25D366;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">💬 WhatsApp</button>
-    <button onclick="shareToPlat('Instagram')" style="padding:10px;background:#E1306C;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">📸 Instagram</button>
-    <button onclick="shareToPlat('Facebook')" style="padding:10px;background:#1877F2;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">📘 Facebook</button>
-    <button onclick="shareToPlat('X')" style="padding:10px;background:#0F172A;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">X / Twitter</button>
-    <button onclick="shareToPlat('Threads')" style="padding:10px;background:#0F172A;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">Threads</button>
-    <button onclick="shareToPlat('TikTok')" style="padding:10px;background:#010101;border:none;border-radius:12px;color:#ffffff;font-size:13px;font-weight:600;cursor:pointer;">TikTok</button>
-  </div>
-  <button onclick="copyBadgeLink()" style="width:100%;padding:12px;background:#1E3A8A;border:none;border-radius:12px;color:#ffffff;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:8px;">📋 Copy Download Link</button>
-  <button onclick="closeBadgeShare()" style="width:100%;padding:12px;background:#f1f5f9;border:none;border-radius:12px;color:#64748B;font-size:13px;font-weight:600;cursor:pointer;">Close</button>
-</div>
-```
-
-  </div>
-</div>
 
 <!-- ══ PROFILE ══ -->
-
 <div class="screen" id="profileScreen">
   <div class="scroll-area" style="padding-bottom:80px;">
 
-```
-<!-- Header -->
-<div style="background:#1E3A8A;padding:52px 20px 40px;text-align:center;position:relative;overflow:hidden;">
-  <div style="position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.05);top:-60px;right:-40px;"></div>
-  <div style="position:absolute;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.05);bottom:-30px;left:-20px;"></div>
+    <!-- Header -->
+    <div style="background:#1E3A8A;padding:52px 20px 40px;text-align:center;position:relative;overflow:hidden;">
+      <div style="position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,0.05);top:-60px;right:-40px;"></div>
+      <div style="position:absolute;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.05);bottom:-30px;left:-20px;"></div>
 
-  <!-- Avatar -->
-  <div id="profileAvatar" style="width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#1E3A8A);display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;color:#ffffff;margin:0 auto 14px;border:3px solid rgba(255,255,255,0.3);box-shadow:0 8px 24px rgba(0,0,0,0.3);">DA</div>
+      <!-- Avatar -->
+      <div id="profileAvatar" style="width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#7C3AED,#1E3A8A);display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;color:#ffffff;margin:0 auto 14px;border:3px solid rgba(255,255,255,0.3);box-shadow:0 8px 24px rgba(0,0,0,0.3);">DA</div>
 
-  <p id="profileName" style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:#ffffff;margin-bottom:6px;">Champ</p>
-  <span id="profileLevelBadge" style="background:rgba(255,255,255,0.2);border-radius:20px;padding:5px 14px;color:#ffffff;font-size:12px;font-weight:600;display:inline-block;">🌱 Beginner</span>
-</div>
-
-<!-- Stats Row -->
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;margin:-1px 0 0;background:#ffffff;border-bottom:1px solid #E2E8F0;">
-  <div style="padding:14px;text-align:center;border-right:1px solid #E2E8F0;">
-    <p id="profileWorkouts" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#1E3A8A;">0</p>
-    <p style="font-size:10px;color:#64748B;margin-top:2px;">Workouts</p>
-  </div>
-  <div style="padding:14px;text-align:center;border-right:1px solid #E2E8F0;">
-    <p id="profileStreak" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#F97316;">0</p>
-    <p style="font-size:10px;color:#64748B;margin-top:2px;">Day Streak</p>
-  </div>
-  <div style="padding:14px;text-align:center;">
-    <p id="profileKcal" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#22C55E;">0</p>
-    <p style="font-size:10px;color:#64748B;margin-top:2px;">kcal Burned</p>
-  </div>
-</div>
-
-<!-- Account Section -->
-<div style="padding:20px 16px 0;">
-  <p style="font-size:11px;color:#64748B;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Account</p>
-  <div style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(15,23,42,0.06);">
-
-    <!-- Edit Username -->
-    <div onclick="editUsername()" style="display:flex;align-items:center;gap:14px;padding:16px;border-bottom:1px solid #E2E8F0;cursor:pointer;">
-      <div style="width:40px;height:40px;border-radius:12px;background:#ede9fe;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">✏️</div>
-      <div style="flex:1;">
-        <p style="font-size:14px;font-weight:600;color:#0F172A;">Edit Username</p>
-        <p id="profileUsernameLabel" style="font-size:12px;color:#64748B;margin-top:1px;">Champ</p>
-      </div>
-      <span style="color:#CBD5E1;font-size:18px;">›</span>
+      <p id="profileName" style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:#ffffff;margin-bottom:6px;">Champ</p>
+      <span id="profileLevelBadge" style="background:rgba(255,255,255,0.2);border-radius:20px;padding:5px 14px;color:#ffffff;font-size:12px;font-weight:600;display:inline-block;">🌱 Beginner</span>
     </div>
 
-    <!-- Change Password -->
-    <div onclick="changePassword()" style="display:flex;align-items:center;gap:14px;padding:16px;cursor:pointer;">
-      <div style="width:40px;height:40px;border-radius:12px;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔒</div>
-      <div style="flex:1;">
-        <p style="font-size:14px;font-weight:600;color:#0F172A;">Change Password</p>
-        <p style="font-size:12px;color:#64748B;margin-top:1px;">Update your password</p>
+    <!-- Stats Row -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;margin:-1px 0 0;background:#ffffff;border-bottom:1px solid #E2E8F0;">
+      <div style="padding:14px;text-align:center;border-right:1px solid #E2E8F0;">
+        <p id="profileWorkouts" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#1E3A8A;">0</p>
+        <p style="font-size:10px;color:#64748B;margin-top:2px;">Workouts</p>
       </div>
-      <span style="color:#CBD5E1;font-size:18px;">›</span>
-    </div>
-  </div>
-</div>
-
-<!-- My Level Section -->
-<div style="padding:20px 16px 0;">
-  <p style="font-size:11px;color:#64748B;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">My Level</p>
-  <div style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(15,23,42,0.06);">
-    <div style="display:flex;align-items:center;gap:14px;padding:16px;border-bottom:1px solid #E2E8F0;">
-      <div id="profileLevelIcon" style="width:40px;height:40px;border-radius:12px;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🌱</div>
-      <div style="flex:1;">
-        <p style="font-size:14px;font-weight:600;color:#0F172A;">Current Level</p>
-        <p id="profileLevelText" style="font-size:12px;color:#22C55E;font-weight:600;margin-top:1px;">Beginner - Active</p>
+      <div style="padding:14px;text-align:center;border-right:1px solid #E2E8F0;">
+        <p id="profileStreak" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#F97316;">0</p>
+        <p style="font-size:10px;color:#64748B;margin-top:2px;">Day Streak</p>
       </div>
-    </div>
-    <div onclick="switchTab('progress')" style="display:flex;align-items:center;gap:14px;padding:16px;cursor:pointer;">
-      <div style="width:40px;height:40px;border-radius:12px;background:#fff7ed;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔓</div>
-      <div style="flex:1;">
-        <p style="font-size:14px;font-weight:600;color:#0F172A;">Unlock Other Levels</p>
-        <p style="font-size:12px;color:#64748B;margin-top:1px;">$10 one-time per level</p>
-      </div>
-      <span style="color:#CBD5E1;font-size:18px;">›</span>
-    </div>
-  </div>
-</div>
-
-<!-- Preferences Section -->
-<div style="padding:20px 16px 0;">
-  <p style="font-size:11px;color:#64748B;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Preferences</p>
-  <div style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(15,23,42,0.06);">
-
-    <!-- Notifications -->
-    <div style="display:flex;align-items:center;gap:14px;padding:16px;border-bottom:1px solid #E2E8F0;">
-      <div style="width:40px;height:40px;border-radius:12px;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔔</div>
-      <div style="flex:1;">
-        <p style="font-size:14px;font-weight:600;color:#0F172A;">Workout Reminders</p>
-        <p style="font-size:12px;color:#64748B;margin-top:1px;">Get notified to stay on track</p>
-      </div>
-      <div onclick="toggleNotif(this)" id="notifToggle" style="width:44px;height:26px;background:#E2E8F0;border-radius:20px;position:relative;cursor:pointer;transition:background 0.3s;">
-        <div style="width:20px;height:20px;background:#ffffff;border-radius:50%;position:absolute;top:3px;left:3px;transition:left 0.3s;box-shadow:0 1px 4px rgba(0,0,0,0.2);" id="notifDot"></div>
+      <div style="padding:14px;text-align:center;">
+        <p id="profileKcal" style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#22C55E;">0</p>
+        <p style="font-size:10px;color:#64748B;margin-top:2px;">kcal Burned</p>
       </div>
     </div>
 
-    <!-- Ad Free -->
-    <div onclick="buyAdFree()" style="display:flex;align-items:center;gap:14px;padding:16px;cursor:pointer;">
-      <div style="width:40px;height:40px;border-radius:12px;background:#fce7f3;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚫</div>
-      <div style="flex:1;">
-        <p style="font-size:14px;font-weight:600;color:#0F172A;">Remove Ads</p>
-        <p style="font-size:12px;color:#64748B;margin-top:1px;">Ad-free experience - $<span id="adFreePrice">10</span> one-time</p>
+    <!-- Account Section -->
+    <div style="padding:20px 16px 0;">
+      <p style="font-size:11px;color:#64748B;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Account</p>
+      <div style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(15,23,42,0.06);">
+
+        <!-- Edit Username -->
+        <div onclick="editUsername()" style="display:flex;align-items:center;gap:14px;padding:16px;border-bottom:1px solid #E2E8F0;cursor:pointer;">
+          <div style="width:40px;height:40px;border-radius:12px;background:#ede9fe;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">✏️</div>
+          <div style="flex:1;">
+            <p style="font-size:14px;font-weight:600;color:#0F172A;">Edit Username</p>
+            <p id="profileUsernameLabel" style="font-size:12px;color:#64748B;margin-top:1px;">Champ</p>
+          </div>
+          <span style="color:#CBD5E1;font-size:18px;">›</span>
+        </div>
+
+        <!-- Change Password -->
+        <div onclick="changePassword()" style="display:flex;align-items:center;gap:14px;padding:16px;cursor:pointer;">
+          <div style="width:40px;height:40px;border-radius:12px;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔒</div>
+          <div style="flex:1;">
+            <p style="font-size:14px;font-weight:600;color:#0F172A;">Change Password</p>
+            <p style="font-size:12px;color:#64748B;margin-top:1px;">Update your password</p>
+          </div>
+          <span style="color:#CBD5E1;font-size:18px;">›</span>
+        </div>
       </div>
-      <span style="color:#CBD5E1;font-size:18px;">›</span>
-    </div>
-  </div>
-</div>
-
-<!-- Social Media Section -->
-<div style="padding:20px 16px 0;">
-  <p style="font-size:11px;color:#64748B;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Follow Dr. Amirah</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-    <a href="https://www.instagram.com/doctoramirah_talks_health?igsh=MXR0Z3Ixb3hucXRsZQ==" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
-      <span style="font-size:22px;">📸</span><span style="font-size:12px;font-weight:600;color:#0F172A;">Instagram</span>
-    </a>
-    <a href="https://www.facebook.com/share/1CR6gDEXG2/?mibextid=wwXIfr" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
-      <span style="font-size:22px;">📘</span><span style="font-size:12px;font-weight:600;color:#0F172A;">Facebook</span>
-    </a>
-    <a href="https://www.tiktok.com/@doctor_amirah?_r=1&_t=ZS-95k2ccMqDt2" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
-      <span style="font-size:22px;">🎵</span><span style="font-size:12px;font-weight:600;color:#0F172A;">TikTok</span>
-    </a>
-    <a href="https://x.com/doctor_amirah?s=21" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
-      <span style="font-size:22px;">𝕏</span><span style="font-size:12px;font-weight:600;color:#0F172A;">X / Twitter</span>
-    </a>
-    <a href="https://www.threads.com/@doctor_amirah?igshid=NTc4MTIwNjQ2YQ==" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
-      <span style="font-size:22px;">🧵</span><span style="font-size:12px;font-weight:600;color:#0F172A;">Threads</span>
-    </a>
-    <a href="https://www.youtube.com/@Doctor_Amirah" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
-      <span style="font-size:22px;">▶️</span><span style="font-size:12px;font-weight:600;color:#0F172A;">YouTube</span>
-    </a>
-    <a href="https://whatsapp.com/channel/0029VbBC4MD59PwadkjCqn3M" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
-      <span style="font-size:22px;">💬</span><span style="font-size:12px;font-weight:600;color:#0F172A;">WhatsApp</span>
-    </a>
-    <a href="https://www.linkedin.com/in/amirah-sanni-449996106" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
-      <span style="font-size:22px;">💼</span><span style="font-size:12px;font-weight:600;color:#0F172A;">LinkedIn</span>
-    </a>
-    <a href="https://www.doctoramirah.com" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);grid-column:span 2;">
-      <span style="font-size:22px;">🌐</span><span style="font-size:12px;font-weight:600;color:#1E3A8A;">www.doctoramirah.com ↗</span>
-    </a>
-  </div>
-</div>
-
-<!-- Share & About Section -->
-<div style="padding:20px 16px 0;">
-  <p style="font-size:11px;color:#64748B;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">More</p>
-  <div style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(15,23,42,0.06);">
-
-    <!-- Share App -->
-    <div onclick="shareApp()" style="display:flex;align-items:center;gap:14px;padding:16px;border-bottom:1px solid #E2E8F0;cursor:pointer;">
-      <div style="width:40px;height:40px;border-radius:12px;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📤</div>
-      <div style="flex:1;">
-        <p style="font-size:14px;font-weight:600;color:#0F172A;">Share MyFitFlow</p>
-        <p style="font-size:12px;color:#64748B;margin-top:1px;">Invite friends to join</p>
-      </div>
-      <span style="color:#CBD5E1;font-size:18px;">›</span>
     </div>
 
-    <!-- About -->
-    <div onclick="showAbout()" style="display:flex;align-items:center;gap:14px;padding:16px;border-bottom:1px solid #E2E8F0;cursor:pointer;">
-      <div style="width:40px;height:40px;border-radius:12px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">ℹ️</div>
-      <div style="flex:1;">
-        <p style="font-size:14px;font-weight:600;color:#0F172A;">About MyFitFlow</p>
-        <p style="font-size:12px;color:#64748B;margin-top:1px;">Version 1.0 · Built with ❤️</p>
+    <!-- My Level Section -->
+    <div style="padding:20px 16px 0;">
+      <p style="font-size:11px;color:#64748B;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">My Level</p>
+      <div style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(15,23,42,0.06);">
+        <div style="display:flex;align-items:center;gap:14px;padding:16px;border-bottom:1px solid #E2E8F0;">
+          <div id="profileLevelIcon" style="width:40px;height:40px;border-radius:12px;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🌱</div>
+          <div style="flex:1;">
+            <p style="font-size:14px;font-weight:600;color:#0F172A;">Current Level</p>
+            <p id="profileLevelText" style="font-size:12px;color:#22C55E;font-weight:600;margin-top:1px;">Beginner - Active</p>
+          </div>
+        </div>
+        <div onclick="switchTab('progress')" style="display:flex;align-items:center;gap:14px;padding:16px;cursor:pointer;">
+          <div style="width:40px;height:40px;border-radius:12px;background:#fff7ed;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔓</div>
+          <div style="flex:1;">
+            <p style="font-size:14px;font-weight:600;color:#0F172A;">Unlock Other Levels</p>
+            <p style="font-size:12px;color:#64748B;margin-top:1px;">$10 one-time per level</p>
+          </div>
+          <span style="color:#CBD5E1;font-size:18px;">›</span>
+        </div>
       </div>
-      <span style="color:#CBD5E1;font-size:18px;">›</span>
     </div>
 
-    <!-- Log Out -->
-    <div onclick="doLogout()" style="display:flex;align-items:center;gap:14px;padding:16px;cursor:pointer;">
-      <div style="width:40px;height:40px;border-radius:12px;background:#fee2e2;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚪</div>
-      <div style="flex:1;">
-        <p style="font-size:14px;font-weight:600;color:#dc2626;">Log Out</p>
-        <p style="font-size:12px;color:#94a3b8;margin-top:1px;">See you soon!</p>
+    <!-- Preferences Section -->
+    <div style="padding:20px 16px 0;">
+      <p style="font-size:11px;color:#64748B;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Preferences</p>
+      <div style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(15,23,42,0.06);">
+
+        <!-- Notifications -->
+        <div style="display:flex;align-items:center;gap:14px;padding:16px;border-bottom:1px solid #E2E8F0;">
+          <div style="width:40px;height:40px;border-radius:12px;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔔</div>
+          <div style="flex:1;">
+            <p style="font-size:14px;font-weight:600;color:#0F172A;">Workout Reminders</p>
+            <p style="font-size:12px;color:#64748B;margin-top:1px;">Get notified to stay on track</p>
+          </div>
+          <div onclick="toggleNotif(this)" id="notifToggle" style="width:44px;height:26px;background:#E2E8F0;border-radius:20px;position:relative;cursor:pointer;transition:background 0.3s;">
+            <div style="width:20px;height:20px;background:#ffffff;border-radius:50%;position:absolute;top:3px;left:3px;transition:left 0.3s;box-shadow:0 1px 4px rgba(0,0,0,0.2);" id="notifDot"></div>
+          </div>
+        </div>
+
+        <!-- Ad Free -->
+        <div onclick="buyAdFree()" style="display:flex;align-items:center;gap:14px;padding:16px;cursor:pointer;">
+          <div style="width:40px;height:40px;border-radius:12px;background:#fce7f3;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚫</div>
+          <div style="flex:1;">
+            <p style="font-size:14px;font-weight:600;color:#0F172A;">Remove Ads</p>
+            <p style="font-size:12px;color:#64748B;margin-top:1px;">Ad-free experience - $<span id="adFreePrice">10</span> one-time</p>
+          </div>
+          <span style="color:#CBD5E1;font-size:18px;">›</span>
+        </div>
       </div>
-      <span style="color:#CBD5E1;font-size:18px;">›</span>
     </div>
-  </div>
-</div>
 
-<!-- App Branding Footer -->
-<div style="text-align:center;padding:28px 16px 8px;">
-  <svg class="spin" style="width:28px;height:28px;margin:0 auto 6px;display:block;" viewBox="0 0 140 140" fill="none">
-    <path d="M70 12C100 8,128 35,128 70C128 90,118 108,102 118" stroke="#1E3A8A" stroke-width="10" stroke-linecap="round" fill="none"/>
-    <path d="M98 120C80 132,58 132,40 122C22 112,12 92,12 70" stroke="#7C3AED" stroke-width="10" stroke-linecap="round" fill="none"/>
-    <path d="M12 68C12 45,25 24,48 14C56 11,63 10,70 12" stroke="#1E3A8A" stroke-width="10" stroke-linecap="round" fill="none"/>
-  </svg>
-  <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#1E3A8A;">MyFitFlow</p>
-  <p style="font-size:11px;color:#94a3b8;margin-top:2px;">Move · Flow · Thrive</p>
-  <p style="font-size:10px;color:#cbd5e1;margin-top:6px;">© 2025 Dr. Amirah · All rights reserved</p>
-</div>
+    <!-- Social Media Section -->
+    <div style="padding:20px 16px 0;">
+      <p style="font-size:11px;color:#64748B;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">Follow Dr. Amirah</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <a href="https://www.instagram.com/doctoramirah_talks_health?igsh=MXR0Z3Ixb3hucXRsZQ==" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
+          <span style="font-size:22px;">📸</span><span style="font-size:12px;font-weight:600;color:#0F172A;">Instagram</span>
+        </a>
+        <a href="https://www.facebook.com/share/1CR6gDEXG2/?mibextid=wwXIfr" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
+          <span style="font-size:22px;">📘</span><span style="font-size:12px;font-weight:600;color:#0F172A;">Facebook</span>
+        </a>
+        <a href="https://www.tiktok.com/@doctor_amirah?_r=1&_t=ZS-95k2ccMqDt2" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
+          <span style="font-size:22px;">🎵</span><span style="font-size:12px;font-weight:600;color:#0F172A;">TikTok</span>
+        </a>
+        <a href="https://x.com/doctor_amirah?s=21" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
+          <span style="font-size:22px;">𝕏</span><span style="font-size:12px;font-weight:600;color:#0F172A;">X / Twitter</span>
+        </a>
+        <a href="https://www.threads.com/@doctor_amirah?igshid=NTc4MTIwNjQ2YQ==" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
+          <span style="font-size:22px;">🧵</span><span style="font-size:12px;font-weight:600;color:#0F172A;">Threads</span>
+        </a>
+        <a href="https://www.youtube.com/@Doctor_Amirah" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
+          <span style="font-size:22px;">▶️</span><span style="font-size:12px;font-weight:600;color:#0F172A;">YouTube</span>
+        </a>
+        <a href="https://whatsapp.com/channel/0029VbBC4MD59PwadkjCqn3M" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
+          <span style="font-size:22px;">💬</span><span style="font-size:12px;font-weight:600;color:#0F172A;">WhatsApp</span>
+        </a>
+        <a href="https://www.linkedin.com/in/amirah-sanni-449996106" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);">
+          <span style="font-size:22px;">💼</span><span style="font-size:12px;font-weight:600;color:#0F172A;">LinkedIn</span>
+        </a>
+        <a href="https://www.doctoramirah.com" target="_blank" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#ffffff;border-radius:14px;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,0.06);grid-column:span 2;">
+          <span style="font-size:22px;">🌐</span><span style="font-size:12px;font-weight:600;color:#1E3A8A;">www.doctoramirah.com ↗</span>
+        </a>
+      </div>
+    </div>
 
-<div style="height:20px;"></div>
-```
+    <!-- Share & About Section -->
+    <div style="padding:20px 16px 0;">
+      <p style="font-size:11px;color:#64748B;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">More</p>
+      <div style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(15,23,42,0.06);">
 
+        <!-- Share App -->
+        <div onclick="shareApp()" style="display:flex;align-items:center;gap:14px;padding:16px;border-bottom:1px solid #E2E8F0;cursor:pointer;">
+          <div style="width:40px;height:40px;border-radius:12px;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📤</div>
+          <div style="flex:1;">
+            <p style="font-size:14px;font-weight:600;color:#0F172A;">Share MyFitFlow</p>
+            <p style="font-size:12px;color:#64748B;margin-top:1px;">Invite friends to join</p>
+          </div>
+          <span style="color:#CBD5E1;font-size:18px;">›</span>
+        </div>
+
+        <!-- About -->
+        <div onclick="showAbout()" style="display:flex;align-items:center;gap:14px;padding:16px;border-bottom:1px solid #E2E8F0;cursor:pointer;">
+          <div style="width:40px;height:40px;border-radius:12px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">ℹ️</div>
+          <div style="flex:1;">
+            <p style="font-size:14px;font-weight:600;color:#0F172A;">About MyFitFlow</p>
+            <p style="font-size:12px;color:#64748B;margin-top:1px;">Version 1.0 · Built with ❤️</p>
+          </div>
+          <span style="color:#CBD5E1;font-size:18px;">›</span>
+        </div>
+
+        <!-- Log Out -->
+        <div onclick="doLogout()" style="display:flex;align-items:center;gap:14px;padding:16px;cursor:pointer;">
+          <div style="width:40px;height:40px;border-radius:12px;background:#fee2e2;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🚪</div>
+          <div style="flex:1;">
+            <p style="font-size:14px;font-weight:600;color:#dc2626;">Log Out</p>
+            <p style="font-size:12px;color:#94a3b8;margin-top:1px;">See you soon!</p>
+          </div>
+          <span style="color:#CBD5E1;font-size:18px;">›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- App Branding Footer -->
+    <div style="text-align:center;padding:28px 16px 8px;">
+      <svg class="spin" style="width:28px;height:28px;margin:0 auto 6px;display:block;" viewBox="0 0 140 140" fill="none">
+        <path d="M70 12C100 8,128 35,128 70C128 90,118 108,102 118" stroke="#1E3A8A" stroke-width="10" stroke-linecap="round" fill="none"/>
+        <path d="M98 120C80 132,58 132,40 122C22 112,12 92,12 70" stroke="#7C3AED" stroke-width="10" stroke-linecap="round" fill="none"/>
+        <path d="M12 68C12 45,25 24,48 14C56 11,63 10,70 12" stroke="#1E3A8A" stroke-width="10" stroke-linecap="round" fill="none"/>
+      </svg>
+      <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:#1E3A8A;">MyFitFlow</p>
+      <p style="font-size:11px;color:#94a3b8;margin-top:2px;">Move · Flow · Thrive</p>
+      <p style="font-size:10px;color:#cbd5e1;margin-top:6px;">© 2025 Dr. Amirah · All rights reserved</p>
+    </div>
+
+    <div style="height:20px;"></div>
   </div>
 
   <div class="bottom-nav">
@@ -923,7 +917,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- ══ EDIT USERNAME MODAL ══ -->
-
 <div id="editUsernameModal" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.75);z-index:400;align-items:flex-end;justify-content:center;">
   <div style="background:#ffffff;width:100%;max-width:430px;border-radius:28px 28px 0 0;padding:28px 24px 40px;animation:slideUp 0.3s ease;">
     <p style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:#0F172A;margin-bottom:6px;">Edit Username</p>
@@ -935,7 +928,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
 </div>
 
 <!-- ══ ABOUT MODAL ══ -->
-
 <div id="aboutModal" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.75);z-index:400;align-items:center;justify-content:center;padding:32px;">
   <div style="background:#ffffff;width:100%;max-width:360px;border-radius:24px;overflow:hidden;">
     <div style="background:#1E3A8A;padding:28px;text-align:center;">
@@ -985,8 +977,41 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Outfit',sans-serif;background
   </div>
 </div>
 
-<!-- ACHIEVEMENT POPUP -->
+<!-- ══ PAYMENT OVERLAY ══ -->
+<div id="paymentOverlay" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.85);z-index:400;align-items:flex-end;justify-content:center;">
+  <div style="background:#ffffff;width:100%;max-width:430px;border-radius:28px 28px 0 0;padding:28px 24px 40px;animation:slideUp 0.3s ease;">
 
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:20px;">
+      <div id="payLevelIcon" style="font-size:48px;margin-bottom:8px;">⚡</div>
+      <p style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#0F172A;margin-bottom:4px;" id="payLevelName">Intermediate Level</p>
+      <p style="font-size:13px;color:#64748B;">One-time payment - yours forever!</p>
+    </div>
+
+    <!-- Price Box -->
+    <div style="background:#f8fafc;border-radius:16px;padding:16px;margin-bottom:20px;text-align:center;border:2px solid #E2E8F0;">
+      <p style="font-size:12px;color:#64748B;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px;">Amount to Pay</p>
+      <p id="payLevelPrice" style="font-family:'Outfit',sans-serif;font-size:32px;font-weight:900;color:#1E3A8A;">N10,000</p>
+      <p style="font-size:11px;color:#94a3b8;margin-top:4px;">Secure payment via Flutterwave</p>
+    </div>
+
+    <!-- What you get -->
+    <div style="background:#f0fdf4;border-radius:14px;padding:14px 16px;margin-bottom:20px;">
+      <p style="font-size:12px;font-weight:700;color:#166534;margin-bottom:8px;">What you get:</p>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;align-items:center;gap:8px;"><span style="color:#22C55E;font-size:14px;">✓</span><span style="font-size:12px;color:#166534;">Full access to all workouts at this level</span></div>
+        <div style="display:flex;align-items:center;gap:8px;"><span style="color:#22C55E;font-size:14px;">✓</span><span style="font-size:12px;color:#166534;">Lifetime access - pay once, use forever</span></div>
+        <div style="display:flex;align-items:center;gap:8px;"><span style="color:#22C55E;font-size:14px;">✓</span><span style="font-size:12px;color:#166534;">76 workout programs across all categories</span></div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <button id="payConfirmBtn" style="width:100%;padding:16px;background:#1E3A8A;border:none;border-radius:16px;font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#ffffff;cursor:pointer;margin-bottom:10px;">Pay Now via Flutterwave</button>
+    <button onclick="document.getElementById('paymentOverlay').style.display='none'" style="width:100%;padding:14px;background:#f1f5f9;border:none;border-radius:16px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;color:#64748B;cursor:pointer;">Maybe later</button>
+  </div>
+</div>
+
+<!-- ACHIEVEMENT POPUP -->
 <div id="achievementPopup" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.7);z-index:500;align-items:flex-end;justify-content:center;padding:24px;">
   <div style="background:#ffffff;border-radius:24px;padding:24px;width:100%;max-width:398px;display:flex;align-items:center;gap:16px;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:slideUp 0.4s ease;">
     <div id="achIcon" style="font-size:44px;flex-shrink:0;">🥇</div>
@@ -1032,6 +1057,14 @@ const sb=createClient('https://tdphxzkjvslqukmfihsu.supabase.co','eyJhbGciOiJIUz
 let user=null,profile=null,chosenLevel=null,authMode='signup';
 let allProducts=[],currentProduct=null,currentCat='all';
 let prices={level_upgrade:10,ad_free:10,advanced_unlock:10};
+
+// Flutterwave config
+const FLW_PUBLIC_KEY = 'FLWPUBK-6591ed0ec41c9ea22c4bfaffa62a6a00-X';
+const LEVEL_PAYMENT_LINKS = {
+  beginner:     'https://flutterwave.com/pay/j0anljjwioyn',
+  intermediate: 'https://flutterwave.com/pay/n3f9uj8sdntc',
+  advanced:     'https://flutterwave.com/pay/xhkczkfecuih',
+};
 
 const quotes=[
   {e:"",q:"Your body can do it. It's your mind you need to convince!"},
@@ -1135,6 +1168,8 @@ window.addEventListener('load',async()=>{
   loadPrices();
   loadGlobalSettings();
   loadWeeklyProgress();
+  // Check for pending level unlock after payment return
+  setTimeout(checkPendingUnlock, 2000);
 });
 
 // ── SCREEN NAVIGATION ──
@@ -1749,11 +1784,73 @@ function updateGoalDisplay(){
 }
 
 function unlockLevel(levelName){
-  const price = prices.level_upgrade || 10;
   const names = {beginner:'Beginner', intermediate:'Intermediate', advanced:'Advanced'};
   const display = names[levelName] || levelName;
-  if(confirm('Unlock '+display+' level for $'+price+' - one-time payment, yours forever!')){
-    alert('Payment integration coming soon! Thank you for your interest!');
+  const price = prices.level_upgrade || 10;
+  const payLink = LEVEL_PAYMENT_LINKS[levelName];
+  if(!payLink){alert('Payment link not available. Please try again.');return;}
+
+  // Show payment confirmation overlay
+  showPaymentOverlay(levelName, display, price, payLink);
+}
+
+function showPaymentOverlay(levelName, display, price, payLink){
+  const icons = {beginner:'🌱', intermediate:'⚡', advanced:'🔥'};
+  const overlay = document.getElementById('paymentOverlay');
+  document.getElementById('payLevelIcon').textContent = icons[levelName] || '🏋️';
+  document.getElementById('payLevelName').textContent = display + ' Level';
+  document.getElementById('payLevelPrice').textContent = 'N' + ((price||10) * 1000).toLocaleString();
+  document.getElementById('payConfirmBtn').onclick = function(){
+    // Store pending unlock in localStorage so we can complete after redirect
+    localStorage.setItem('mff_pending_unlock', levelName);
+    // Open Flutterwave payment page
+    window.open(payLink, '_blank');
+    // Close overlay and show instruction
+    overlay.style.display = 'none';
+    setTimeout(()=>{
+      alert('Complete your payment on the Flutterwave page that just opened.\n\nOnce paid, return to the app and tap "I have paid" to activate your level.');
+      showVerifyPaymentPrompt(levelName, display);
+    }, 500);
+  };
+  overlay.style.display = 'flex';
+}
+
+function showVerifyPaymentPrompt(levelName, display){
+  if(confirm('Have you completed the payment for ' + display + ' level?')){
+    verifyAndUnlockLevel(levelName);
+  }
+}
+
+async function verifyAndUnlockLevel(levelName){
+  // In production this would verify with Flutterwave webhook
+  // For now we trust the user and unlock - webhook verification comes with backend
+  if(!user || !profile) return;
+  try{
+    const{error} = await sb.from('profiles').update({
+      fitness_level: levelName,
+      unlocked_levels: (profile.unlocked_levels || '') + ',' + levelName
+    }).eq('id', user.id);
+    if(error) throw error;
+    profile.fitness_level = levelName;
+    localStorage.removeItem('mff_pending_unlock');
+    alert('Congratulations! ' + levelName.charAt(0).toUpperCase()+levelName.slice(1) + ' level is now unlocked! Enjoy your new workouts!');
+    showProgress();
+    updateApp();
+  } catch(e){
+    alert('Could not unlock level. Please contact support with your payment receipt.');
+  }
+}
+
+// Check for pending unlock on app load (user may have returned from payment)
+function checkPendingUnlock(){
+  const pending = localStorage.getItem('mff_pending_unlock');
+  if(pending && profile){
+    const names = {beginner:'Beginner', intermediate:'Intermediate', advanced:'Advanced'};
+    if(confirm('We found a pending level unlock for ' + (names[pending]||pending) + '. Have you completed the payment?')){
+      verifyAndUnlockLevel(pending);
+    } else {
+      localStorage.removeItem('mff_pending_unlock');
+    }
   }
 }
 
